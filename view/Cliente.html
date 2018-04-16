@@ -1,0 +1,197 @@
+<div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Clientes</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                  	<div class="row">
+	                  	<div class="col-md-12">
+		                    <!--Contenido-->
+                            
+		                    <div class="col-sm-14"  id="VerForm">
+                          <!--
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header">Categoria</h3>
+            </div>
+        </div>
+      -->
+        <form role="form" name="frmCliente" id="frmCliente" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-lg-12 left">
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                            <label>Los campos con (*) son olbigatorios</label>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group has-success">
+                                <input id="txtIdPersona" type="hidden" maxlength="50" class="form-control" name="txtIdPersona" placeholder="" autofocus="" />
+                                <label>Tipo Persona (*):</label>
+                                <select required="" class="form-control" name="cboTipo_Persona">
+                                  <option>Cliente</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                            <div class="form-group has-success">
+                                <label>Nombre (*):</label>
+                                <input id="txtNombre" type="text" maxlength="100" name="txtNombre" required="" class="form-control" placeholder="Nombre / Razón Social" autofocus="" />
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-12 left">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group has-success">
+                                <label>Tipo Documento (*):</label>
+                                <select required="" id="cboTipo_Documento" name="cboTipo_Documento" class="form-control">
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group has-success">
+                                <label>Documento (*):</label>
+                                <input id="txtNum_Documento" type="text" maxlength="20" name="txtNum_Documento" required="" class="form-control" placeholder="Número de documento" autofocus="" />
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-12 left">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group has-success">
+                                <label>Departamento:</label>
+                                <input id="txtDireccion_Departamento" type="text" maxlength="45" name="txtDireccion_Departamento" placeholder="Departamento" class="form-control" autofocus="" />
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group has-success">
+                                <label>Provincia:</label>
+                                <input id="txtDireccion_Provincia" type="text" maxlength="45" name="txtDireccion_Provincia" class="form-control" placeholder="Provincia" autofocus="" />
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group has-success">
+                                <label>Distrito:</label>
+                                <input id="txtDireccion_Distrito" type="text" maxlength="45" name="txtDireccion_Distrito"  class="form-control" placeholder="Distrito" autofocus="" />
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-12 left">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group has-success">
+                                <label>Calle:</label>
+                                <input id="txtDireccion_Calle" type="text" maxlength="70" name="txtDireccion_Calle" placeholder="Calle" class="form-control" autofocus="" />
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group has-success">
+                                <label>Teléfono:</label>
+                                <input id="txtTelefono" type="text" maxlength="20" name="txtTelefono" class="form-control" placeholder="Ingrese el teléfono" autofocus="" />
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group has-success">
+                                <label>Email:</label>
+                                <input id="txtEmail" type="text" maxlength="50" name="txtEmail"  class="form-control" placeholder="Ingrese el email" autofocus="" />
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-12 left">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                            <div class="form-group has-success">
+                                <label>Cuenta Bancaria:</label>
+                                <input id="txtNumero_Cuenta" type="text" maxlength="32" name="txtNumero_Cuenta" class="form-control" autofocus="" />
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group has-success">
+                                <label>Estado (*):</label>
+                                <select required="" class="form-control" name="txtEstado">
+                                  <option>A</option>
+                                  <option>C</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="row">   
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 left">
+                        <h5></h5>
+                        <button class="btn btn-success" type="submit"><i class="fa fa-floppy-o"></i> Registrar</button>
+                        <a href="Cliente.php" class="btn btn-primary" ><i class="fa fa-remove"></i> Cancelar</a>
+                        <hr>
+                        <span class="lead text-primary"></span>
+                        
+                    
+                </div>
+            </div>
+        </form>
+    </div>
+<button class="btn btn-primary" id="btnNuevo"><i class="fa fa-file"></i> Nuevo</button>
+
+
+		                    <br><br>
+		                    <div id="VerListado" class="table-responsive">
+
+
+            		<table id="tblCliente" class="table table-striped table-bordered table-condensed table-hover" cellpadding="0" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                        	<th>#</th>
+                            <th>Cliente</th>
+                            <th>Documento</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Direccion</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+             
+                    <tfoot>
+                        <tr>
+                            <th>#</th>
+                            <th>Cliente</th>
+                            <th>Documento</th>
+                            <th>Email</th>
+                            <th>Teléfono</th>
+                            <th>Direccion</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </tfoot>
+             
+                    <tbody id="cliente">
+
+                    </tbody>
+                </table>
+</div>
+		                    <!--Fin-Contenido-->
+                  		</div>
+                  	</div><!-- /.row -->
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+
+<script type="text/javascript">
+    
+    $('#liVentas').addClass("treeview active");
+    $('#liClientes').addClass("active");
+
+</script>

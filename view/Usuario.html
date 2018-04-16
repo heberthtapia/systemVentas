@@ -1,0 +1,202 @@
+<div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Usuarios</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                  	<div class="row">
+	                  	<div class="col-md-12">
+		                    <!--Contenido-->
+
+		                    <div class="col-sm-14"  id="VerForm">
+
+        <form role="form" name="frmUsuarios" id="frmUsuarios" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <label>Los campos con (*) son olbigatorios</label>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 left">
+                    <div class="form-group has-success">
+                        <label>Sucursal (*):</label>
+                        <select id="cboSucursal" required="" name="cboSucursal" class="form-control">
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 left">
+                    <div class="form-group">
+                        <input id="txtIdUsuario" type="hidden" maxlength="50" class="form-control" name="txtIdUsuario" required="" placeholder="" autofocus="" />
+                        <label>Trabajador (*):</label>
+                        <input id="txtIdEmpleado" type="hidden" class="form-control" name="txtIdEmpleado" required="" placeholder="" autofocus="" />
+                        <div class="input-group has-success">
+                            <input id="txtEmpleado" type="text" class="form-control" name="txtEmpleado" required="" placeholder="Seleccione un Trabajador" autofocus="" disabled/>
+                            <span class="input-group-btn" >
+                                  <button type="button" class="btn btn-success" id="btnBuscarTrabajador"><i class='fa fa-search'></i>
+                                                Buscar
+                                  </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 left">
+                    <div class="form-group has-success">
+                        <label>Tipo de Usuario:</label>
+                        <select id="cboTipoUsuario" name="cboTipoUsuario" class="form-control" required="" >
+                            <option value="Administrador">Administrador</option>
+                            <option value="Empleado">Empleado</option>
+                            <option value="Vendedor">Vendedor</option>
+                            <option value="Cliente">Cliente</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 left">
+                  <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Permisos (*):</a></li>
+                  </ul>
+
+                  <div class="tab-content">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 left">
+                        <div class="form group">
+                            <br>
+                              <input type="checkbox" id="chkMnuAlmacen" name="chkMnuAlmacen">Almacén<br>
+                              <input type="checkbox" id="chkMnuCompras" name="chkMnuCompras">Compras <br>
+                              <input type="checkbox" id="chkMnuVentas" name="chkMnuVentas">Ventas <br>
+                              <input type="checkbox" id="chkMnuMantenimiento" name="chkMnuMantenimiento">Mantenimiento
+                              <br>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 left">
+                        <div class="form group">
+                            <br>
+                              <input type="checkbox" id="chkMnuSeguridad" name="chkMnuSeguridad">Seguridad <br>
+                              <input type="checkbox" id="chkConsultaCompras" name="chkMnuConsultaCompras">Consulta de Compras <br>
+                              <input type="checkbox" id="chkConsultaVentas" name="chkMnuConsultaVentas">Consulta de Ventas <br>
+                              <input type="checkbox" id="chkMnuAdmin" name="chkMnuAdmin">Administrador <br>
+                        </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <h5></h5>
+                      <button class="btn btn-success" type="submit"><i class="fa fa-floppy-o"></i> Registrar</button>
+                      <a href="Usuario.php" class="btn btn-primary" ><i class="fa fa-remove"></i> Cancelar</a>
+                      <hr>
+                      <span class="lead text-primary"></span>
+                  </div>
+                </div>
+            </div>
+        </form>
+    </div>
+<button class="btn btn-primary" id="btnNuevo"><i class="fa fa-file"></i> Nuevo</button>
+
+
+
+
+		                    <br><br>
+		                    <div id="VerListado" class="table-responsive">
+
+
+            		<table id="tblUsuarios" class="table table-striped table-bordered table-condensed table-hover" cellspacing="0" cellpadding="0" width="100%">
+                    <thead>
+                        <tr>
+                        	<th>#</th>
+                            <th>Sucursal</th>
+                            <th>Trabajador</th>
+                            <th>Tipo de Usuario</th>
+                            <th>Fecha de Registro</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+
+                    <tfoot>
+                        <tr>
+                        	<th>#</th>
+                            <th>Sucursal</th>
+                            <th>Trabajador</th>
+                            <th>Tipo de Usuario</th>
+                            <th>Fecha de Registro</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </tfoot>
+
+                    <tbody id="Usuario">
+
+                    </tbody>
+                </table>
+</div>
+		                    <!--Fin-Contenido-->
+                  		</div>
+                  	</div><!-- /.row -->
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+
+
+<div id="modalListadoEmpleados" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Listado de Empleados</h4>
+      </div>
+      <div class="modal-body">
+      <div class="table-responsive">
+        <table id="tblTrabajadores" class="table table-striped table-bordered table-condensed table-hover" cellpadding="0" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+
+                            <th>Seleccione</th>
+                            <th>#</th>
+                            <th>Apellidos</th>
+                            <th>Nombre</th>
+                            <th>Tipo de Documento</th>
+                            <th>N° de Documento</th>
+                            <th>Email</th>
+                            <th>Foto</th>
+
+                        </tr>
+                    </thead>
+
+                    <tfoot>
+                        <tr>
+
+                            <th>Seleccione</th>
+                            <th>#</th>
+                            <th>Apellidos</th>
+                            <th>Nombre</th>
+                            <th>Tipo de Documento</th>
+                            <th>N° de Documento</th>
+                            <th>Email</th>
+                            <th>Foto</th>
+
+                        </tr>
+                    </tfoot>
+
+                    <tbody id="Trabajador">
+
+                    </tbody>
+                </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-remove"></i> Cerrar</button>
+        <button type="button" id="btnAgregarEmpleado" class="btn btn-primary"><i class="fa fa-plus"></i> Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+    $('#liMantenimiento').addClass("treeview active");
+    $('#liUsuarios').addClass("active");
+
+</script>

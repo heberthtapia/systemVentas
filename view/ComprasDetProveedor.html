@@ -1,0 +1,231 @@
+<div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="box-header with-border">
+                  <h3 class="box-title" >Compras Detalladas - Proveedor</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                </div>
+            </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                  	<div class="row">
+	                  	<div class="col-md-12">
+		                    <!--Contenido-->
+                            
+	<div class="col-sm-14">
+       
+        <form role="form">
+            <div class="row">
+                <?php
+                            if ($_SESSION["superadmin"] == "S") {
+                        ?>
+                        <div class="col-lg-4 left">
+                            <label for="inputMarca">Sucursal:</label>
+                            <div class="form-group has-success">
+                                
+                                <div class="input-group">
+
+                                    <input id="txtSucursal" type="text" value="<?php echo $_SESSION['sucursal'] ?>" class="form-control" name="txtSucursal" required="" placeholder="Seleccione una Sucursal" autofocus="" disabled/>
+                                    <span class="input-group-btn" >
+                                          <button type="button" class="btn btn-success" id="btnBuscarSucursal" ><i class='fa fa-search'></i>
+                                                        Buscar
+                                          </button>
+                                    </span>
+                                </div>   
+                            </div>
+                        </div>
+                        <?php } ?>
+                <div class="col-lg-10 left">
+                            <label for="inputMarca">Proveedor:</label>
+                            <div class="form-group has-success">
+                                <input id="txtIdProveedor" type="hidden" class="form-control" name="txtIdProveedor" required="" placeholder="" autofocus="" />
+                                <div class="input-group">
+                                    <input id="txtIdSucursal" type="hidden" value="<?php echo $_SESSION['idsucursal'] ?>" maxlength="50" class="form-control" name="txtIdSucursal" required="" placeholder="" autofocus="" />
+                                    <input id="txtProveedor" type="text" class="form-control" name="txtProveedor" required="" placeholder="Seleccione un Proveedor" autofocus="" disabled/>
+                                    <span class="input-group-btn" >
+                                          <button type="button" class="btn btn-success" id="btnBuscarProveedor" ><i class='fa fa-search'></i>
+                                                        Buscar
+                                          </button>
+                                    </span>
+                                </div>   
+                            </div>
+                 </div>
+                <div class="col-lg-4 left">
+                    <div class="form-group has-success">
+                        <label for="inputMarca">Desde :</label>
+                        <input id="cboFechaDesdeDetProv" type="date" value="<?php echo date('Y-m-d'); ?>"  maxlength="50" class="form-control" name="cboFechaDesdeDetProv" required="" />
+                    </div>
+                </div>
+                <div class="col-lg-4 left">
+                    <div class="form-group has-success">
+                        <label for="inputMarca">Hasta :</label>
+                        <input id="cboFechaHastaDetProv" type="date" maxlength="50" value="<?php echo date('Y-m-d'); ?>"  class="form-control" name="cboFechaHastaDetProv" required="" />
+                    </div>
+                </div>
+            </div>
+        </form>
+        <br>
+            <div id="VerListado" class="table-responsive">
+
+
+                    <table id="tblComprasDetProveedor" class="table table-striped table-bordered table-condensed table-hover" cellpadding="0" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Sucursal</th>
+                            <th>Empleado</th>
+                            <th>Proveedor</th>
+                            <th>Comprobante</th>
+                            <th>Serie</th>
+                            <th>Numero</th>
+                            <th>Impuesto</th>
+                            <th>Articulo</th>
+                            <th>Codigo</th>
+                            <th>Serie Art.</th>
+                            <th>Stock Ingreso</th>
+                            <th>Stock Actual</th>
+                            <th>Stock Vendido</th>
+                            <th>P. Compra</th>
+                            <th>P. Venta Publico</th>
+                            <th>P. Venta Distribuidor</th>
+                        </tr>
+                    </thead>
+             
+                    <tfoot>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Sucursal</th>
+                            <th>Empleado</th>
+                            <th>Proveedor</th>
+                            <th>Comprobante</th>
+                            <th>Serie</th>
+                            <th>Numero</th>
+                            <th>Impuesto</th>
+                            <th>Articulo</th>
+                            <th>Codigo</th>
+                            <th>Serie Art.</th>
+                            <th>Stock Ingreso</th>
+                            <th>Stock Actual</th>
+                            <th>Stock Vendido</th>
+                            <th>P. Compra</th>
+                            <th>P. Venta Publico</th>
+                            <th>P. Venta Distribuidor</th>
+                        </tr>
+                    </tfoot>
+             
+                </table>
+            </div>
+    </div>
+		                    
+		                    <!--Fin-Contenido-->
+                  		</div>
+                  	</div><!-- /.row -->
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+
+              <div id="modalListadoProveedor" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Listado de Proveedores</h4>
+      </div>
+      <div class="modal-body">
+      <div class="table-responsive">
+        <table id="tblProveedores" class="table table-striped table-bordered table-condensed table-hover" cellpadding="0" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Seleccione</th>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Tipo de Documento</th>
+                            <th>N° de Documento</th>
+                            <th>E-Mail</th>
+                            <th>N° de Cuenta</th>
+                        </tr>
+                    </thead>
+             
+                    <tfoot>
+                        <tr>
+                            <th>Seleccione</th>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Tipo de Documento</th>
+                            <th>N° de Documento</th>
+                            <th>E-Mail</th>
+                            <th>N° de Cuenta</th>
+                        </tr>
+                    </tfoot>
+             
+                    <tbody id="Proveedor">
+
+                    </tbody>
+                </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-remove"></i> Cerrar</button>
+        <button type="button" id="btnAgregarProveedor" class="btn btn-primary"><i class="fa fa-plus"></i> Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modalListadoSucursal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Listado de Sucursales</h4>
+      </div>
+      <div class="modal-body">
+      <div class="table-responsive">
+        <table id="tblSucursales" class="table table-striped table-bordered table-condensed table-hover" cellpadding="0" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Seleccione</th>
+                            <th>#</th>
+                            <th>Razón Social</th>
+                            <th>Documento</th>
+                            <th>Dirección</th>
+                            <th>E-Mail</th>
+                            <th>Logo</th>
+                        </tr>
+                    </thead>
+             
+                    <tfoot>
+                        <tr>
+                            <th>Seleccione</th>
+                            <th>#</th>
+                            <th>Razón Social</th>
+                            <th>Documento</th>
+                            <th>Dirección</th>
+                            <th>E-Mail</th>
+                            <th>Logo</th>
+                        </tr>
+                    </tfoot>
+             
+                    <tbody id="Sucursales">
+
+                    </tbody>
+                </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-remove"></i> Cerrar</button>
+        <button type="button" id="btnAgregarSucursal" class="btn btn-primary"><i class="fa fa-plus"></i> Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    
+    $('#liConsultaCompras').addClass("treeview active");
+    $('#liComprasDetProveedor').addClass("active");
+
+    //$("#txtNombre").numeric();
+</script>

@@ -1,0 +1,170 @@
+<div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Sucursales</h3>
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                    
+                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                  	<div class="row">
+	                  	<div class="col-md-12">
+		                    <!--Contenido-->
+                            
+		                    <div class="col-sm-14"  id="VerForm">
+                          <!--
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header">Categoria</h3>
+            </div>
+        </div>
+      -->
+        <form role="form" name="frmSucursal" id="frmSucursal" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                    <label>Los campos con (*) son olbigatorios</label><br>
+                    <label>Estos datos serán utilizados para el reporte de los comprobantes.</label>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12 left">
+                    <div class="form-group has-success">
+                        <input id="txtIdSucursal" type="hidden" maxlength="50" class="form-control" name="txtIdSucursal" required="" placeholder="" autofocus="" />
+                        <label>Razón Social (*):</label>
+                        <input id="txtRazon_Social" type="text" maxlength="150" class="form-control" name="txtRazon_Social" required="" placeholder="Ingrese la razón Social de la Sucursal" autofocus="" />
+                    </div>
+                </div>
+                <div class="col-lg-12 left">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group has-success">
+                                <label>Tipo Documento (*):</label>
+                                <select required="" id="cboTipo_Documento" name="cboTipo_Documento" class="form-control">
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                            <div class="form-group has-success">    
+                                <label>Documento (*):</label>
+                                <input id="txtNum_Documento" type="text" maxlength="20" name="txtNum_Documento" required="" class="form-control" placeholder="Número de documento" autofocus="" />
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-12 left">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group has-success">
+                                <label>Dirección (*):</label>
+                                <input id="txtDireccion" type="text" maxlength="100" name="txtDireccion" required="" placeholder="Ingrese la dirección" class="form-control" autofocus="" />
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group has-success">
+                                <label>Teléfono (*):</label>
+                                <input id="txtTelefono" type="text" maxlength="20" name="txtTelefono" required="" class="form-control" placeholder="Ingrese el teléfono" autofocus="" />
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group has-success">
+                                <label>Email:</label>
+                                <input id="txtEmail" type="email" maxlength="70" name="txtEmail"  class="form-control" placeholder="Ingrese el email" autofocus="" />
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-12 left">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group has-success">
+                                <label>Representante:</label>
+                                <input id="txtRepresentante" type="text" maxlength="150" name="txtRepresentante" placeholder="Ingrese el nombre del representante de la sucursal" class="form-control" autofocus="" />
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group has-success">    
+                                <label>Logo:</label>
+                                <input id="imagenSuc" type="file" class="form-control" name="imagenSuc" autofocus="" />
+                                <input id="txtRutaImgSuc" type="text" class="form-control" name="txtRutaImgSuc" autofocus="" />
+                            </div>
+                        
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group has-success"> 
+                                <label for="inputMarca">Estado (*):</label>
+                                <select class="form-control" required="" name="txtEstado">
+                                  <option value="A">Activada</option>
+                                  <option value="C">Cancelada</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="row">   
+
+                <div class="col-lg-12 left">
+                        <h5></h5>
+                        <button class="btn btn-success" type="submit"><i class="fa fa-floppy-o"></i> Registrar</button>
+                        <a href="Sucursal.php" class="btn btn-primary" ><i class="fa fa-remove"></i> Cancelar</a>
+                        <hr>
+                        <span class="lead text-primary"></span>
+                        
+                    
+                </div>
+            </div>
+        </form>
+    </div>
+<button class="btn btn-primary" id="btnNuevo"><i class="fa fa-file"></i> Nuevo</button>
+
+
+		                    <br><br>
+		                    <div id="VerListado" class="table-responsive">
+
+
+            		<table id="tblSucursal" class="table table-striped table-bordered table-condensed table-hover" cellspacing="0" cellpadding="0" width="100%">
+                    <thead>
+                        <tr>
+                        	<th>#</th>
+                            <th>Razón Social</th>
+                            <th>Documento</th>
+                            <th>Dirección</th>
+                            <th>Email</th>
+                            <th>Logo</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+             
+                    <tfoot>
+                        <tr>
+                            <th>#</th>
+                            <th>Razón Social</th>
+                            <th>Documento</th>
+                            <th>Dirección</th>
+                            <th>Email</th>
+                            <th>Logo</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </tfoot>
+             
+                    <tbody id="sucursal">
+
+                    </tbody>
+                </table>
+</div>
+		                    <!--Fin-Contenido-->
+                  		</div>
+                  	</div><!-- /.row -->
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+
+<script type="text/javascript">
+    
+    $('#liMantenimiento').addClass("treeview active");
+    $('#liSucursal').addClass("active");
+
+</script>
