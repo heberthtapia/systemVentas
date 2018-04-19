@@ -160,11 +160,11 @@ function fact_dev( $libelle, $num )
     $y1  = 6;
     $y2  = $y1 + 2;
     $mid = ($r1 + $r2 ) / 2;
-    
-    $texte  = $libelle  . $num;    
+
+    $texte  = $libelle  . $num;
     $szfont = 12;
     $loop   = 0;
-    
+
     while ( $loop == 0 )
     {
        $this->SetFont( "Arial", "B", $szfont );
@@ -253,7 +253,7 @@ function addPageNumber( $page )
 // Client address
 function addClientAdresse( $cliente,$domicilio,$num_documento,$email,$telefono )
 {
-	$r1     = $this->w - 180;
+	$r1     = $this->w - 290;
 	$r2     = $r1 + 68;
 	$y1     = 40;
 	$this->SetXY( $r1, $y1);
@@ -341,7 +341,7 @@ function addReference($ref)
 function addCols( $tab )
 {
 	global $colonnes;
-	
+
 	$r1  = 10;
 	$r2  = $this->w - ($r1 * 2) ;
 	$y1  = 79;
@@ -363,7 +363,7 @@ function addCols( $tab )
 function addLineFormat( $tab )
 {
 	global $format, $colonnes;
-	
+
 	while ( list( $lib, $pos ) = each ($colonnes) )
 	{
 		if ( isset( $tab["$lib"] ) )
@@ -519,7 +519,7 @@ function addTVAs( $igv, $total,$moneda )
 	$this->SetFont( "Arial", "", 8);
 	$this->SetXY( $re, $y1+5 );
 	$this->Cell( 17,4, $moneda.sprintf("%0.2F", $total), '', '', 'R');
-	
+
 }
 
 // add a watermark (temporary estimate, DUPLICATA...)

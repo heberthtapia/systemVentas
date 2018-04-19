@@ -33,12 +33,12 @@ $f = "";
         $f = $reg_cli->logo;
       }
 
-      $archivo = $f; 
-      $trozos = explode(".", $archivo); 
+      $archivo = $f;
+      $trozos = explode(".", $archivo);
       $extension = end($trozos);
 
 
-$pdf = new PDF_Invoice( 'P', 'mm', 'A4' );
+$pdf = new PDF_Invoice( 'L', 'mm', 'A4' );
 $pdf->AddPage();
 $pdf->addSociete( utf8_decode( $reg_cli->razon_social),
                   "$reg_cli->num_sucursal\n" .
@@ -69,7 +69,7 @@ $cols=array( "CODIGO"    => "L",
              "P.U."      => "R",
              "DSCTO" => "R",
              "SUBTOTAL"          => "C" );
-$pdf->addLineFormat( $cols);
+//$pdf->addLineFormat( $cols);
 $pdf->addLineFormat($cols);
 
 $y    = 89;
@@ -94,8 +94,8 @@ $reg_total = $query_total->fetch_object();
 
 require_once "../ajax/Letras.php";
 
- $V=new EnLetras(); 
- $con_letra=strtoupper($V->ValorEnLetras($reg_total->Total,"BOLIVIANOS")); 
+ $V=new EnLetras();
+ $con_letra=strtoupper($V->ValorEnLetras($reg_total->Total,"BOLIVIANOS"));
 //$pdf->addCadreTVAs("---TRES MILLONES CUATROCIENTOS CINCUENTA Y UN MIL DOSCIENTOS CUARENTA PESOS 00/100 M.N.");
 $pdf->addCadreTVAs("---".$con_letra);
 
