@@ -1,7 +1,7 @@
 $(document).on("ready", init);// Inciamos el jquery
 
 function init(){
-	
+
 	$('#tblEmpleado').dataTable({
         dom: 'Bfrtip',
         buttons: [
@@ -11,13 +11,13 @@ function init(){
             'pdfHtml5'
         ]
     });
-    
+
 	ListadoEmpleado();// Ni bien carga la pagina que cargue el metodo
 	ComboTipo_Documento();
 	$("#VerForm").hide();// Ocultamos el formulario
 	$("#txtClaveOtro").hide();
 	$("form#frmEmpleado").submit(SaveOrUpdate);// Evento submit de jquery que llamamos al metodo SaveOrUpdate para poder registrar o modificar datos
-	
+
 	$("#btnNuevo").click(VerForm);// evento click de jquery que llamamos al metodo VerForm
 
 	function SaveOrUpdate(e){
@@ -78,7 +78,7 @@ function init(){
 	}
 }
 
-function ListadoEmpleado(){ 
+function ListadoEmpleado(){
 	var tabla = $('#tblEmpleado').dataTable(
 		{   "aProcessing": true,
        		"aServerSide": true,
@@ -100,14 +100,14 @@ function ListadoEmpleado(){
                     {   "mDataProp": "7"},
                     {   "mDataProp": "8"}
 
-        	],"ajax": 
+        	],"ajax":
 	        	{
 	        		url: './ajax/EmpleadoAjax.php?op=list',
 					type : "get",
 					dataType : "json",
-					
+
 					error: function(e){
-				   		console.log(e.responseText);	
+				   		console.log(e.responseText);
 					}
 	        	},
 	        "bDestroy": true
@@ -118,17 +118,17 @@ function ListadoEmpleado(){
 function eliminarEmpleado(id){// funcion que llamamos del archivo ajax/CategoriaAjax.php?op=delete linea 53
 	bootbox.confirm("¿Esta Seguro de eliminar el Empleado?", function(result){ // confirmamos con una pregunta si queremos eliminar
 		if(result){// si el result es true
-			$.post("./ajax/EmpleadoAjax.php?op=delete", {id : id}, function(e){// llamamos la url de eliminar por post. y mandamos por parametro el id 
+			$.post("./ajax/EmpleadoAjax.php?op=delete", {id : id}, function(e){// llamamos la url de eliminar por post. y mandamos por parametro el id
                 swal("Mensaje del Sistema", e, "success");
 				ListadoEmpleado();
 
             });
 		}
-		
+
 	})
 }
 
-function cargarDataEmpleado(id,apellidos, nombre,tipo_documento,num_documento,direccion,telefono,email,fecha_nacimiento,foto, login, clave,estado){// funcion que llamamos del archivo ajax/CategoriaAjax.php linea 52
+function cargarDataEmpleado(id,apellidos, nombre,tipo_documento,num_documento,direccion,coorX,coorY,telefono,email,fecha_nacimiento,foto, login, clave,estado){// funcion que llamamos del archivo ajax/CategoriaAjax.php linea 52
 		$("#VerForm").show();// mostramos el formulario
 		$("#btnNuevo").hide();
 		$("#VerListado").hide();// ocultamos el listado
@@ -139,6 +139,8 @@ function cargarDataEmpleado(id,apellidos, nombre,tipo_documento,num_documento,di
  		$("#cboTipo_Documento").val(tipo_documento);
  		$("#txtNum_Documento").val(num_documento);
  		$("#txtDireccion").val(direccion);
+ 		$("#cx").val(coorX);
+ 		$("#cy").val(coorY);
  		$("#txtTelefono").val(telefono);
  		$("#txtEmail").val(email);
  		$("#txtFecha_Nacimiento").val(fecha_nacimiento);
@@ -150,13 +152,13 @@ function cargarDataEmpleado(id,apellidos, nombre,tipo_documento,num_documento,di
  		$("#txtEstado").val(estado);
  		$("#txtClaveOtro").val(clave);
  		//$("#txtClaveOtro").show();
- 	}	
+ 	}
 
 
  	function ComboTipo_Documento() {
 
         $.get("./ajax/EmpleadoAjax.php?op=listTipo_DocumentoPersona", function(r) {
                 $("#cboTipo_Documento").html(r);
-            
+
         })
     }
