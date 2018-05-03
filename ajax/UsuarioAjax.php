@@ -8,32 +8,33 @@
 
 	switch ($_GET["op"]) {
 
-		case 'SaveOrUpdate':	
-			$alm = 0;	
-			$comp = 0;	
-			$vent = 0;	
-			$mant = 0;	
-			$seg = 0;	
-			$cons_comp = 0;		
-			$cons_vent = 0;		
-			$admin = 0;		
+		case 'SaveOrUpdate':
+			$alm       = 0;
+			$comp      = 0;
+			$vent      = 0;
+			$mant      = 0;
+			$seg       = 0;
+			$cons_comp = 0;
+			$cons_vent = 0;
+			$admin     = 0;
 
-			$idsucursal = $_POST["cboSucursal"];
-			$idempleado = $_POST["txtIdEmpleado"];
+			$idsucursal   = $_POST["cboSucursal"];
+			$idempleado   = $_POST["txtIdEmpleado"];
 			$tipo_usuario = $_POST["cboTipoUsuario"];
+			$num_grupo    = $_POST["cboGrupo"];
 			//$mnu_almacen = $_POST["chkMnuAlmacen"];
 			if(isset($_POST["chkMnuAlmacen"])){
 				$alm = true;
 			} else {
 				$alm = 0;
 			}
-			
+
 			if(isset($_POST["chkMnuCompras"])){
 				$comp = true;
 			} else {
 				$comp = 0;
 			}
-			
+
 			if(isset($_POST["chkMnuVentas"])){
 				$vent = true;
 			} else {
@@ -44,7 +45,7 @@
 			} else {
 				$mant = 0;
 			}
-			
+
 			if(isset($_POST["chkMnuSeguridad"])){
 				$seg = true;
 			} else {
@@ -68,17 +69,17 @@
 			}
 
 				if(empty($_POST["txtIdUsuario"])){
-					
-					if($objusuario->Registrar($idsucursal, $idempleado, $tipo_usuario, $alm, $comp, $vent, $mant, $seg, $cons_comp, 
+
+					if($objusuario->Registrar($idsucursal, $idempleado, $tipo_usuario, $num_grupo, $alm, $comp, $vent, $mant, $seg, $cons_comp,
 						$cons_vent, $admin)){
 						echo "Registrado Exitosamente";
 					}else{
 						echo "Usuario no ha podido ser registado.";
 					}
 				}else{
-					
+
 					$idusuario = $_POST["txtIdUsuario"];
-					if($objusuario->Modificar($idusuario, $idsucursal, $idempleado, $tipo_usuario, $alm, $comp, $vent, $mant, $seg, $cons_comp, 
+					if($objusuario->Modificar($idusuario, $idsucursal, $idempleado, $tipo_usuario, $num_grupo, $alm, $comp, $vent, $mant, $seg, $cons_comp,
 						$cons_vent, $admin)){
 						echo "Informacion del Usuario ha sido actualizada";
 					}else{
@@ -88,8 +89,8 @@
 
 			break;
 
-		case "delete":			
-			
+		case "delete":
+
 			$id = $_POST["id"];
 			$result = $objusuario->Eliminar($id);
 			if ($result) {
@@ -98,7 +99,7 @@
 				echo "No fue Eliminado";
 			}
 			break;
-		
+
 		case "list":
 			$query_Tipo = $objusuario->Listar();
 			$data = Array();
@@ -110,7 +111,7 @@
                     "2"=>$reg->empleado,
                     "3"=>$reg->tipo_usuario,
                     "4"=>$reg->fecha_registro,
-                    "5"=>'<button class="btn btn-warning" data-toggle="tooltip" title="Editar" onclick="cargarDataUsuario('.$reg->idusuario.',\''.$reg->idsucursal.'\',\''.$reg->idempleado.'\',\''.$reg->empleado.'\',\''.$reg->tipo_usuario.'\',\''.$reg->mnu_almacen.'\',\''.$reg->mnu_compras.'\',\''.$reg->mnu_ventas.'\',\''.$reg->mnu_mantenimiento.'\',\''.$reg->mnu_seguridad.'\',\''.$reg->mnu_consulta_compras.'\',\''.$reg->mnu_consulta_ventas.'\',\''.$reg->mnu_admin.'\')"><i class="fa fa-pencil"></i> </button>&nbsp;'.
+                    "5"=>'<button class="btn btn-warning" data-toggle="tooltip" title="Editar" onclick="cargarDataUsuario('.$reg->idusuario.',\''.$reg->idsucursal.'\',\''.$reg->idempleado.'\',\''.$reg->empleado.'\',\''.$reg->tipo_usuario.'\',\''.$reg->num_grupo.'\',\''.$reg->mnu_almacen.'\',\''.$reg->mnu_compras.'\',\''.$reg->mnu_ventas.'\',\''.$reg->mnu_mantenimiento.'\',\''.$reg->mnu_seguridad.'\',\''.$reg->mnu_consulta_compras.'\',\''.$reg->mnu_consulta_ventas.'\',\''.$reg->mnu_admin.'\')"><i class="fa fa-pencil"></i> </button>&nbsp;'.
                     '<button class="btn btn-danger" data-toggle="tooltip" title="Eliminar" onclick="eliminarUsuario('.$reg->idusuario.')"><i class="fa fa-trash"></i> </button>');
                 $i++;
             }
@@ -120,7 +121,7 @@
         	"iTotalDisplayRecords" => count($data),
             "aaData"=>$data);
 			echo json_encode($results);
-            
+
 			break;
 
 		case "listSucursal":
@@ -147,7 +148,7 @@
 	        $i = 1;
 
 	        while ($reg = $query_Categoria->fetch_object()) {
-	            echo '<tr>		                
+	            echo '<tr>
 		                <td><input type="radio" name="optEmpleadosBusqueda" data-nombre="'.$reg->nombre.'" data-apellidos="'.$reg->apellidos.'" id="'.$reg->idempleado.'" value="'.$reg->idempleado.'" /></td>
 		                <td>'.$i.'</td>
 		                <td>'.$reg->apellidos.'</td>
@@ -155,7 +156,7 @@
 		                <td>'.$reg->tipo_documento.'</td>
 		                <td>'.$reg->num_documento.'</td>
 		                <td>'.$reg->email.'</td>
-		                <td><img width=100px height=100px src="./'.$reg->foto.'" /></td>		                
+		                <td><img width=100px height=100px src="./'.$reg->foto.'" /></td>
 	                   </tr>';
 	        }
 
@@ -165,13 +166,13 @@
 
 	    	$user = $_REQUEST["user"];
 			$pass = $_REQUEST["pass"];
-			
+
 			$query = $objusuario->Ingresar_Sistema($user, md5($pass));
 			$fetch = $query->fetch_object();
-			
+
 			echo json_encode($fetch);
-			
-			
+
+
 			if(isset($fetch)){
 				$_SESSION["idusuario"] = $fetch->idusuario;
 				$_SESSION["idempleado"] = $fetch->idempleado;
@@ -258,4 +259,3 @@
 
 
 	}
-	

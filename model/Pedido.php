@@ -7,11 +7,12 @@
 			global $conexion;
 			$sw = true;
 			$date = date( 'Y-m-d' ); /*curdate()*/
+			$hour = date( 'H:i:s' );
 			try {
 
 
-				$sql = "INSERT INTO pedido(idcliente, idusuario, idsucursal, tipo_pedido, fecha, numero, estado)
-						VALUES($idcliente, $idusuario, $idsucursal, '$tipo_pedido', '$date', $numero, 'A')";
+				$sql = "INSERT INTO pedido(idcliente, idusuario, idsucursal, tipo_pedido, fecha, hora, numero, estado)
+						VALUES($idcliente, $idusuario, $idsucursal, '$tipo_pedido', '$date', '$hour', $numero, 'A')";
 				//var_dump($sql);
 				$conexion->query($sql);
 				$idpedido=$conexion->insert_id;
@@ -227,7 +228,7 @@
 
 		public function GetVenta($idpedido){
 			global $conexion;
-			$sql = "select p.*, ped.fecha, s.razon_social, v.num_comprobante, v.serie_comprobante, s.tipo_documento, s.num_documento as num_sucursal, s.direccion, s.telefono as telefono_suc, s.email as email_suc, s.representante, s.logo, ped.tipo_pedido,v.impuesto,p.tipo_documento as doc, u.idusuario as usuario, e.nombre as us, e.apellidos as usAp
+			$sql = "select p.*, ped.fecha, ped.hora, s.razon_social, v.num_comprobante, v.serie_comprobante, s.tipo_documento, s.num_documento as num_sucursal, s.direccion, s.telefono as telefono_suc, s.email as email_suc, s.representante, s.logo, ped.tipo_pedido,v.impuesto,p.tipo_documento as doc, u.idusuario as usuario, e.nombre as us, e.apellidos as usAp
 	from persona p
 	inner join pedido ped on ped.idcliente = p.idpersona
 	inner join sucursal s on ped.idsucursal = s.idsucursal

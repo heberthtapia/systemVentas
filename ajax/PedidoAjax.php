@@ -41,7 +41,7 @@ switch ($_GET["op"]) {
             }
             */
         }
-                
+
         break;
 
 
@@ -64,7 +64,7 @@ switch ($_GET["op"]) {
                 $data[] = array("0"=>$i,
                     "1"=>$reg->Cliente,
                     "2"=>($reg->tipo_pedido=="Pedido")?'<span class="badge bg-blue">Pedido</span>':(($reg->tipo_pedido=="Venta")?'<span class="badge bg-aqua">Venta</span>':'<span class="badge bg-green">Proforma</span>'),
-                    "3"=>$reg->fecha,
+                    "3"=>$reg->fecha.' '.$reg->hora,
                     "4"=>$reg_total->Total,
                     "5"=>($reg->estado=="A")?'<span class="badge bg-green">ACEPTADO</span>':'<span class="badge bg-red">CANCELADO</span>',
                     "6"=>($reg->estado=="A")?'<button class="btn btn-success" data-toggle="tooltip" title="Ver Detalle" onclick="cargarDataPedido('.$reg->idpedido.',\''.$reg->tipo_pedido.'\',\''.$reg->numero.'\',\''.$reg->Cliente.'\',\''.$reg_total->Total.'\',\''.$reg->email.'\')" ><i class="fa fa-eye"></i> </button>&nbsp'.
@@ -160,7 +160,7 @@ switch ($_GET["op"]) {
                         <td>'.$reg->cantidad.'</td>
                         <td>'.$reg->descuento.'</td>
                        </tr>';
-                 $i++; 
+                 $i++;
             }
 
         break;
@@ -192,7 +192,7 @@ switch ($_GET["op"]) {
             echo $valor[0]. " - ";
         }
         */
-        
+
         $hosp = $obj->CambiarEstado($idPedido, $_POST["detalle"]);
                 if ($hosp) {
                     echo "Venta Anulada";
@@ -234,7 +234,7 @@ switch ($_GET["op"]) {
                         <td>'.$reg->num_documento.'</td>
                         <td>'.$reg->email.'</td>
                        </tr>';
-                 $i++; 
+                 $i++;
             }
 
         break;
@@ -249,8 +249,8 @@ switch ($_GET["op"]) {
             while ($reg = $query_cli->fetch_object()) {
                 $data[] = array(
 
-                    "0"=>'<button type="button" class="btn btn-warning" name="optDetIngBusqueda[]" data-codigo="'.$reg->codigo.'" 
-                    data-serie="'.$reg->serie.'" data-nombre="'.$reg->Articulo.'" data-precio-venta="'.$reg->precio_ventapublico.'" 
+                    "0"=>'<button type="button" class="btn btn-warning" name="optDetIngBusqueda[]" data-codigo="'.$reg->codigo.'"
+                    data-serie="'.$reg->serie.'" data-nombre="'.$reg->Articulo.'" data-precio-venta="'.$reg->precio_ventapublico.'"
                     data-stock-actual="'.$reg->stock_actual.'" id="'.$reg->iddetalle_ingreso.'" value="'.$reg->iddetalle_ingreso.'"
                     data-toggle="tooltip" title="Agregar al carrito"
                     onclick="AgregarPedCarrito('.$reg->iddetalle_ingreso.',\''.$reg->stock_actual.'\',\''.$reg->Articulo.'\',\''.$reg->codigo.'\',\''.$reg->serie.'\',\''.$reg->precio_ventapublico.'\')" >
@@ -272,7 +272,7 @@ switch ($_GET["op"]) {
             "iTotalDisplayRecords" => count($data),
             "aaData"=>$data);
             echo json_encode($results);
-            
+
             break;
 
      case "listTipoDoc":
@@ -335,4 +335,4 @@ switch ($_GET["op"]) {
             break;
 
 }
-	
+

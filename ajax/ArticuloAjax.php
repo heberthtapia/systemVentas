@@ -8,7 +8,7 @@
 
 	switch ($_GET["op"]) {
 
-		case 'SaveOrUpdate':			
+		case 'SaveOrUpdate':
 
 			$idcategoria = $_POST["cboCategoria"];
 			$idunidad_medida = $_POST["cboUnidadMedida"];
@@ -20,14 +20,14 @@
 			if(move_uploaded_file($imagen, "../Files/Articulo/".$ruta)){
 
 				if(empty($_POST["txtIdArticulo"])){
-					
+
 					if($objArticulo->Registrar($idcategoria, $idunidad_medida, $nombre, $descripcion, "Files/Articulo/".$ruta)){
 						echo "Articulo Registrado";
 					}else{
 						echo "Articulo no ha podido ser registado.";
 					}
 				}else{
-					
+
 					$idarticulo = $_POST["txtIdArticulo"];
 					if($objArticulo->Modificar($idarticulo, $idcategoria, $idunidad_medida, $nombre, $descripcion, "Files/Articulo/".$ruta)){
 						echo "Informacion del Articulo ha sido actualizada";
@@ -38,14 +38,14 @@
 			} else {
 				$ruta_img = $_POST["txtRutaImgArt"];
 				if(empty($_POST["txtIdArticulo"])){
-					
+
 					if($objArticulo->Registrar($idcategoria, $idunidad_medida, $nombre, $descripcion, $ruta_img)){
 						echo "Articulo Registrado";
 					}else{
 						echo "Articulo no ha podido ser registado.";
 					}
 				}else{
-					
+
 					$idarticulo = $_POST["txtIdArticulo"];
 					if($objArticulo->Modificar($idarticulo, $idcategoria, $idunidad_medida, $nombre, $descripcion, $ruta_img)){
 						echo "Informacion del Articulo ha sido actualizada";
@@ -57,8 +57,8 @@
 
 			break;
 
-		case "delete":			
-			
+		case "delete":
+
 			$id = $_POST["id"];
 			$result = $objArticulo->Eliminar($id);
 			if ($result) {
@@ -67,7 +67,7 @@
 				echo "No fue Eliminado";
 			}
 			break;
-		
+
 		case "list":
 			$query_Tipo = $objArticulo->Listar();
 			$data = Array();
@@ -90,7 +90,7 @@
         	"iTotalDisplayRecords" => count($data),
             "aaData"=>$data);
 			echo json_encode($results);
-            
+
 			break;
 		case "listArtElegir":
 			$query_Tipo = $objArticulo->Listar();
@@ -108,14 +108,14 @@
 					"6"=>'<img width=100px height=100px src="./'.$reg->imagen.'" />');
 				$i++;
             }
-            
+
             $results = array(
             "sEcho" => 1,
         	"iTotalRecords" => count($data),
         	"iTotalDisplayRecords" => count($data),
             "aaData"=>$data);
 			echo json_encode($results);
-            
+
 			break;
 
 		case "listCategoria":
@@ -124,6 +124,8 @@
 	        $objCategoria = new Categoria();
 
 	        $query_Categoria = $objCategoria->Listar();
+
+	        echo '<option value="0">TODOS</option>';
 
 	        while ($reg = $query_Categoria->fetch_object()) {
 	            echo '<option value=' . $reg->idcategoria . '>' . $reg->nombre . '</option>';
@@ -147,4 +149,4 @@
 
 
 	}
-	
+

@@ -84,36 +84,51 @@
           case "listVentasDetalladasArticulo":
 
                $fecha_desde = $_REQUEST["fecha_desde"];
-               $idsucursal = $_REQUEST["idsucursal"];
-               $categoria = $_REQUEST["categoria"];
-               $data = Array();
-               $query_Tipo = $objCategoria->ListarVentasDetalladasArticulo($idsucursal, $categoria, $fecha_desde);
-               $j=0;
+               $idsucursal  = $_REQUEST["idsucursal"];
+               $categoria   = $_REQUEST["categoria"];
+               $grupo       = $_REQUEST["grupo"];
+               $data        = Array();
+               $query_Tipo  = $objCategoria->ListarVentasDetalladasArticulo($idsucursal, $categoria, $fecha_desde);
+               $j           =0;
 
                while ($reg = $query_Tipo->fetch_object()) {
+
                     $total = 0;
+                    $emp   = Array();
+                    $sql   = "SELECT e.idempleado, e.apellidos, e.nombre ";
+                    $sql   .= "FROM empleado AS e, usuario AS u ";
+                    $sql   .= "WHERE e.idempleado = u.idempleado AND u.tipo_usuario = 'Vendedor' ";
+                    if($grupo != 0){
+                         $sql   .= "AND u.num_grupo = '".$grupo."' ";
+                    }
+                    $sql   .= "ORDER BY e.idempleado";
 
-                    $emp = Array();
-
-                    $sql = "SELECT e.idempleado, e.apellidos, e.nombre FROM empleado AS e, usuario AS u WHERE e.idempleado = u.idempleado AND u.tipo_usuario = 'Vendedor' ORDER BY e.idempleado";
                     $Query = $conexion->query($sql);
 
-                    $num = mysqli_num_rows($Query);
+                    $num   = mysqli_num_rows($Query);
 
                     while ($row = $Query->fetch_object()) {
 
-                         $sqlQuery = "SELECT SUM(dp.cantidad) AS cantidad
-                         FROM empleado AS e, usuario AS u, venta AS v, pedido AS p, detalle_pedido AS dp, detalle_ingreso AS di, articulo AS a
-                         WHERE e.idempleado = u.idempleado
-                         AND e.idempleado = $row->idempleado
-                         AND v.idusuario = u.idusuario
-                         AND v.idpedido = p.idpedido
-                         AND p.idpedido = dp.idpedido
-                         AND dp.iddetalle_ingreso = di.iddetalle_ingreso
-                         AND di.idarticulo = a.idarticulo
-                         AND a.idarticulo = $reg->idarticulo
-                         AND a.idcategoria = $categoria
-                         AND v.fecha = '".$fecha_desde."' ";
+                         $sqlQuery = "SELECT SUM(dp.cantidad) AS cantidad ";
+                         $sqlQuery .= "FROM empleado AS e, usuario AS u, venta AS v, pedido AS p, detalle_pedido AS dp, detalle_ingreso AS di, articulo AS a ";
+                         $sqlQuery .= "WHERE e.idempleado = u.idempleado ";
+                         $sqlQuery .= "AND e.idempleado = $row->idempleado ";
+                         $sqlQuery .= "AND v.idusuario = u.idusuario ";
+                         $sqlQuery .= "AND v.idpedido = p.idpedido ";
+                         $sqlQuery .= "AND p.idusuario = u.idusuario ";
+                         $sqlQuery .= "AND p.idpedido = dp.idpedido ";
+                         $sqlQuery .= "AND dp.iddetalle_ingreso = di.iddetalle_ingreso ";
+                         $sqlQuery .= "AND di.idarticulo = a.idarticulo ";
+                         $sqlQuery .= "AND v.estado = 'A' ";
+                         $sqlQuery .= "AND p.estado = 'A' ";
+                         $sqlQuery .= "AND a.idarticulo = $reg->idarticulo ";
+                         if( $categoria != 0 ){
+                              $sqlQuery .= "AND a.idcategoria = $categoria ";
+                         }
+                         $sqlQuery .= "AND v.fecha = '".$fecha_desde."' ";
+                         if($grupo != 0){
+                              $sqlQuery .= "AND u.num_grupo = '".$grupo."' ";
+                         }
 
                          $con = $conexion->query($sqlQuery);
                          $fila = $con->fetch_object();

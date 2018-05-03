@@ -1,7 +1,7 @@
 $(document).on("ready", init);
 
 function init(){
-	
+
 	$('#tblUsuarios').dataTable({
 	        dom: 'Bfrtip',
 	        buttons: [
@@ -11,13 +11,13 @@ function init(){
 	            'pdfHtml5'
 	        ]
 	    });
-	
+
 	ListadoUsuarios();
 	ComboSucursal();
 	$("#VerForm").hide();
 	$("#txtRutaImgArt").hide();
 	$("form#frmUsuarios").submit(SaveOrUpdate);
-	
+
 	$("#btnNuevo").click(VerForm);
 	$("#btnBuscarTrabajador").click(AbrirModalEmpleado);
 
@@ -88,7 +88,7 @@ function init(){
         $("#VerListado").show();
         //Limpiar();
     }
-    
+
 
 }
 
@@ -102,11 +102,11 @@ function eliminarUsuario(id){
 
             });
 		}
-		
+
 	})
 }
 
-function ListadoUsuarios(){ 
+function ListadoUsuarios(){
         var tabla = $('#tblUsuarios').dataTable(
 		{   "aProcessing": true,
        		"aServerSide": true,
@@ -125,14 +125,14 @@ function ListadoUsuarios(){
                     {   "mDataProp": "4"},
                     {   "mDataProp": "5"}
 
-        	],"ajax": 
+        	],"ajax":
 	        	{
 	        		url: './ajax/UsuarioAjax.php?op=list',
 					type : "get",
 					dataType : "json",
-					
+
 					error: function(e){
-				   		console.log(e.responseText);	
+				   		console.log(e.responseText);
 					}
 	        	},
 	        "bDestroy": true
@@ -141,7 +141,7 @@ function ListadoUsuarios(){
 
 };
 
-function cargarDataUsuario(idUsuario, idSucursal, idempleado, empleado, tipo_usuario, mnu_almacen, mnu_compras, mnu_ventas,
+function cargarDataUsuario(idUsuario, idSucursal, idempleado, empleado, tipo_usuario, num_grupo, mnu_almacen, mnu_compras, mnu_ventas,
 	 mnu_mantenimiento, mnu_seguridad, mnu_consulta_compras, mnu_consulta_ventas, mnu_admin){
 		$("#VerForm").show();
 		$("#btnNuevo").hide();
@@ -152,6 +152,7 @@ function cargarDataUsuario(idUsuario, idSucursal, idempleado, empleado, tipo_usu
 	    $("#txtIdEmpleado").val(idempleado);
 	    $("#txtEmpleado").val(empleado);
 	    $("#cboTipoUsuario").val(tipo_usuario);
+	    $("#cboGrupo").val(num_grupo);
 
 	    if (mnu_almacen == 1) {
 	    	$("#chkMnuAlmacen").attr('checked', true);

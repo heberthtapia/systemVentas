@@ -85,6 +85,7 @@ function init(){
 
 	$("#cboFechaHoyDetVent").change(ListadoVentasDetalladasArticulo);
 	$("#cboCategoria").change(ListadoVentasDetalladasArticulo);
+	//$("#cboGrupoReport").change(CargaListadoVentasDetalladasArticulo);
 
 	$("#cboFechaDesdeVentPend").change(ListadoVentasPendientes);
 	$("#cboFechaHastaVentPend").change(ListadoVentasPendientes);
@@ -202,15 +203,15 @@ function init(){
 	function ListadoVentasDetalladasArticulo(){
 
 		if($("#cboFechaHoyDetVent").val() != "" ){
-			var fecha_desde = $("#cboFechaHoyDetVent").val(), categoria = $("#cboCategoria").val(), idsucursal = $("#txtIdSucursal").val();
+			var fecha_desde = $("#cboFechaHoyDetVent").val(), categoria = $("#cboCategoria").val(), idsucursal = $("#txtIdSucursal").val(), grupo = $("#cboGrupoReport").val();
 			var tabla = $('#tblVentasDetalladas').dataTable(
 				{   "aProcessing": true,
 		       		"aServerSide": true,
 	       			dom: 'Bfrtip',
 			        buttons: [
-			            'copyHtml5',
+			            //'copyHtml5',
 			            'excelHtml5',
-			            'csvHtml5',
+			            //'csvHtml5',
 			            'pdfHtml5'
 			        ],
 		        	"ajax":
@@ -218,7 +219,7 @@ function init(){
 			        		url: './ajax/ConsultasVentasAjax.php?op=listVentasDetalladasArticulo',
 							type : "get",
 							dataType : "json",
-							data:{fecha_desde: fecha_desde, categoria: categoria, idsucursal: idsucursal},
+							data:{fecha_desde: fecha_desde, categoria: categoria, idsucursal: idsucursal, grupo: grupo},
 							error: function(e){
 						   		console.log(e.responseText);
 							}
@@ -229,6 +230,11 @@ function init(){
 
 		}
 	}
+
+	/*function CargaListadoVentasDetalladasArticulo(){
+		grupo = $("#cboGrupoReport").val();
+		document.location.href = "VentasDetalladasArticulo.php?grupo="+grupo;
+	}*/
 
 	function ListadoVentasPendientes(){
 

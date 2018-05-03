@@ -59,7 +59,10 @@
 		public function ListarVentasDetalladasArticulo($idsucursal, $categoria, $fecha_desde){
 			global $conexion;
 
-			$sql = "SELECT idarticulo, nombre FROM articulo WHERE idcategoria = $categoria";
+			$sql = "SELECT idarticulo, nombre FROM articulo ";
+			if ($categoria != 0) {
+				$sql.= "WHERE idcategoria = $categoria";
+			}
 
 			$query = $conexion->query($sql);
 

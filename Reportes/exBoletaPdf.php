@@ -137,11 +137,11 @@ $con_letra=strtoupper($V->ValorEnLetras($reg_total->Total,""));
             <tr>
                 <td style="width: 15%"><?=$reg_cli->razon_social;?></td>
                 <td style="width: 20%; text-align: center;"><strong><?=$reg_cli->serie_comprobante.'-'.$reg_cli->num_comprobante;?></strong></td>
-                <td style="width: 15%; text-align:right; padding-right: 10px;"><strong><?php echo $reg_cli->fecha; ?></strong></td>
+                <td style="width: 15%; text-align:right; padding-right: 10px;"><strong><?php echo $reg_cli->fecha.' '.$reg_cli->hora; ?></strong></td>
 
                 <td style="width: 17%; padding-left: 10px;"><?=$reg_cli->razon_social;?></td>
                 <td style="width: 18%; text-align: center;"><strong><?=$reg_cli->serie_comprobante.'-'.$reg_cli->num_comprobante;?></strong></td>
-                <td style="width: 15%; text-align:right;"><strong><?php echo $reg_cli->fecha; ?></strong></td>
+                <td style="width: 15%; text-align:right;"><strong><?php echo $reg_cli->fecha.' '.$reg_cli->hora; ?></strong></td>
             </tr>
         </table>
     </page_header>
@@ -188,7 +188,7 @@ $con_letra=strtoupper($V->ValorEnLetras($reg_total->Total,""));
                         </td>
 
                         <td style =" text-align:left;"><strong>Fecha:</strong></td>
-                        <td style ="text-align:left;"><?=$reg_cli->fecha;?></td>
+                        <td style ="text-align:left;"><?=$reg_cli->fecha.' '.$reg_cli->hora;?></td>
                     </tr>
                     <tr>
                         <td style =" text-align:left; font-weight: bold;"><strong>Direcci&oacute;n:</strong></td>
@@ -324,7 +324,7 @@ $con_letra=strtoupper($V->ValorEnLetras($reg_total->Total,""));
                         </td>
 
                         <td style =" text-align:left;"><strong>Fecha:</strong></td>
-                        <td style ="text-align:left;"><?=$reg_cli->fecha;?></td>
+                        <td style ="text-align:left;"><?=$reg_cli->fecha.' '.$reg_cli->hora;?></td>
                     </tr>
                     <tr>
                         <td style =" text-align:left; font-weight: bold;"><strong>Direcci&oacute;n:</strong></td>
