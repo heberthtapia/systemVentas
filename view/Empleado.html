@@ -309,6 +309,7 @@
                 //alert(marcador.titulo);
             });
             deleteMarkers(markers);
+            deleteMarkers(marcadores_bd);
             marcador.setMap(mapa);
         });
 
@@ -379,9 +380,57 @@
         geocoder.geocode({ 'address': address}, geocodeResult);
     });
 
-    $(document).ready(function () {
+        //FUERA DE READY DE JQUERY
+  //FUNCION PARA RECUPERAR PUNTOS DE LA BD
+  function listaMap(coorX, coorY){
+    //ANTES DE LISTAR MARCADORES
+    //SE DEBEN QUITAR LOS ANTERIORES DEL MAPA
+    deleteMarkers(markers);
+    var formulario_edicion = $("#frmEmpleado");
+
+    if(coorX != ""){
+        //alert('Hay puntos en la BD');
+        //$.each(data, function(i, item){
+            //OBTENER LAS COORDENADAS DEL PUNTO
+            var posi = new google.maps.LatLng(coorX, coorY);
+            //CARGAR LAS PROPIEDADES AL MARCADOR
+            var marca = new google.maps.Marker({
+                //idMarcador:item.IdPunto,
+                position:posi,
+                //zoom:15,
+                //titulo: item.Titulo,
+                cx:coorX,//esas coordenadas vienen de la BD
+                cy:coorY,//esas coordenadas vienen de la BD
+                draggable: false
+            });
+            //AGREGAR EVENTO CLICK AL MARCADOR
+            //MARCADORES QUE VIENEN DE LA BASE DE DATOS
+            google.maps.event.addListener(marca, 'click', function(){
+                //alert("Hiciste click en "+marca.position + " - " + marca.titulo);
+                //ENTRAR EN EL SEGUNDO COLAPSIBLE
+                //Y OCULTAR EL PRIMERO
+                //$("#collapseTwo").collapse("show");
+                //$("#collapseOne").collapse("hide");
+                //VER DOCUMENTACION DE BOOTSTRAP
+
+                //AHORA PASAR LA INFORMACION DEL MARCADOR
+                //AL FORMULARIO
+                /*formulario_edicion.find("input[name='id']").val(marca.idMarcador);*/
+                //formulario_edicion.find("input[name='titulo']").val(marca.titulo).focus();
+                /*formulario_edicion.find("input[name='cx']").val(marca.cx);
+                formulario_edicion.find("input[name='cy']").val(marca.cy);*/
+
+            });
+            //AGREGAR EL MARCADOR A LA VARIABLE MARCADORES_BD
+            marcadores_bd.push(marca);
+            //UBICAR EL MARCADOR EN EL MAPA
+            marca.setMap(mapa);
+        //});
+    }else{
+        //alert('No hay puntos en la BD');
         initMap();
-    })
+    }
+  }
 
 </script>
 <script  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7FN4j43pO5hJesGiaTGDqShcxqzcZLZ8&force=lite"></script>

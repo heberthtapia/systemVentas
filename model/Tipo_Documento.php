@@ -2,8 +2,8 @@
 	require "Conexion.php";
 
 	class Tipo_Documento{
-	
-		
+
+
 		public function __construct(){
 		}
 
@@ -14,7 +14,7 @@
 			$query = $conexion->query($sql);
 			return $query;
 		}
-		
+
 		public function Modificar($idtipo_documento, $nombre,$operacion){
 			global $conexion;
 			$sql = "UPDATE tipo_documento set nombre = '$nombre',operacion='$operacion'
@@ -22,7 +22,7 @@
 			$query = $conexion->query($sql);
 			return $query;
 		}
-		
+
 		public function Eliminar($idtipo_documento){
 			global $conexion;
 			$sql = "DELETE FROM tipo_documento WHERE idtipo_documento = $idtipo_documento";
@@ -59,11 +59,11 @@
 		}
 		public function VerTipo_Documento_Persona(){
 			global $conexion;
-			$sql = "select nombre from tipo_documento where operacion='Persona'";
+			$sql = "select nombre from tipo_documento where operacion='Persona' order by (nombre) ASC";
 			$query = $conexion->query($sql);
 			return $query;
 		}
 
-		
+
 
 	}

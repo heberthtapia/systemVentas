@@ -283,7 +283,7 @@ switch ($_GET["op"]) {
 
             $query_Categoria = $objPedido->ListarTipoDocumento($_SESSION["idsucursal"]);
 
-            echo "<option>--Seleccione Comprobante--</option>";
+            //echo "<option>--Seleccione Comprobante--</option>";
             while ($reg = $query_Categoria->fetch_object()) {
                 echo '<option value=' . $reg->nombre . '>' . $reg->nombre . '</option>';
             }

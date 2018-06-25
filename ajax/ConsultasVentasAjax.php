@@ -89,12 +89,16 @@
                $grupo       = $_REQUEST["grupo"];
                $data        = Array();
                $query_Tipo  = $objCategoria->ListarVentasDetalladasArticulo($idsucursal, $categoria, $fecha_desde);
-               $j           =0;
+               $j           = 0;
+               $totalEmp = Array();
+               $totalPre = Array();
 
                while ($reg = $query_Tipo->fetch_object()) {
 
                     $total = 0;
+                    $i     = 0;
                     $emp   = Array();
+
                     $sql   = "SELECT e.idempleado, e.apellidos, e.nombre ";
                     $sql   .= "FROM empleado AS e, usuario AS u ";
                     $sql   .= "WHERE e.idempleado = u.idempleado AND u.tipo_usuario = 'Vendedor' ";
@@ -109,11 +113,11 @@
 
                     while ($row = $Query->fetch_object()) {
 
-                         $sqlQuery = "SELECT SUM(dp.cantidad) AS cantidad ";
+                         $sqlQuery = "SELECT SUM(dp.cantidad) AS cantidad, di.precio_ventadistribuidor AS precio ";
                          $sqlQuery .= "FROM empleado AS e, usuario AS u, venta AS v, pedido AS p, detalle_pedido AS dp, detalle_ingreso AS di, articulo AS a ";
                          $sqlQuery .= "WHERE e.idempleado = u.idempleado ";
                          $sqlQuery .= "AND e.idempleado = $row->idempleado ";
-                         $sqlQuery .= "AND v.idusuario = u.idusuario ";
+                         //$sqlQuery .= "AND v.idusuario = u.idusuario ";
                          $sqlQuery .= "AND v.idpedido = p.idpedido ";
                          $sqlQuery .= "AND p.idusuario = u.idusuario ";
                          $sqlQuery .= "AND p.idpedido = dp.idpedido ";
@@ -127,8 +131,10 @@
                          }
                          $sqlQuery .= "AND v.fecha = '".$fecha_desde."' ";
                          if($grupo != 0){
-                              $sqlQuery .= "AND u.num_grupo = '".$grupo."' ";
+                             $sqlQuery .= "AND u.num_grupo = '".$grupo."' ";
                          }
+                         //$sqlQuery .= "AND v.fecha >= '2018-04-01' AND v.fecha <= '2018-04-30' ";
+                         //echo $sqlQuery;
 
                          $con = $conexion->query($sqlQuery);
                          $fila = $con->fetch_object();
@@ -136,62 +142,54 @@
                          if($fila->cantidad == NULL){
                               $fila->cantidad = 0;
                          }
-
                          $total = $total + $fila->cantidad;
-
                          $emp[] = array(
                               $fila->cantidad,
                          );
+                         $i++;
+                         $totalEmp[$i] = $totalEmp[$i] + $fila->cantidad;
+                         $totalPre[$i] = $totalPre[$i] + ( $fila->cantidad * $fila->precio );
+                         //echo '--->'.$fila->precio;
                     }
 
-                    //print_r($emp);
+                    $c = 0;
+                    $data[$j][$c] = $reg->nombre;
 
-                   /* $data[0][0] = $reg->nombre;
-                    $data[0][1] = "ff";*/
+                    for($i=1; $i <= $num; $i++){
+                         $data[$j][$i] = $emp[$c];
+                          $c++;
+                    }
 
-
-                    //for ($j=0; $j <= 0 ; $j++) {
-                         $c = 0;
-                         $data[$j][$c] = $reg->nombre;
-
-                         for($i=1; $i <= $num; $i++){
-                              //echo $emp[$i][0];
-                              $data[$j][$i] = $emp[$c];
-                               $c++;
-                         }
-                         $data[$j][$c+1] = $total;
-                         //$c++;
-                   // }
+                    $data[$j][$c+1] = $total;
+                    $montoTotal = $montoTotal + $total;
                     $j++;
-                    //print_r($data);
-
-                    /*$data[] = array(
-                         "0"=>$reg->nombre,
-                         "1"=>$emp[0],
-                         "2"=>$emp[1],
-                         "3"=>$emp[2],
-                         "4"=>$total*/
-                         /*"4"=>$reg->nombre
-                         "5"=>$reg->serie,
-                         "6"=>$reg->numero,
-                         "7"=>$reg->impuesto,
-                         "8"=>$reg->articulo,
-                         "9"=>$reg->codigo,
-                         "10"=>$reg->serie_art,
-                         "11"=>$reg->cantidad,
-                         "12"=>$reg->precio_venta,
-                         "13"=>$reg->descuento,
-                         "14"=>$reg->total*/
-                    //);
-
-                    //print_r($data);
+                    $k = $j;
                }
 
+               $data[$k][0] = '<strong>z. TOTAL VENTAS</strong>';
+
+               for($i=1; $i <= $num; $i++){
+                    $data[$k][$i] = '<strong>'.$totalEmp[$i].'</strong>';
+               }
+               $data[$k][$num+1] = '<strong>'.$montoTotal.'</strong>';
+
+               /*****************************/
+
+               $data[$k+1][0] = '<strong>z. TOTAL Bs.-</strong>';
+
+               for($i=1; $i <= $num; $i++){
+                    $data[$k+1][$i] = '<strong>'.$totalPre[$i].'</strong>';
+               }
+               $data[$k+1][$num+1] = '';
+
+               //print_r($totalPre);
+
                $results = array(
-                "sEcho" => 1,
-               "iTotalRecords" => count($data),
-               "iTotalDisplayRecords" => count($data),
-               "aaData"=>$data);
+                    "sEcho"                => 1,
+                    "iTotalRecords"        => count($data),
+                    "iTotalDisplayRecords" => count($data),
+                    "aaData"               =>$data
+               );
                echo json_encode($results);
 
                break;

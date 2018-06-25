@@ -69,6 +69,7 @@ function init(){
 		$("#VerForm").show();// Mostramos el formulario
 		$("#btnNuevo").hide();
 		$("#VerListado").hide();// ocultamos el listado
+		initMap();
 	}
 
 	function OcultarForm(){
@@ -129,10 +130,10 @@ function eliminarEmpleado(id){// funcion que llamamos del archivo ajax/Categoria
 }
 
 function cargarDataEmpleado(id,apellidos, nombre,tipo_documento,num_documento,direccion,coorX,coorY,telefono,email,fecha_nacimiento,foto, login, clave,estado){// funcion que llamamos del archivo ajax/CategoriaAjax.php linea 52
+
 		$("#VerForm").show();// mostramos el formulario
 		$("#btnNuevo").hide();
 		$("#VerListado").hide();// ocultamos el listado
-
 		$("#txtIdEmpleado").val(id);// recibimos la variable id a la caja de texto txtIdCategoria
 	    $("#txtApellidos").val(apellidos);
 	    $("#txtNombre").val(nombre);
@@ -152,6 +153,8 @@ function cargarDataEmpleado(id,apellidos, nombre,tipo_documento,num_documento,di
  		$("#txtEstado").val(estado);
  		$("#txtClaveOtro").val(clave);
  		//$("#txtClaveOtro").show();
+ 		initMap();
+ 		listaMap(coorX,coorY);
  	}
 
 

@@ -1,7 +1,7 @@
 $(document).on("ready", init);// Inciamos el jquery
 
 function init(){
-	
+
     $('#tblTipo_Documento').dataTable({
         dom: 'Bfrtip',
         buttons: [
@@ -11,11 +11,11 @@ function init(){
             'pdfHtml5'
         ]
     });
-    
+
 	ListadoTipo_Documento();// Ni bien carga la pagina que cargue el metodo
 	$("#VerForm").hide();// Ocultamos el formulario
 	$("form#frmTipo_Documento").submit(SaveOrUpdate);// Evento submit de jquery que llamamos al metodo SaveOrUpdate para poder registrar o modificar datos
-	
+
 	$("#btnNuevo").click(VerForm);// evento click de jquery que llamamos al metodo VerForm
 
 
@@ -52,7 +52,7 @@ function init(){
 
 }
 
-function ListadoTipo_Documento(){ 
+function ListadoTipo_Documento(){
          var tabla = $('#tblTipo_Documento').dataTable();
         $.ajax({
             url: './ajax/Tipo_DocumentoAjax.php?op=list',
@@ -67,12 +67,12 @@ function ListadoTipo_Documento(){
                                     s[i][2],
                                     s[i][3],
                                     s[i][4]
-                                      ]);                                       
+                                      ]);
                         } // End For
-                                        
+
             },
             error: function(e){
-               console.log(e.responseText); 
+               console.log(e.responseText);
             }
         });
     };
@@ -80,13 +80,13 @@ function ListadoTipo_Documento(){
 function eliminarTipo_Documento(id){// funcion que llamamos del archivo ajax/CategoriaAjax.php?op=delete linea 53
 	bootbox.confirm("¿Esta Seguro de eliminar el tipo de documento?", function(result){ // confirmamos con una pregunta si queremos eliminar
 		if(result){// si el result es true
-			$.post("./ajax/Tipo_DocumentoAjax.php?op=delete", {id : id}, function(e){// llamamos la url de eliminar por post. y mandamos por parametro el id 
+			$.post("./ajax/Tipo_DocumentoAjax.php?op=delete", {id : id}, function(e){// llamamos la url de eliminar por post. y mandamos por parametro el id
                 swal("Mensaje del Sistema", e, "success");
 				ListadoTipo_Documento();
 
             });
 		}
-		
+
 	})
 }
 

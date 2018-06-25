@@ -4,7 +4,7 @@
                   <h3 class="box-title" id="lblTitle" >Pedido</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    
+
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                   </div>
                 </div>
@@ -33,7 +33,7 @@
                                                         Buscar
                                           </button>
                                     </span>
-                                </div>   
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-4 left">
@@ -48,7 +48,7 @@
                         <div class="col-lg-4 left">
                             <label id="inputTipoPed">Tipo Pedido:</label>
                             <div class="form-group  has-success">
-                                
+
                                 <select id="cboTipoPedido" name="cboTipoPedido" class="form-control" required >
                                     <option value="Pedido">Pedido</option>
                                     <option value="Proforma">Proforma</option>
@@ -89,7 +89,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            
+
                             </tbody>
                         </table>
                 </div>
@@ -100,26 +100,26 @@
                             <div class="input-group has-error">
                                 <div id="SubTotal" class="input-group-addon"></div>
                                 <input type="text" class="form-control" id="txtSubTotalPed" name="txtSubTotalPed" placeholder="Sub Total" disabled>
-                                
+
                             </div>
                         </div>
                         <div class="col-lg-4 left  has-error">
                             <div class="input-group">
                                 <div id="IGV" class="input-group-addon"></div>
                                 <input type="text" class="form-control" id="txtIgvPed" name="txtIgvPed" placeholder="I.G.V" disabled>
-                                
+
                             </div>
                         </div>
                         <div class="col-lg-4 left has-error">
                             <div class="input-group">
                                 <div id="Total" class="input-group-addon"></div>
                                 <input type="text" class="form-control" id="txtTotalPed" name="txtTotalPed" placeholder="Total" disabled>
-                                
+
                             </div>
                         </div>
                     </div>
                 </div>
-                    
+
                     <div class="col-lg-12 left" id="VerRegPedido">
                     <p></p>
                         <button class="btn btn-success" type="submit"><i class="fa fa-floppy-o"></i> Registrar Pedido</button>
@@ -128,7 +128,7 @@
                         <hr>
                         <span class="lead text-primary"></span>
                     </div>
-                
+
                 <br><br>
             </div>
         </form>
@@ -155,7 +155,7 @@
                 <div class="col-lg-4 left">
                     <label for="inputMarca">T. Comprobante</label>
                     <div class="form-group  has-success">
-                        
+
                         <select id="cboTipoComprobante" name="cboTipoComprobante" class="form-control">
 
                         </select>
@@ -165,27 +165,27 @@
                     <label for="inputMarca">Serie/Folio:</label>
                     <div class="form-group  has-success">
                         <input id="txtIdTipoDoc" type="hidden" maxlength="50" class="form-control" name="txtIdTipoDoc" required="" autofocus="" placeholder=""/>
-                        <input id="txtSerieVent" type="text" maxlength="50" class="form-control" name="txtSerieVent" required="" autofocus="" placeholder="" >
+                        <input id="txtSerieVent" type="text" readonly="" maxlength="50" class="form-control" name="txtSerieVent" required="" autofocus="" placeholder="" >
                     </div>
                 </div>
                 <div class="col-lg-5 left">
                     <label for="inputInscripcion">Numero</label>
                     <div class="form-group  has-success">
-                        
-                        <input id="txtNumeroVent" type="text" class="form-control" name="txtNumeroVent" required="" placeholder="">
+
+                        <input id="txtNumeroVent" type="text" readonly="" class="form-control" name="txtNumeroVent" required="" placeholder="">
                     </div>
                 </div>
                 <div class="col-lg-3 left">
                     <label for="inputInscripcion">Impuesto</label>
                     <div class="form-group  has-success">
-                        
+
                         <input id="txtImpuesto" type="text" class="form-control" name="txtImpuesto" placeholder="" readonly="readonly"/>
                     </div>
                 </div>
                 <div class="col-lg-3 left">
                     <label for="inputInscripcion">Total</label>
                     <div class="form-group  has-success">
-                        
+
                         <input id="txtTotalVent" type="text" class="form-control" name="txtTotalVent" required="" placeholder="" readonly="readonly"/>
                     </div>
                 </div>
@@ -213,12 +213,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            
+
                             </tbody>
                         </table>
                 </div>
             </div>
-            
+
     </div>
     <button class="btn btn-primary" id="btnNuevoPedido"><i class="fa fa-file"></i> Nuevo</button>
     <br><br>
@@ -235,7 +235,7 @@
                 <th>Generar Venta</th>
             </tr>
         </thead>
- 
+
         <tfoot>
             <tr>
                 <th>#</th>
@@ -245,7 +245,7 @@
                 <th>Generar Venta</th>
             </tr>
         </tfoot>
- 
+
     </table>
 </div>
 		                    <!--Fin-Contenido-->
@@ -311,7 +311,7 @@
                             <th>E-Mail</th>
                         </tr>
                     </thead>
-             
+
                     <tfoot>
                         <tr>
                             <th>Seleccione</th>
@@ -322,7 +322,7 @@
                             <th>E-Mail</th>
                         </tr>
                     </tfoot>
-             
+
                     <tbody id="Cliente">
 
                     </tbody>
@@ -360,7 +360,7 @@
                             <th>Fecha de Ingreso</th>
                         </tr>
                     </thead>
-             
+
                     <tfoot>
                         <tr>
                             <th>Seleccione</th>
@@ -373,7 +373,7 @@
                             <th>Fecha de Ingreso</th>
                         </tr>
                     </tfoot>
-             
+
                     <tbody id="ArticuloPed" style="text-align:center;">
 
                     </tbody>
@@ -390,7 +390,7 @@
 </div>
 
 <script type="text/javascript">
-    
+
     $('#liVentas').addClass("treeview active");
     $('#liVenta').addClass("active");
 

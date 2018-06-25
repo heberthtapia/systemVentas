@@ -146,6 +146,7 @@ function init() {
 
     function GenerarVenta(e){
         e.preventDefault();
+        //alert('entra');
 
         if ($("#txtIdCliente").val() != "") {
             if (elementos.length > 0) {
@@ -186,6 +187,8 @@ function init() {
                                     //$("#VerVentaDetallePedido").hide();
                                     $("#btnEnviarCorreo").hide();
                                     ComboTipoDoc();
+
+                                    objinitV.VerNumSerie();
 
                                     $('table#tblDetallePedidoVer th:nth-child(4)').hide();
                                     $('table#tblDetallePedidoVer th:nth-child(8)').hide();
@@ -315,6 +318,7 @@ function init() {
             {   "aProcessing": true,
                 "aServerSide": true,
                 "iDisplayLength": 4,
+                "aaSorting": [[ 1, "asc" ]],
                 //"aLengthMenu": [0, 4],
                 "aoColumns":[
                         {   "mDataProp": "0"},
@@ -399,8 +403,8 @@ function init() {
 };
 
 function ListadoPedidos(){
-            var tabla = $('#tblPedidos').dataTable(
-            {   "aProcessing": true,
+        var tabla = $('#tblPedidos').dataTable({
+            "aProcessing": true,
             "aServerSide": true,
             dom: 'Bfrtip',
                 buttons: [
@@ -432,6 +436,7 @@ function ListadoPedidos(){
 
         }).DataTable();
     };
+
 function eliminarDetallePed(ele){
         console.log(ele);
         objinit.eliminar(ele);
@@ -444,7 +449,7 @@ function ConsultarDetallesPed() {
 
         for (var pos in data) {
 
-            $("table#tblDetallePedido").append("<tr><td>" + data[pos][1] + " <input class='form-control' type='hidden' name='txtIdDetIng' id='txtIdDetIng[]' value='" + data[pos][0] + "' /></td><td> " + data[pos][6] + "</td><td> " + data[pos][7] + "</td><td>" + data[pos][5]+ "</td><td><input class='form-control' type='text' name='txtPrecioVentPed' id='txtPrecioVentPed[]' value='" + data[pos][2] + "' onchange='calcularTotalPed(" + pos + ")' /></td><td><input class='form-control' type='text' name='txtCantidaPed' id='txtCantidaPed[]'  value='" + data[pos][3] + "' onchange='calcularTotalPed(" + pos + ")' /></td><td><input class='form-control' type='text' name='txtDescuentoPed' id='txtDescuentoPed[]' value='" + data[pos][4] + "' onchange='calcularTotalPed(" + pos + ")' /></td><td><button type='button' onclick='eliminarDetallePed(" + pos + ")' class='btn btn-danger'><i class='fa fa-remove' ></i> </button></td></tr>");
+            $("table#tblDetallePedido").append("<tr><td>" + data[pos][1] + " <input class='form-control' type='hidden' name='txtIdDetIng' id='txtIdDetIng[]' value='" + data[pos][0] + "' /></td><td> " + data[pos][6] + "</td><td> " + data[pos][7] + "</td><td>" + data[pos][5]+ "</td><td><input class='form-control' type='text' readonly='' name='txtPrecioVentPed' id='txtPrecioVentPed[]' value='" + data[pos][2] + "' onchange='calcularTotalPed(" + pos + ")' /></td><td><input class='form-control' type='text' name='txtCantidaPed' id='txtCantidaPed[]'  value='" + data[pos][3] + "' onchange='calcularTotalPed(" + pos + ")' /></td><td><input class='form-control' type='text' name='txtDescuentoPed' id='txtDescuentoPed[]' value='" + data[pos][4] + "' onchange='calcularTotalPed(" + pos + ")' /></td><td><button type='button' onclick='eliminarDetallePed(" + pos + ")' class='btn btn-danger'><i class='fa fa-remove' ></i> </button></td></tr>");
         }
         calcularIgvPed();
         calcularSubTotalPed();

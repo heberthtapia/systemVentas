@@ -2,30 +2,25 @@ $(document).on("ready", init);// Inciamos el jquery
 
 function init(){
 
-	$('#tblCliente').dataTable({
+	$('#tblClienteStatus').dataTable({
         dom: 'Bfrtip',
-        buttons: [
-            'copyHtml5',
-            'excelHtml5',
-            'csvHtml5',
-            'pdfHtml5'
-        ]
+        buttons: []
     });
 
-	ListadoCliente();// Ni bien carga la pagina que cargue el metodo
-	ComboTipo_Documento();
+	ListadoClienteStatus();// Ni bien carga la pagina que cargue el metodo
+	//ComboTipo_Documento();
 	$("#VerForm").hide();// Ocultamos el formulario
-	$("form#frmCliente").submit(SaveOrUpdate);// Evento submit de jquery que llamamos al metodo SaveOrUpdate para poder registrar o modificar datos
+	$("form#frmClienteStatus").submit(SaveOrUpdate);// Evento submit de jquery que llamamos al metodo SaveOrUpdate para poder registrar o modificar datos
 
 	$("#btnNuevo").click(VerForm);// evento click de jquery que llamamos al metodo VerForm
 
 
 	function SaveOrUpdate(e){
 		e.preventDefault();// para que no se recargue la pagina
-        $.post("./ajax/ClienteAjax.php?op=SaveOrUpdate", $(this).serialize(), function(r){// llamamos la url por post. function(r). r-> llamada del callback
+        $.post("./ajax/ClienteAjaxStatus.php?op=SaveOrUpdate", $(this).serialize(), function(r){// llamamos la url por post. function(r). r-> llamada del callback
 
             Limpiar();
-            ListadoCliente();
+            ListadoClienteStatus();
             //$.toaster({ priority : 'success', title : 'Mensaje', message : r});
             swal("Mensaje del Sistema", r, "success");
             OcultarForm();
@@ -71,17 +66,12 @@ function init(){
 
 }
 
-function ListadoCliente(){
-		var tabla = $('#tblCliente').dataTable(
+function ListadoClienteStatus(){
+		var tabla = $('#tblClienteStatus').dataTable(
 		{   "aProcessing": true,
        		"aServerSide": true,
        		dom: 'Bfrtip',
-	        buttons: [
-	            'copyHtml5',
-	            'excelHtml5',
-	            'csvHtml5',
-	            'pdfHtml5'
-	        ],
+       		buttons: [],
         	"aoColumns":[
         	     	{   "mDataProp": "id"},
                     {   "mDataProp": "1"},
@@ -93,7 +83,7 @@ function ListadoCliente(){
 
         	],"ajax":
 	        	{
-	        		url: './ajax/ClienteAjax.php?op=list',
+	        		url: './ajax/ClienteAjaxStatus.php?op=list',
 					type : "get",
 					dataType : "json",
 
@@ -111,7 +101,7 @@ function eliminarCliente(id){// funcion que llamamos del archivo ajax/CategoriaA
 		if(result){// si el result es true
 			$.post("./ajax/ClienteAjax.php?op=delete", {id : id}, function(e){// llamamos la url de eliminar por post. y mandamos por parametro el id
 
-				ListadoCliente();
+				ListadoClienteStatus();
 				swal("Mensaje del Sistema", e, "success");
 
             });
@@ -120,7 +110,7 @@ function eliminarCliente(id){// funcion que llamamos del archivo ajax/CategoriaA
 	})
 }
 
-function cargarDataCliente(id, tipo_persona,nombre,tipo_documento,num_documento,direccion_departamento,direccion_provincia,direccion_distrito,direccion_calle,direccion_nom_calle,direccion_num,direccion_zona,direccion_nom_zona,cx,cy,telefono,email,numero_cuenta,estado){// funcion que llamamos del archivo ajax/CategoriaAjax.php linea 52
+function cargarDataCliente(id, tipo_persona,nombre,tipo_documento,num_documento,direccion_departamento,direccion_provincia,direccion_distrito,direccion_calle,direccion_nom_calle,direccion_num,direccion_zona,direccion_nom_zona,cx,cy,telefono,email,numero_cuenta,estado,status){// funcion que llamamos del archivo ajax/CategoriaAjax.php linea 52
 		$("#VerForm").show();// mostramos el formulario
 		$("#btnNuevo").hide();// ocultamos el boton nuevo
 		$("#VerListado").hide();

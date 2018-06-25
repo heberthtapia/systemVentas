@@ -4,7 +4,7 @@
                   <h3 class="box-title" >Ventas Generales</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    
+
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                   </div>
                 </div>
@@ -15,7 +15,7 @@
 	                  	<div class="col-md-12">
 		                    <!--Contenido-->
                             <div class="col-sm-14"  id="VerFormVentaPed">
-<form role="form" name="frmVentas" id="frmVentas" >
+    <form role="form" name="frmVentas" id="frmVentas" >
             <div class="row">
                 <h3 class="col-lg-12" id="txtVenta" ></h3>
                 <div class="col-lg-4 left">
@@ -33,7 +33,7 @@
                 <div class="col-lg-4 left">
                     <label for="inputMarca">T. Comprobante</label>
                     <div class="form-group  has-success">
-                        
+
                         <select id="cboTipoComprobante" name="cboTipoComprobante" class="form-control">
 
                         </select>
@@ -49,21 +49,21 @@
                 <div class="col-lg-5 left">
                     <label for="inputInscripcion">Numero</label>
                     <div class="form-group  has-success">
-                        
+
                         <input id="txtNumeroVent" type="text" class="form-control" name="txtNumeroVent" required="" placeholder="" readonly="readonly"/>
                     </div>
                 </div>
                 <div class="col-lg-3 left">
                     <label for="inputInscripcion">Impuesto</label>
                     <div class="form-group  has-success">
-                        
+
                         <input id="txtImpuesto" type="text" class="form-control" name="txtImpuesto" placeholder="" readonly="readonly"/>
                     </div>
                 </div>
                 <div class="col-lg-3 left">
                     <label id="inputTotal">Total</label>
                     <div class="form-group  has-success">
-                        
+
                         <input id="txtTotalVent" type="text" class="form-control" name="txtTotalVent" required="" placeholder="" readonly="readonly"/>
                     </div>
                 </div>
@@ -91,7 +91,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            
+
                             </tbody>
                         </table>
                 </div>
@@ -102,21 +102,21 @@
                             <div class="input-group has-error">
                                 <div id="SubTotal_Ver" class="input-group-addon"></div>
                                 <input type="text" class="form-control" id="txtSubTotalPedVer" name="txtSubTotalPedVer" placeholder="Sub Total" disabled>
-                                
+
                             </div>
                         </div>
                         <div class="col-lg-4 left  has-error">
                             <div class="input-group">
                                 <div id="IGV_Ver" class="input-group-addon"></div>
                                 <input type="text" class="form-control" id="txtIgvPedVer" name="txtIgvPedVer" placeholder="I.G.V" disabled>
-                                
+
                             </div>
                         </div>
                         <div class="col-lg-4 left has-error">
                             <div class="input-group">
                                 <div id="Total_Ver" class="input-group-addon"></div>
                                 <input type="text" class="form-control" id="txtTotalPedVer" name="txtTotalPedVer" placeholder="Total" disabled>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -128,7 +128,7 @@
         </form>
 </div>
 	<div class="col-sm-14">
-       
+
         <form role="form">
             <div class="row">
                 <?php
@@ -137,7 +137,7 @@
                         <div class="col-lg-4 left">
                             <label for="inputMarca">Sucursal:</label>
                             <div class="form-group has-success">
-                                
+
                                 <div class="input-group">
 
                                     <input id="txtSucursal" type="text" value="<?php echo $_SESSION["sucursal"] ?>" class="form-control" name="txtSucursal" required="" placeholder="Seleccione una Sucursal" autofocus="" disabled/>
@@ -146,7 +146,7 @@
                                                         Buscar
                                           </button>
                                     </span>
-                                </div>   
+                                </div>
                             </div>
                         </div>
                         <?php } ?>
@@ -186,7 +186,7 @@
                             <th>Opciones</th>
                         </tr>
                     </thead>
-             
+
                     <tfoot>
                         <tr>
                             <th>Fecha</th>
@@ -203,11 +203,11 @@
                             <th>Opciones</th>
                         </tr>
                     </tfoot>
-             
+
                 </table>
             </div>
     </div>
-		                    
+
 		                    <!--Fin-Contenido-->
                   		</div>
                   	</div><!-- /.row -->
@@ -235,7 +235,7 @@
                             <th>Logo</th>
                         </tr>
                     </thead>
-             
+
                     <tfoot>
                         <tr>
                             <th>Seleccione</th>
@@ -247,7 +247,7 @@
                             <th>Logo</th>
                         </tr>
                     </tfoot>
-             
+
                     <tbody id="Sucursales">
 
                     </tbody>
@@ -263,7 +263,7 @@
 </div>
 
 <script type="text/javascript">
-    
+
     $('#liConsultaVentas').addClass("treeview active");
     $('#liVentasFechas').addClass("active");
 

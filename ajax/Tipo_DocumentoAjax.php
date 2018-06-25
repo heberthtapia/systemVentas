@@ -8,20 +8,20 @@
 
 	switch ($_GET["op"]) {
 
-		case 'SaveOrUpdate':			
+		case 'SaveOrUpdate':
 
 			$nombre = $_POST["txtNombre"]; // Llamamos al input txtNombre
 			$operacion = $_POST["txtOperacion"];
 
 			if(empty($_POST["txtIdTipo_Documento"])){
-				
+
 				if($objTipo_Documento->Registrar($nombre,$operacion)){
 					echo "Tipo de Documento registrado correctamente";
 				}else{
 					echo "Tipo documento no ha podido ser registrado.";
 				}
 			}else{
-				
+
 				$idtipo_documento = $_POST["txtIdTipo_Documento"];
 				if($objTipo_Documento->Modificar($idtipo_documento,$nombre,$operacion)){
 					echo "La informacion del tipo de documento ha sido actualizada";
@@ -31,8 +31,8 @@
 			}
 			break;
 
-		case "delete":			
-			
+		case "delete":
+
 			$id = $_POST["id"];// Llamamos a la variable id del js que mandamos por $.post (Categoria.js (Linea 62))
 			$result = $objTipo_Documento->Eliminar($id);
 			if ($result) {
@@ -41,7 +41,7 @@
 				echo "No fue Eliminado";
 			}
 			break;
-		
+
 		case "list":
 			$query_Tipo = $objTipo_Documento->Listar();
 
@@ -59,4 +59,3 @@
 			break;
 
 	}
-	

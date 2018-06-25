@@ -14,32 +14,46 @@
 			$hour = date( 'H:i:s' );
 			try {
 
-				$sql = "INSERT INTO venta(idpedido,idusuario,tipo_venta,tipo_comprobante,serie_comprobante,num_comprobante, fecha, hora, impuesto,total,estado)
+				$query = "SELECT count(idpedido) AS num FROM venta WHERE idpedido = $idpedido";
+				$q = $conexion->query($query);
+				$cont = $q->fetch_object();
+
+				if ($cont->num == 0) {
+					$sql = "INSERT INTO venta(idpedido,idusuario,tipo_venta,tipo_comprobante,serie_comprobante,num_comprobante, fecha, hora, impuesto,total,estado)
 						VALUES('$idpedido','$idusuario','$tipo_venta','$tipo_comprobante','$serie_comprobante','$num_comprobante', '$date', '$hour', '$impuesto','$total','$estado')";
-				//var_dump($sql);
-				$conexion->query($sql);
+					//var_dump($sql);
+					$conexion->query($sql);
 
-				$sql_detalle_doc = "UPDATE detalle_documento_sucursal set ultimo_numero = '$numero' where iddetalle_documento_sucursal = $iddetalle_documento_sucursal";
-				//var_dump($sql);
-				$conexion->query($sql_detalle_doc);
+					$sql_detalle_doc = "UPDATE detalle_documento_sucursal set ultimo_numero = '$numero' where iddetalle_documento_sucursal = $iddetalle_documento_sucursal";
+					//var_dump($sql);
+					$conexion->query($sql_detalle_doc);
 
-				$sql_ped = "UPDATE pedido set tipo_pedido = 'Venta' where idpedido = $idpedido";
-				//var_dump($sql);
-				$conexion->query($sql_ped);
+					$sql_ped = "UPDATE pedido set tipo_pedido = 'Venta' where idpedido = $idpedido";
+					//var_dump($sql);
+					$conexion->query($sql_ped);
 
-				$conexion->autocommit(true);
-				foreach($detalle as $indice => $valor){
-					$sql_detalle = "UPDATE detalle_ingreso set stock_actual = ".$valor[1]." - ".$valor[2]." where iddetalle_ingreso = ".$valor[0]."";
-					$conexion->query($sql_detalle) or $sw = false;
+					$conexion->autocommit(true);
+					foreach($detalle as $indice => $valor){
+						$sql_detalle = "UPDATE detalle_ingreso set stock_actual = ".$valor[1]." - ".$valor[2]." where iddetalle_ingreso = ".$valor[0]."";
+						$conexion->query($sql_detalle) or $sw = false;
+					}
+
+	            	$sql_ped = "SELECT idcliente FROM pedido WHERE idpedido = '$idpedido' ";
+	            	$query = $conexion->query($sql_ped);
+        			$row = $query->fetch_object();
+
+	            	$sql = "INSERT INTO status_cliente(idpersona, status, fecha) VALUES('$row->idcliente','V','$date')";
+					$conexion->query($sql);
+
+					if ($conexion != null) {
+	                	$conexion->close();
+	            	}
 				}
-				if ($conexion != null) {
-                	$conexion->close();
-            	}
+
 			} catch (Exception $e) {
 				$conexion->rollback();
 			}
 			return $sw;
-
 		}
 
 		public function Modificar($idventa,$idpedido, $idusuario,$tipo_venta,$tipo_comprobante,$serie_comprobante,$num_comprobante,$impuesto,$total,$estado){
