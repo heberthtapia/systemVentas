@@ -7,18 +7,17 @@
 		public function __construct(){
 		}
 
-		public function Registrar($tipo_persona,$nombre,$tipo_documento,$num_documento,$direccion_departamento,$direccion_provincia,$direccion_distrito,$direccion_calle,$direccion_nom_calle,$direccion_num,$direccion_zona,$direccion_nom_zona,$cx,$cy,$telefono,$email,$numero_cuenta,$estado){
+		public function Registrar($tipo_persona,$nombre,$tipo_documento,$num_documento,$direccion_departamento,$direccion_provincia,$direccion_distrito,$direccion_calle,$direccion_nom_calle,$direccion_num,$direccion_zona,$direccion_nom_zona,$cx,$cy,$telefono,$email,$numero_cuenta,$foto,$estado){
 			global $conexion;
-			$sql = "INSERT INTO persona(tipo_persona,nombre,tipo_documento,num_documento,direccion_departamento,direccion_provincia,direccion_distrito,direccion_calle,direccion_nom_calle,direccion_num,direccion_zona,direccion_nom_zona,coorX,coorY,telefono,email,numero_cuenta,estado)
-			VALUES('$tipo_persona','$nombre','$tipo_documento','$num_documento','$direccion_departamento','$direccion_provincia','$direccion_distrito','$direccion_calle','$direccion_nom_calle','$direccion_num','$direccion_zona','$direccion_nom_zona','$cx','$cy','$telefono','$email','$numero_cuenta','$estado')";
+			$sql = "INSERT INTO persona(tipo_persona,nombre,tipo_documento,num_documento,direccion_departamento,direccion_provincia,direccion_distrito,direccion_calle,direccion_nom_calle,direccion_num,direccion_zona,direccion_nom_zona,coorX,coorY,telefono,email,numero_cuenta,foto,estado)
+			VALUES('$tipo_persona','$nombre','$tipo_documento','$num_documento','$direccion_departamento','$direccion_provincia','$direccion_distrito','$direccion_calle','$direccion_nom_calle','$direccion_num','$direccion_zona','$direccion_nom_zona','$cx','$cy','$telefono','$email','$numero_cuenta','$foto','$estado')";
 			$query = $conexion->query($sql);
 			return $query;
 		}
 
-		public function Modificar($idpersona,$tipo_persona,$nombre,$tipo_documento,$num_documento,$direccion_departamento,$direccion_provincia,$direccion_distrito,$direccion_calle,$direccion_nom_calle,$direccion_num,$direccion_zona,$direccion_nom_zona,$cx,$cy,$telefono,$email,$numero_cuenta,$estado){
+		public function Modificar($idpersona,$tipo_persona,$nombre,$tipo_documento,$num_documento,$direccion_departamento,$direccion_provincia,$direccion_distrito,$direccion_calle,$direccion_nom_calle,$direccion_num,$direccion_zona,$direccion_nom_zona,$cx,$cy,$telefono,$email,$numero_cuenta,$foto,$estado){
 			global $conexion;
-			$sql = "UPDATE persona set tipo_persona = '$tipo_persona',nombre = '$nombre',tipo_documento='$tipo_documento',num_documento='$num_documento', direccion_departamento = '$direccion_departamento',direccion_provincia='$direccion_provincia',direccion_distrito='$direccion_distrito',direccion_calle='$direccion_calle', direccion_nom_calle='$direccion_nom_calle', direccion_num='$direccion_num', direccion_zona='$direccion_zona', direccion_nom_zona='$direccion_nom_zona', coorX='$cx', coorY='$cy' ,telefono='$telefono',email='$email',numero_cuenta='$numero_cuenta',
-					estado='$estado'
+			$sql = "UPDATE persona set tipo_persona = '$tipo_persona',nombre = '$nombre',tipo_documento='$tipo_documento',num_documento='$num_documento', direccion_departamento = '$direccion_departamento',direccion_provincia='$direccion_provincia',direccion_distrito='$direccion_distrito',direccion_calle='$direccion_calle', direccion_nom_calle='$direccion_nom_calle', direccion_num='$direccion_num', direccion_zona='$direccion_zona', direccion_nom_zona='$direccion_nom_zona', coorX='$cx', coorY='$cy' ,telefono='$telefono',email='$email',numero_cuenta='$numero_cuenta',foto='$foto',estado='$estado'
 						WHERE idpersona = $idpersona";
 			$query = $conexion->query($sql);
 			return $query;

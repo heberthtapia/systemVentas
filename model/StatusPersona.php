@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	require "Conexion.php";
 
 	class Persona{
@@ -20,8 +21,9 @@
 
 			$date = date( 'Y-m-d' ); /*curdate()*/
 			$hour = date( 'H:i:s' );
+			$idUsuario = $_SESSION["idusuario"];
 
-			$sql = "INSERT INTO status_cliente(idpersona, status, fecha) VALUES('$idpersona','$status','$date')";
+			$sql = "INSERT INTO status_cliente(idpersona, idusuario, status, fecha) VALUES('$idpersona', '$idUsuario', '$status','$date')";
 			$query = $conexion->query($sql);
 			return $query;
 

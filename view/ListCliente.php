@@ -1,11 +1,12 @@
 <script>
     $(document).ready(function(){
-        $("#status, #txtZona").change(function(){
-            status = $("#status").val();
-            zona = $("#txtZona").val();
-            fecha = $("#cboFecha").val();
+        $("#status, #txtZona, #cboEmpleado").change(function(){
+            status     = $("#status").val();
+            zona       = $("#txtZona").val();
+            fecha      = $("#cboFecha").val();
+            idempleado = $("#cboEmpleado").val();
 
-            listaCliente(status,zona,fecha);
+            listaCliente(status,zona,fecha,idempleado);
         });
     })
 </script>
@@ -31,16 +32,16 @@
         <form role="form">
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
-                            <div class="form-group has-success">
-                                <label>Zona:</label>
-                                <input id="txtZona" type="text" maxlength="100" name="txtZona" class="form-control" placeholder="Zona" autofocus="" />
-                            </div>
-                        </div>
+                    <div class="form-group has-success">
+                        <label>Zona:</label>
+                        <input id="txtZona" type="text" maxlength="100" name="txtZona" class="form-control" placeholder="Zona" autofocus="" />
+                    </div>
+                </div>
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 left">
                     <div class="form-group has-success">
                         <label>Estado:</label>
                         <select id="status" name="status" class="form-control" required="" >
-                            <option value="">Todos</option>
+                            <option value="L">Ver Todos los Clientes</option>
                             <option value="V">Vendidas</option>
                             <option value="N">No Vendidas</option>
                             <option value="C">Cerradas</option>
@@ -49,11 +50,19 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-4 left">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 left">
                     <div class="form-group has-success">
                         <label for="inputMarca">Fecha :</label>
                         <input id="txtIdSucursal" type="hidden" value="<?php echo $_SESSION["idsucursal"] ?>" maxlength="50" class="form-control" name="txtIdSucursal" required="" placeholder="" autofocus="" />
                         <input id="cboFecha" type="date" maxlength="50" value="<?php echo date("Y-m-d"); ?>"  class="form-control" name="cboFecha" required="" />
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 left">
+                    <div class="form-group has-success">
+                        <label>Empleado:</label>
+                        <select id="cboEmpleado" name="cboEmpleado" class="form-control">
+
+                        </select>
                     </div>
                 </div>
             </div>
@@ -124,12 +133,13 @@
     $('#liStatusCliente').addClass("active");
 
     jQuery(document).ready(function($) {
-        status = $("#status").val();
-        zona = $("#txtZona").val();
-        fecha = $("#cboFecha").val();
+        status     = $("#status").val();
+        zona       = $("#txtZona").val();
+        fecha      = $("#cboFecha").val();
+        idempleado = $("#cboEmpleado").val();
 
         initMap();
-        listaCliente(status,zona,fecha);
+        listaCliente(status,zona,fecha,idempleado);
     });
 </script>
 <style>
@@ -170,7 +180,7 @@
         }
     }
 
-    function listaCliente(status,zona,fecha){
+    function listaCliente(status,zona,fecha,idempleado){
         //ANTES DE LISTAR MARCADORES
         //SE DEBEN QUITAR LOS ANTERIORES DEL MAPA
         deleteMarkers(markers);
@@ -184,6 +194,7 @@
                 status: status,
                 zona: zona,
                 fecha: fecha,
+                idempleado: idempleado
             },
             dataType:"JSON",
             //data:"&id="+id_empleado,
@@ -195,57 +206,58 @@
 
                 $.each(data, function(i, item){
                     $.each(item, function(j, val){
-                        contentString[c] = '<div>'
-                         +'<h3>Cliente: '+item.nombre[c]+'</h3>'
-                         +'<p>Dirección: <strong>'+item.avenida[c]+'</strong> '+item.nomAve[c]+' </p>'
-                         +'<p><strong># </strong>: '+item.num[c]+' </p>'
-                         +'<p><strong>'+item.zona[c]+': </strong> '+item.nomZona[c]+' </p>'
+                        contentString[j] = '<div>'
+                         +'<h3>Cliente: '+data.nombre[j]+'</h3>'
+                         +'<p>Dirección: <strong>'+data.avenida[j]+'</strong> '+data.nomAve[j]+' </p>'
+                         +'<p><strong># </strong>: '+data.num[j]+' </p>'
+                         +'<p><strong>'+data.zona[j]+': </strong> '+data.nomZona[j]+' </p>'
+                         +'<img src="'+data.foto[j]+'" alt="" width="200" >'
                          +'</div>';
 
                         var infowindow = new google.maps.InfoWindow({
-                            content: contentString[c],
+                            content: contentString[j],
                             maxWidth: 300
                         });
 
-                        switch (item.status[c]) {
+                        switch (data.status[j]) {
                             case 'V':
                                 img = 'green.png';
                                 break;
                             case 'C':
                                 img = 'yellow.png';
                                 break;
-                            default:
+                            case 'N':
                                 img = 'red.png';
+                                break;
+                            default:
+                                img = 'blue.png';
                         }
 
-                        //alert(item.status[c]+'---'+img);
-
                         //OBTENER LAS COORDENADAS DEL PUNTO
-                        var posi = new google.maps.LatLng(item.cx[c], item.cy[c]);
+                        var posi = new google.maps.LatLng(data.cx[j], data.cy[j]);
                         //CARGAR LAS PROPIEDADES AL MARCADOR
                         var marca = new google.maps.Marker({
-                            //idMarcador:item.IdPunto,
+                            //idMarcador:data.IdPunto,
                             position:posi,
                             icon: 'img/'+img,
                             //zoom:15,
-                            //titulo: item.Titulo,
-                            cx:item.cx[c],//esas coordenadas vienen de la BD
-                            cy:item.cy[c],//esas coordenadas vienen de la BD
+                            //titulo: data.Titulo,
+                            cx:data.cx[j],//esas coordenadas vienen de la BD
+                            cy:data.cy[j],//esas coordenadas vienen de la BD
                             draggable: false
                         });
                         // Add info window to marker
                         google.maps.event.addListener(marca, 'click', (function(marca, c) {
                             return function() {
-                                infoWindow.setContent(contentString[c]);
+                                infoWindow.setContent(contentString[j]);
                                 infoWindow.open(mapa, marca);
                             }
-                        })(marca, c));
+                        })(marca, j));
                         //AGREGAR EL MARCADOR A LA VARIABLE MARCADORES_BD
                         // marcadores_bd.push(marca);
                         //UBICAR EL MARCADOR EN EL MAPA
                         markers.push(marca);
                         marca.setMap(mapa);
-                        c++;
                     });
                 });
             },

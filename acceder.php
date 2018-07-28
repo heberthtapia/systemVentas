@@ -1,5 +1,5 @@
-<?php 
-  session_start(); 
+<?php
+  session_start();
   if(isset($_SESSION["idusuario"])){
 ?>
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="public/css/font-awesome.css">
-   
+
     <!-- Theme style -->
     <link rel="stylesheet" href="public/css/AdminLTE.min.css">
     <!-- iCheck -->
@@ -63,7 +63,7 @@
                         </div><!-- /.widget-user -->
 
                     </div>
-                  </div> 
+                  </div>
                   </div><!-- /.box-body -->
 
                   <div class="box-footer">
@@ -72,11 +72,11 @@
                 </form>
               </div><!-- /.box -->
 
-              
 
-              
 
-              
+
+
+
             </div><!--/.col (left) -->
             <!-- right column -->
             <div class="col-md-8">
@@ -86,28 +86,28 @@
                   <h3 class="box-title">Acceso a las Sucursales</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                
+
                   <div class="box-body">
                   <div class="box">
-                
+
                 <div class="box-body no-padding">
                   <table class="table table-hover" id="tblSucursal">
-                    <tr>                      
+                    <tr>
                       <th>Opcion</th>
                       <th>Sucursal</th>
                       <th>Logo</th>
-                      
+
                     </tr>
-                    
+
                     <tbody id="Sucursal">
 
                     </tbody>
-                    
+
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
 
-                  
+
               </div><!-- /.box -->
               <!-- general form elements disabled -->
                           </div><!--/.col (right) -->
@@ -121,7 +121,7 @@
     <script src="public/js/bootstrap.min.js"></script>
     <!-- iCheck -->
     <script src="public/js/icheck.min.js"></script>
-    
+
     <script type="text/javascript">
       $(document).on("ready", init);
 
@@ -129,7 +129,7 @@
 
         ListadoIngresos();
 
-        function ListadoIngresos(){ 
+        function ListadoIngresos(){
           $.post("ajax/SucursalAjax.php?op=listSucursalEmp", function(r){
                 $("#Sucursal").html(r);
           });
@@ -139,7 +139,7 @@
       }
 
       function Acceder(idusuario, idsucursal, idempleado, empleado, tipo_documento, tipo_usuario, num_documento, direccion, telefono, foto, logo, email, login, razon_social, mnu_almacen, mnu_compras, mnu_ventas, mnu_mantenimiento, mnu_seguridad, mnu_consulta_compras, mnu_consulta_ventas, mnu_admin){
-        var data = { 
+        var data = {
             idusuario : idusuario,
             idsucursal : idsucursal,
             idempleado : idempleado,
@@ -169,7 +169,7 @@
       }
 
       function AccederSuperAdmin(idempleado, idusuario, idsucursal, estadoAdmin, empleado, tipo_documento, direccion, telefono, foto, email, login, mnu_almacen, mnu_compras, mnu_ventas, mnu_mantenimiento, mnu_seguridad, mnu_consulta_compras, mnu_consulta_ventas, mnu_admin, logo){
-        var data = { 
+        var data = {
             idempleado : idempleado,
             idusuario : idusuario,
             idsucursal : idsucursal,
@@ -204,5 +204,5 @@
   } else {
     header("Location:index.html");
   }
-  
+
 ?>

@@ -110,7 +110,7 @@ function eliminarCliente(id){// funcion que llamamos del archivo ajax/CategoriaA
 	})
 }
 
-function cargarDataCliente(id, tipo_persona,nombre,tipo_documento,num_documento,direccion_departamento,direccion_provincia,direccion_distrito,direccion_calle,direccion_nom_calle,direccion_num,direccion_zona,direccion_nom_zona,cx,cy,telefono,email,numero_cuenta,estado,status){// funcion que llamamos del archivo ajax/CategoriaAjax.php linea 52
+/*function cargarDataCliente(id, tipo_persona,nombre,tipo_documento,num_documento,direccion_departamento,direccion_provincia,direccion_distrito,direccion_calle,direccion_nom_calle,direccion_num,direccion_zona,direccion_nom_zona,cx,cy,telefono,email,numero_cuenta,estado,status){// funcion que llamamos del archivo ajax/CategoriaAjax.php linea 52
 		$("#VerForm").show();// mostramos el formulario
 		$("#btnNuevo").hide();// ocultamos el boton nuevo
 		$("#VerListado").hide();
@@ -137,5 +137,5 @@ function cargarDataCliente(id, tipo_persona,nombre,tipo_documento,num_documento,
 
  		initMap();
  		listaMap(cx,cy);
- 	}
+ 	}*/
 

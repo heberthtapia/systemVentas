@@ -39,7 +39,7 @@
 				v.impuesto,
 				a.nombre as articulo,di.codigo as codigo,di.serie as serie_art,
 				dp.cantidad,dp.precio_venta,dp.descuento,
-				(dp.cantidad*(dp.precio_venta-dp.descuento))as total
+				((dp.cantidad*dp.precio_venta)-dp.descuento)as total
 				from detalle_pedido dp inner join detalle_ingreso di on dp.iddetalle_ingreso=di.iddetalle_ingreso
 				inner join articulo a on di.idarticulo=a.idarticulo
 				inner join pedido p on dp.idpedido=p.idpedido

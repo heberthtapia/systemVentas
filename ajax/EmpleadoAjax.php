@@ -10,22 +10,21 @@
 
 		case 'SaveOrUpdate':
 
-			$apellidos = $_POST["txtApellidos"];
-			$nombre = $_POST["txtNombre"];
-			$tipo_documento = $_POST["cboTipo_Documento"];
-			$num_documento = $_POST["txtNum_Documento"];
-			$direccion = $_POST["txtDireccion"];
-			$coorX = $_POST["cx"];
-			$coorY = $_POST["cy"];
-			$telefono = $_POST["txtTelefono"];
-			$email = $_POST["txtEmail"];
+			$apellidos        = $_POST["txtApellidos"];
+			$nombre           = $_POST["txtNombre"];
+			$tipo_documento   = $_POST["cboTipo_Documento"];
+			$num_documento    = $_POST["txtNum_Documento"];
+			$direccion        = $_POST["txtDireccion"];
+			$coorX            = $_POST["cx"];
+			$coorY            = $_POST["cy"];
+			$telefono         = $_POST["txtTelefono"];
+			$email            = $_POST["txtEmail"];
 			$fecha_nacimiento = $_POST["txtFecha_Nacimiento"];
-			$imagen = $_FILES["imagenEmp"]["tmp_name"];
-			$ruta = $_FILES["imagenEmp"]["name"];
-			$login = $_POST["txtLogin"];
-			$clave = md5($_POST["txtClave"]);
-			$estado = $_POST["txtEstado"];
-
+			$imagen           = $_FILES["imagenEmp"]["tmp_name"];
+			$ruta             = $_FILES["imagenEmp"]["name"];
+			$login            = $_POST["txtLogin"];
+			$clave            = md5($_POST["txtClave"]);
+			$estado           = $_POST["txtEstado"];
 
 			if(move_uploaded_file($imagen, "../Files/Empleado/".$ruta)){
 
@@ -139,5 +138,20 @@
 		        }
 
 		    break;
+
+		case "listEmpleado":
+	        require_once "../model/Empleado.php";
+
+	        $objEmpleado = new Empleado();
+
+	        $query_empleado = $objEmpleado->ListarEmp();
+
+	        echo '<option value="0">TODOS</option>';
+
+	        while ($reg = $query_empleado->fetch_object()) {
+	            echo '<option value=' . $reg->idempleado . '>' . $reg->nombre . ' ' . $reg->apellidos . '</option>';
+	        }
+
+	        break;
 
 	}

@@ -42,7 +42,7 @@
 	            	$query = $conexion->query($sql_ped);
         			$row = $query->fetch_object();
 
-	            	$sql = "INSERT INTO status_cliente(idpersona, status, fecha) VALUES('$row->idcliente','V','$date')";
+	            	$sql = "INSERT INTO status_cliente(idpersona, idusuario, status, fecha) VALUES('$row->idcliente', '$idusuario','V','$date')";
 					$conexion->query($sql);
 
 					if ($conexion != null) {

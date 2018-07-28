@@ -92,6 +92,8 @@
                $j           = 0;
                $totalEmp = Array();
                $totalPre = Array();
+               $totalVentas = 0;
+               $descuento = Array();
 
                while ($reg = $query_Tipo->fetch_object()) {
 
@@ -113,7 +115,7 @@
 
                     while ($row = $Query->fetch_object()) {
 
-                         $sqlQuery = "SELECT SUM(dp.cantidad) AS cantidad, di.precio_ventadistribuidor AS precio ";
+                         $sqlQuery = "SELECT SUM(dp.cantidad) AS cantidad, di.precio_ventadistribuidor AS precio, dp.descuento AS descuento ";
                          $sqlQuery .= "FROM empleado AS e, usuario AS u, venta AS v, pedido AS p, detalle_pedido AS dp, detalle_ingreso AS di, articulo AS a ";
                          $sqlQuery .= "WHERE e.idempleado = u.idempleado ";
                          $sqlQuery .= "AND e.idempleado = $row->idempleado ";
@@ -149,7 +151,40 @@
                          $i++;
                          $totalEmp[$i] = $totalEmp[$i] + $fila->cantidad;
                          $totalPre[$i] = $totalPre[$i] + ( $fila->cantidad * $fila->precio );
-                         //echo '--->'.$fila->precio;
+
+                         /**
+                          * CALCULO DE DESCUENTO
+                          */
+
+                         $sqlQueryDes = "SELECT SUM(dp.descuento) AS descuento ";
+                         $sqlQueryDes .= "FROM empleado AS e, usuario AS u, venta AS v, pedido AS p, detalle_pedido AS dp, detalle_ingreso AS di, articulo AS a ";
+                         $sqlQueryDes .= "WHERE e.idempleado = u.idempleado ";
+                         $sqlQueryDes .= "AND e.idempleado = $row->idempleado ";
+                         //$sqlQueryDes .= "AND v.idusuario = u.idusuario ";
+                         $sqlQueryDes .= "AND v.idpedido = p.idpedido ";
+                         $sqlQueryDes .= "AND p.idusuario = u.idusuario ";
+                         $sqlQueryDes .= "AND p.idpedido = dp.idpedido ";
+                         $sqlQueryDes .= "AND dp.iddetalle_ingreso = di.iddetalle_ingreso ";
+                         $sqlQueryDes .= "AND di.idarticulo = a.idarticulo ";
+                         $sqlQueryDes .= "AND v.estado = 'A' ";
+                         $sqlQueryDes .= "AND p.estado = 'A' ";
+                         $sqlQueryDes .= "AND a.idarticulo = $reg->idarticulo ";
+                         if( $categoria != 0 ){
+                              $sqlQueryDes .= "AND a.idcategoria = $categoria ";
+                         }
+                         $sqlQueryDes .= "AND v.fecha = '".$fecha_desde."' ";
+                         if($grupo != 0){
+                             $sqlQueryDes .= "AND u.num_grupo = '".$grupo."' ";
+                         }
+
+                         $con = $conexion->query($sqlQueryDes);
+                         $des = $con->fetch_object();
+
+                         $descuento[$i] = $descuento[$i] + $des->descuento;
+
+                         /**
+                          * FIN CALCULO DE DESCUENTO
+                          */
                     }
 
                     $c = 0;
@@ -178,9 +213,11 @@
                $data[$k+1][0] = '<strong>z. TOTAL Bs.-</strong>';
 
                for($i=1; $i <= $num; $i++){
-                    $data[$k+1][$i] = '<strong>'.$totalPre[$i].'</strong>';
+                    $totalBs = $totalPre[$i]-$descuento[$i];
+                    $data[$k+1][$i] = '<strong>'.$totalBs.'</strong>';
+                    $totalVentas = $totalVentas + $totalPre[$i] - $descuento[$i];
                }
-               $data[$k+1][$num+1] = '';
+               $data[$k+1][$num+1] = '<strong>'.$totalVentas.'</strong>';
 
                //print_r($totalPre);
 

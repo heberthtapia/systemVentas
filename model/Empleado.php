@@ -45,6 +45,11 @@
 			return $query;
 		}
 
-
+		public function ListarEmp(){
+			global $conexion;
+			$sql = "SELECT * FROM empleado AS e, usuario AS u WHERE e.idempleado = u.idempleado AND u.tipo_usuario = 'Vendedor' order by e.idempleado desc";
+			$query = $conexion->query($sql);
+			return $query;
+		}
 
 	}

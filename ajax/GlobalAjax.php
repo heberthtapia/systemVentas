@@ -8,7 +8,7 @@
 
 	switch ($_GET["op"]) {
 
-		case 'SaveOrUpdate':			
+		case 'SaveOrUpdate':
 
 			$empresa = $_POST["txtEmpresa"]; // Llamamos al input txtNombre
 			$nombre_impuesto = $_POST["txtNombre_Impuesto"];
@@ -19,14 +19,14 @@
 
 			if(move_uploaded_file($imagen, "../Files/Global/".$ruta)){
 				if(empty($_POST["txtIdGlobal"])){
-					
+
 					if($objGlobal->Registrar($empresa,$nombre_impuesto,$porcentaje_impuesto,$simbolo_moneda, "Files/Global/".$ruta)){
 						echo "Configuración Global registrada, se utilizará esta configuración.";
 					}else{
 						echo "La configuración global no ha podido ser registada.";
 					}
 				}else{
-					
+
 					$idglobal = $_POST["txtIdGlobal"];
 					if($objGlobal->Modificar($idglobal, $empresa,$nombre_impuesto,$porcentaje_impuesto,$simbolo_moneda, "Files/Global/".$ruta)){
 						echo "La configuración Global ha sido actualizada";
@@ -37,14 +37,14 @@
 			} else {
 				$ruta_img = $_POST["txtRutaImgLogo"];
 				if(empty($_POST["txtIdGlobal"])){
-					
+
 					if($objGlobal->Registrar($empresa,$nombre_impuesto,$porcentaje_impuesto,$simbolo_moneda, $ruta_img)){
 						echo "Configuración Global registrada, se utilizará esta configuración.";
 					}else{
 						echo "La configuración global no ha podido ser registada.";
 					}
 				}else{
-					
+
 					$idglobal = $_POST["txtIdGlobal"];
 					if($objGlobal->Modificar($idglobal, $empresa,$nombre_impuesto,$porcentaje_impuesto,$simbolo_moneda, $ruta_img)){
 						echo "La configuración Global ha sido actualizada";
@@ -55,8 +55,8 @@
 			}
 			break;
 
-		case "delete":			
-			
+		case "delete":
+
 			$id = $_POST["id"];// Llamamos a la variable id del js que mandamos por $.post (Categoria.js (Linea 62))
 			$result = $objGlobal->Eliminar($id);
 			if ($result) {
@@ -65,7 +65,7 @@
 				echo "La configuración global no fue Eliminada";
 			}
 			break;
-		
+
 		case "list":
 			$query_Tipo = $objGlobal->Listar();
 
@@ -82,16 +82,16 @@
 				$i++;
 			}
 			echo json_encode($data);
-            
+
 			break;
 
 		case "GetImpuesto":
 			$query_Tipo = $objGlobal->Listar();
 
             $reg = $query_Tipo->fetch_object();
-     		
+
      		echo json_encode($reg);
-            
+
 			break;
 
 		case "SN":
@@ -102,12 +102,12 @@
 			$cant_letra = strlen($entero);
 
 			$parte_izquierda = substr($letra, 0, -$cant_letra);
-			
+
 			$suma = $entero + 1;
 
 			echo $parte_izquierda."".$suma;
-            
+
 			break;
 
 	}
-	
+

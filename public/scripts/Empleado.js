@@ -13,6 +13,7 @@ function init(){
     });
 
 	ListadoEmpleado();// Ni bien carga la pagina que cargue el metodo
+	ComboEmpleado();
 	ComboTipo_Documento();
 	$("#VerForm").hide();// Ocultamos el formulario
 	$("#txtClaveOtro").hide();
@@ -165,3 +166,9 @@ function cargarDataEmpleado(id,apellidos, nombre,tipo_documento,num_documento,di
 
         })
     }
+
+    function ComboEmpleado(){
+			$.post("./ajax/EmpleadoAjax.php?op=listEmpleado", function(r){
+	            $("#cboEmpleado").html(r);
+	        });
+	}

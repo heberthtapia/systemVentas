@@ -21,7 +21,7 @@ function init(){
 
 
 	function SaveOrUpdate(e){
-		e.preventDefault();// para que no se recargue la pagina
+		/*e.preventDefault();// para que no se recargue la pagina
         $.post("./ajax/ClienteAjax.php?op=SaveOrUpdate", $(this).serialize(), function(r){// llamamos la url por post. function(r). r-> llamada del callback
 
             Limpiar();
@@ -29,7 +29,24 @@ function init(){
             //$.toaster({ priority : 'success', title : 'Mensaje', message : r});
             swal("Mensaje del Sistema", r, "success");
             OcultarForm();
-        });
+        });*/
+
+        e.preventDefault();// para que no se recargue la pagina
+
+        var formData = new FormData($("#frmCliente")[0]);
+        $.ajax({
+                url: "./ajax/ClienteAjax.php?op=SaveOrUpdate",
+                type: "POST",
+               	data: formData,
+                contentType: false,
+                processData: false,
+                success: function(datos){
+                    swal("Mensaje del Sistema", datos, "success");
+                    ListadoCliente();
+                    OcultarForm();
+                    Limpiar();
+                }
+            });
 	};
 
 	function Limpiar(){
@@ -44,7 +61,7 @@ function init(){
 	    $("#txtTelefono").val("");
 	    $("#txtEmail").val("");
 	    $("#txtNumero_cuenta").val("");
-
+	    $("#frmCliente")[0].reset();
 	}
 
 	function ComboTipo_Documento() {
@@ -120,7 +137,7 @@ function eliminarCliente(id){// funcion que llamamos del archivo ajax/CategoriaA
 	})
 }
 
-function cargarDataCliente(id, tipo_persona,nombre,tipo_documento,num_documento,direccion_departamento,direccion_provincia,direccion_distrito,direccion_calle,direccion_nom_calle,direccion_num,direccion_zona,direccion_nom_zona,cx,cy,telefono,email,numero_cuenta,estado){// funcion que llamamos del archivo ajax/CategoriaAjax.php linea 52
+function cargarDataCliente(id, tipo_persona,nombre,tipo_documento,num_documento,direccion_departamento,direccion_provincia,direccion_distrito,direccion_calle,direccion_nom_calle,direccion_num,direccion_zona,direccion_nom_zona,cx,cy,foto,telefono,email,numero_cuenta,estado){// funcion que llamamos del archivo ajax/CategoriaAjax.php linea 52
 		$("#VerForm").show();// mostramos el formulario
 		$("#btnNuevo").hide();// ocultamos el boton nuevo
 		$("#VerListado").hide();
@@ -140,6 +157,8 @@ function cargarDataCliente(id, tipo_persona,nombre,tipo_documento,num_documento,
 	    $("#txtDireccion_Nom_Zona").val(direccion_nom_zona);
 	    $("#cx").val(cx);
 	    $("#cy").val(cy);
+	    $("#txtRutaImgCli").val(foto);
+	    $("#txtRutaImgCli").show();
 	    $("#txtTelefono").val(telefono);
  		$("#txtEmail").val(email);
  		$("#txtNumero_Cuenta").val(numero_cuenta);

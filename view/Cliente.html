@@ -1,20 +1,19 @@
 <div class="box">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Clientes</h3>
-                  <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    <div class="box-header with-border">
+      <h3 class="box-title">Clientes</h3>
+      <div class="box-tools pull-right">
+        <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 
-                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                  </div>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                  	<div class="row">
-	                  	<div class="col-md-12">
-		                    <!--Contenido-->
-
-		                    <div class="col-sm-14"  id="VerForm">
-                          <!--
+        <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+      </div>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+      	<div class="row">
+          	<div class="col-md-12">
+                <!--Contenido-->
+                <div class="col-sm-14" id="VerForm">
+                <!--
         <div class="row">
             <div class="col-lg-12">
                 <h3 class="page-header">Categoria</h3>
@@ -82,7 +81,7 @@
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                             <div class="form-group has-success">
                                 <label>Calle/Avenida/Plaza/Otro (*):</label>
-                                <select required="" class="form-control" name="txtDireccion_Calle">
+                                <select required="" class="form-control" id="txtDireccion_Calle" name="txtDireccion_Calle">
                                     <option>Avenida</option>
                                     <option>Calle</option>
                                     <option>Carretera</option>
@@ -111,7 +110,7 @@
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                             <div class="form-group has-success">
                                 <label>Zona/Barrio/Otro (*):</label>
-                                <select required="" class="form-control" name="txtDireccion_Zona">
+                                <select required="" class="form-control" id="txtDireccion_Zona" name="txtDireccion_Zona">
                                   <option>Zona</option>
                                   <option>Anillo</option>
                                   <option>Barrio</option>
@@ -181,6 +180,13 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                             <div class="form-group has-success">
+                                <label>Foto (*):</label>
+                                <input id="imagenCli" type="file" class="form-control" name="imagenCli" autofocus="" />
+                                <input id="txtRutaImgCli" type="text" class="form-control" name="txtRutaImgCli" autofocus="" />
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="form-group has-success">
                                 <label>Teléfono:</label>
                                 <input id="txtTelefono" type="text" maxlength="20" name="txtTelefono" class="form-control" placeholder="Ingrese el teléfono" autofocus="" />
                             </div>
@@ -216,61 +222,54 @@
                 </div>
             </div>
             <div class="row">
-
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 left">
-                        <h5></h5>
-                        <button class="btn btn-success" type="submit"><i class="fa fa-floppy-o"></i> Registrar</button>
-                        <a href="Cliente.php" class="btn btn-primary" ><i class="fa fa-remove"></i> Cancelar</a>
-                        <hr>
-                        <span class="lead text-primary"></span>
-
-
+                    <h5></h5>
+                    <button class="btn btn-success" type="submit"><i class="fa fa-floppy-o"></i> Registrar</button>
+                    <a href="Cliente.php" class="btn btn-primary" ><i class="fa fa-remove"></i> Cancelar</a>
+                    <hr>
+                    <span class="lead text-primary"></span>
                 </div>
             </div>
         </form>
     </div>
 <button class="btn btn-primary" id="btnNuevo"><i class="fa fa-file"></i> Nuevo</button>
+    <br><br>
+    <div id="VerListado" class="table-responsive">
+		<table id="tblCliente" class="table table-striped table-bordered table-condensed table-hover" cellpadding="0" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                	<th>#</th>
+                    <th>Cliente</th>
+                    <th>Documento</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Direccion</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
 
+            <tfoot>
+                <tr>
+                    <th>#</th>
+                    <th>Cliente</th>
+                    <th>Documento</th>
+                    <th>Email</th>
+                    <th>Teléfono</th>
+                    <th>Direccion</th>
+                    <th>Opciones</th>
+                </tr>
+            </tfoot>
 
-		                    <br><br>
-		                    <div id="VerListado" class="table-responsive">
+            <tbody id="cliente">
 
-
-            		<table id="tblCliente" class="table table-striped table-bordered table-condensed table-hover" cellpadding="0" cellspacing="0" width="100%">
-                    <thead>
-                        <tr>
-                        	<th>#</th>
-                            <th>Cliente</th>
-                            <th>Documento</th>
-                            <th>Email</th>
-                            <th>Teléfono</th>
-                            <th>Direccion</th>
-                            <th>Opciones</th>
-                        </tr>
-                    </thead>
-
-                    <tfoot>
-                        <tr>
-                            <th>#</th>
-                            <th>Cliente</th>
-                            <th>Documento</th>
-                            <th>Email</th>
-                            <th>Teléfono</th>
-                            <th>Direccion</th>
-                            <th>Opciones</th>
-                        </tr>
-                    </tfoot>
-
-                    <tbody id="cliente">
-
-                    </tbody>
-                </table>
-</div>
-		                    <!--Fin-Contenido-->
-                  		</div>
-                  	</div><!-- /.row -->
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
+            </tbody>
+        </table>
+    </div>
+            <!--Fin-Contenido-->
+  		</div>
+  	</div><!-- /.row -->
+</div><!-- /.box-body -->
+</div><!-- /.box -->
 <style>
 #mapa {
 
@@ -296,7 +295,7 @@
         var formulario = $('#frmCliente');
         //COODENADAS INICIALES -16.5207007,-68.1615534
         //VARIABLE PARA EL PUNTO INICIAL
-        var punto = new google.maps.LatLng(-16.499299167397574, -68.1646728515625);
+        var punto = new google.maps.LatLng(-16.499299167397574,-68.1646728515625);
         //VARIABLE PARA CONFIGURACION INICIAL
         var config = {
             zoom:10,
@@ -326,8 +325,8 @@
             });
 
             //PASAR LAS COORDENADAS AL FORMULARIO
-            formulario.find("input[name='cx']").val(lista[0]);
-            formulario.find("input[name='cy']").val(lista[1]);
+            formulario.find("input[name='cx']").val($.trim(lista[0]));
+            formulario.find("input[name='cy']").val($.trim(lista[1]));
             //UBICAR EL FOCO EN EL CAMPO TITULO
             formulario.find("input[name='addres']").focus();
 
@@ -435,31 +434,9 @@
                 cy:coorY,//esas coordenadas vienen de la BD
                 draggable: false
             });
-
-            var config = {
-                zoom:10,
-                center:posi,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-
-            mapa = new google.maps.Map( $("#mapa")[0], config );
-
             //AGREGAR EVENTO CLICK AL MARCADOR
             //MARCADORES QUE VIENEN DE LA BASE DE DATOS
             google.maps.event.addListener(marca, 'click', function(){
-                alert("Hiciste click en "+marca.position + " - " + marca.titulo);
-                //ENTRAR EN EL SEGUNDO COLAPSIBLE
-                //Y OCULTAR EL PRIMERO
-                //$("#collapseTwo").collapse("show");
-                //$("#collapseOne").collapse("hide");
-                //VER DOCUMENTACION DE BOOTSTRAP
-
-                //AHORA PASAR LA INFORMACION DEL MARCADOR
-                //AL FORMULARIO
-                /*formulario_edicion.find("input[name='id']").val(marca.idMarcador);*/
-                //formulario_edicion.find("input[name='titulo']").val(marca.titulo).focus();
-                /*formulario_edicion.find("input[name='cx']").val(marca.cx);
-                formulario_edicion.find("input[name='cy']").val(marca.cy);*/
 
             });
             //AGREGAR EL MARCADOR A LA VARIABLE MARCADORES_BD
