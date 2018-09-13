@@ -85,9 +85,18 @@ $(document).ready(function(){
                     </div>
                 </div>
 
-                <div class="col-lg-4 left">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 left">
                     <div class="form-group has-success">
-                        <label for="inputMarca">Hoy :</label>
+                        <label>Categoria:</label>
+                        <select id="cboCategoria" name="cboCategoria" class="form-control" required="" >
+
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 left">
+                    <div class="form-group has-success">
+                        <label for="inputMarca">Desde :</label>
                         <input id="txtIdSucursal" type="hidden" value="<?php echo $_SESSION["idsucursal"] ?>" maxlength="50" class="form-control" name="txtIdSucursal" required="" placeholder="" autofocus="" />
                         <input id="cboFechaHoyDetVent" type="date" value=""  maxlength="50" class="form-control" name="cboFechaHoyDetVent" required="" />
                     </div>
@@ -95,10 +104,8 @@ $(document).ready(function(){
 
                 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 left">
                     <div class="form-group has-success">
-                        <label>Categoria:</label>
-                        <select id="cboCategoria" name="cboCategoria" class="form-control" required="" >
-
-                        </select>
+                        <label for="inputMarca">Hasta :</label>
+                        <input id="cboFechaHDetVent" type="date" value=""  maxlength="50" class="form-control" name="cboFechaHDetVent" required="" />
                     </div>
                 </div>
 

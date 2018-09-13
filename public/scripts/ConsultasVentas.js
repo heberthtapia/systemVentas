@@ -84,8 +84,9 @@ function init(){
 	$("#cboFechaHastaDetVent").change(ListadoVentasDetalladas);
 
 	$("#cboFechaHoyDetVent").change(ListadoVentasDetalladasArticulo);
+	$("#cboFechaHDetVent").change(ListadoVentasDetalladasArticulo);
 	$("#cboCategoria").change(ListadoVentasDetalladasArticulo);
-	//$("#cboGrupoReport").change(CargaListadoVentasDetalladasArticulo);
+	//$("#cboGrupoReport").change(ListadoVentasDetalladasArticulo);
 
 	$("#cboFechaDesdeVentPend").change(ListadoVentasPendientes);
 	$("#cboFechaHastaVentPend").change(ListadoVentasPendientes);
@@ -203,7 +204,7 @@ function init(){
 	function ListadoVentasDetalladasArticulo(){
 
 		if($("#cboFechaHoyDetVent").val() != "" ){
-			var fecha_desde = $("#cboFechaHoyDetVent").val(), categoria = $("#cboCategoria").val(), idsucursal = $("#txtIdSucursal").val(), grupo = $("#cboGrupoReport").val();
+			var fecha_desde = $("#cboFechaHoyDetVent").val(), fecha_hasta = $("#cboFechaHDetVent").val(), categoria = $("#cboCategoria").val(), idsucursal = $("#txtIdSucursal").val(), grupo = $("#cboGrupoReport").val();
 			var tabla = $('#tblVentasDetalladas').dataTable(
 				{   "aProcessing": true,
 		       		"aServerSide": true,
@@ -219,7 +220,7 @@ function init(){
 			        		url: './ajax/ConsultasVentasAjax.php?op=listVentasDetalladasArticulo',
 							type : "get",
 							dataType : "json",
-							data:{fecha_desde: fecha_desde, categoria: categoria, idsucursal: idsucursal, grupo: grupo},
+							data:{fecha_desde: fecha_desde, fecha_hasta: fecha_hasta, categoria: categoria, idsucursal: idsucursal, grupo: grupo},
 							error: function(e){
 						   		console.log(e.responseText);
 							}

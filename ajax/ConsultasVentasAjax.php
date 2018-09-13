@@ -84,11 +84,12 @@
           case "listVentasDetalladasArticulo":
 
                $fecha_desde = $_REQUEST["fecha_desde"];
+               $fecha_hasta = $_REQUEST["fecha_hasta"];
                $idsucursal  = $_REQUEST["idsucursal"];
                $categoria   = $_REQUEST["categoria"];
                $grupo       = $_REQUEST["grupo"];
                $data        = Array();
-               $query_Tipo  = $objCategoria->ListarVentasDetalladasArticulo($idsucursal, $categoria, $fecha_desde);
+               $query_Tipo  = $objCategoria->ListarVentasDetalladasArticulo($idsucursal, $categoria, $fecha_desde, $fecha_hasta);
                $j           = 0;
                $totalEmp = Array();
                $totalPre = Array();
@@ -131,7 +132,9 @@
                          if( $categoria != 0 ){
                               $sqlQuery .= "AND a.idcategoria = $categoria ";
                          }
-                         $sqlQuery .= "AND v.fecha = '".$fecha_desde."' ";
+                         $sqlQuery .= "AND v.fecha >= '".$fecha_desde."' ";
+                         $sqlQuery .= "AND v.fecha <= '".$fecha_hasta."' ";
+                         //$sqlQuery .= "AND v.fecha BETWEEN '".$fecha_desde."' AND '".$fecha_hasta."' ";
                          if($grupo != 0){
                              $sqlQuery .= "AND u.num_grupo = '".$grupo."' ";
                          }

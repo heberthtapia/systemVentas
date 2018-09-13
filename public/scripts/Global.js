@@ -1,7 +1,7 @@
 $(document).on("ready", init);// Inciamos el jquery
 
 function init(){
-	
+
 	$('#tblGlobal').dataTable({
         dom: 'Bfrtip',
         buttons: [
@@ -11,11 +11,11 @@ function init(){
             'pdfHtml5'
         ]
     });
-    
+
 	ListadoGlobal();// Ni bien carga la pagina que cargue el metodo
 	$("#VerForm").hide();// Ocultamos el formulario
 	$("form#frmGlobal").submit(SaveOrUpdate);// Evento submit de jquery que llamamos al metodo SaveOrUpdate para poder registrar o modificar datos
-	
+
 	$("#btnNuevo").click(VerForm);// evento click de jquery que llamamos al metodo VerForm
 
 	function SaveOrUpdate(e){
@@ -70,7 +70,7 @@ function init(){
 			$("#VerListado").show();// ocultamos el listado
 	}
 }
-function ListadoGlobal(){ 
+function ListadoGlobal(){
         var tabla = $('#tblGlobal').dataTable();
          $.ajax({
 			url: './ajax/GlobalAjax.php?op=list',
@@ -88,12 +88,12 @@ function ListadoGlobal(){
 									s[i][5],
 									s[i][6],
 									s[i][7]
-                                      ]);										
+                                      ]);
 						} // End For
-										
+
 			},
 			error: function(e){
-			   console.log(e.responseText);	
+			   console.log(e.responseText);
 			}
 		});
     };
@@ -101,14 +101,14 @@ function ListadoGlobal(){
 function eliminarGlobal(id){// funcion que llamamos del archivo ajax/CategoriaAjax.php?op=delete linea 53
 	bootbox.confirm("¿Esta Seguro de eliminar la Configuración?", function(result){ // confirmamos con una pregunta si queremos eliminar
 		if(result){// si el result es true
-			$.post("./ajax/GlobalAjax.php?op=delete", {id : id}, function(e){// llamamos la url de eliminar por post. y mandamos por parametro el id 
-                
+			$.post("./ajax/GlobalAjax.php?op=delete", {id : id}, function(e){// llamamos la url de eliminar por post. y mandamos por parametro el id
+
 				swal("Mensaje del Sistema", e, "success");
                 ListadoGlobal();
 
             });
 		}
-		
+
 	})
 }
 
