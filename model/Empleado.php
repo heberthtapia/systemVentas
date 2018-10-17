@@ -26,9 +26,21 @@
 
 		public function Eliminar($idempleado){
 			global $conexion;
-			$sql = "DELETE FROM empleado WHERE idempleado = $idempleado";
+			$sql = "SET FOREIGN_KEY_CHECKS=0";
 			$query = $conexion->query($sql);
-			return $query;
+			if ($query) {
+				$sql = "DELETE FROM usuario WHERE idempleado = $idempleado";
+				$query = $conexion->query($sql);
+				if ($query) {
+					$sql = "DELETE FROM empleado WHERE idempleado = $idempleado";
+					$query = $conexion->query($sql);
+
+					$sqlQuery = "SET FOREIGN_KEY_CHECKS=1";
+					$querySql = $conexion->query($sqlQuery);
+
+					return $query;
+				}
+			}
 		}
 
 		public function Listar(){
@@ -48,6 +60,13 @@
 		public function ListarEmp(){
 			global $conexion;
 			$sql = "SELECT * FROM empleado AS e, usuario AS u WHERE e.idempleado = u.idempleado AND u.tipo_usuario = 'Vendedor' order by e.idempleado desc";
+			$query = $conexion->query($sql);
+			return $query;
+		}
+
+		public function updatePerfil($id){
+			global $conexion;
+			$sql = "UPDATE usuario SET mnu_perfil = 0 WHERE idusuario = $id ";
 			$query = $conexion->query($sql);
 			return $query;
 		}

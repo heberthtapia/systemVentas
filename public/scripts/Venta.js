@@ -6,7 +6,6 @@ var email = "";
 
 function init(){
 
-    //Ver();
 	$('#tblVentaPedido').dataTable({
         dom: 'Bfrtip',
         buttons: [

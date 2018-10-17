@@ -53,7 +53,7 @@ switch ($_GET["op"]) {
         {
             $_SESSION['idsucursal'] = 1;
         }
-        $query_Pedido = $objPedido->Listar($_SESSION["idsucursal"]);
+        $query_Pedido = $objPedido->Listar($_SESSION["idsucursal"],$_SESSION["tipo_usuario"]);
 
         $i = 1;
             while ($reg = $query_Pedido->fetch_object()) {

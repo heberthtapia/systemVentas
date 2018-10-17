@@ -156,6 +156,8 @@ function cargarDataEmpleado(id,apellidos, nombre,tipo_documento,num_documento,di
  		//$("#txtClaveOtro").show();
  		initMap();
  		listaMap(coorX,coorY);
+
+ 		$(".alert").hide();
  	}
 
 

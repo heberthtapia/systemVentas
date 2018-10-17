@@ -68,10 +68,16 @@
 				$admin = 0;
 			}
 
+			if(isset($_POST["chkMnuPerfil"])){
+				$perfil = true;
+			} else {
+				$perfil = 0;
+			}
+
 				if(empty($_POST["txtIdUsuario"])){
 
 					if($objusuario->Registrar($idsucursal, $idempleado, $tipo_usuario, $num_grupo, $alm, $comp, $vent, $mant, $seg, $cons_comp,
-						$cons_vent, $admin)){
+						$cons_vent, $admin, $perfil)){
 						echo "Registrado Exitosamente";
 					}else{
 						echo "Usuario no ha podido ser registado.";
@@ -80,7 +86,7 @@
 
 					$idusuario = $_POST["txtIdUsuario"];
 					if($objusuario->Modificar($idusuario, $idsucursal, $idempleado, $tipo_usuario, $num_grupo, $alm, $comp, $vent, $mant, $seg, $cons_comp,
-						$cons_vent, $admin)){
+						$cons_vent, $admin, $perfil)){
 						echo "Informacion del Usuario ha sido actualizada";
 					}else{
 						echo "Informacion del usuario no ha podido ser actualizada.";
@@ -111,7 +117,7 @@
                     "2"=>$reg->empleado,
                     "3"=>$reg->tipo_usuario,
                     "4"=>$reg->fecha_registro,
-                    "5"=>'<button class="btn btn-warning" data-toggle="tooltip" title="Editar" onclick="cargarDataUsuario('.$reg->idusuario.',\''.$reg->idsucursal.'\',\''.$reg->idempleado.'\',\''.$reg->empleado.'\',\''.$reg->tipo_usuario.'\',\''.$reg->num_grupo.'\',\''.$reg->mnu_almacen.'\',\''.$reg->mnu_compras.'\',\''.$reg->mnu_ventas.'\',\''.$reg->mnu_mantenimiento.'\',\''.$reg->mnu_seguridad.'\',\''.$reg->mnu_consulta_compras.'\',\''.$reg->mnu_consulta_ventas.'\',\''.$reg->mnu_admin.'\')"><i class="fa fa-pencil"></i> </button>&nbsp;'.
+                    "5"=>'<button class="btn btn-warning" data-toggle="tooltip" title="Editar" onclick="cargarDataUsuario('.$reg->idusuario.',\''.$reg->idsucursal.'\',\''.$reg->idempleado.'\',\''.$reg->empleado.'\',\''.$reg->tipo_usuario.'\',\''.$reg->num_grupo.'\',\''.$reg->mnu_almacen.'\',\''.$reg->mnu_compras.'\',\''.$reg->mnu_ventas.'\',\''.$reg->mnu_mantenimiento.'\',\''.$reg->mnu_seguridad.'\',\''.$reg->mnu_consulta_compras.'\',\''.$reg->mnu_consulta_ventas.'\',\''.$reg->mnu_admin.'\',\''.$reg->mnu_perfil.'\')"><i class="fa fa-pencil"></i> </button>&nbsp;'.
                     '<button class="btn btn-danger" data-toggle="tooltip" title="Eliminar" onclick="eliminarUsuario('.$reg->idusuario.')"><i class="fa fa-trash"></i> </button>');
                 $i++;
             }
@@ -250,6 +256,19 @@
 				$_SESSION["mnu_consulta_ventas"] = $_POST["mnu_consulta_ventas"];
 				$_SESSION["mnu_admin"] = $_POST["mnu_admin"];
 		break;
+
+		case "verPerfil":
+	        require_once "../model/usuario.php";
+
+	        $objCategoria = new usuario();
+
+	        $query = $objusuario->verPerfil($_POST['id']);
+
+	        $reg = $query->fetch_object();
+
+	        echo $reg->mnu_perfil;
+
+	        break;
 
 		case "Salir":
 			session_unset();

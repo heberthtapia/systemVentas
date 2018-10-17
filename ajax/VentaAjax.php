@@ -87,7 +87,7 @@
 			require_once "../model/Pedido.php";
 			$objPed = new Pedido();
 
-			$query_Tipo = $objPed->ListarTipoPedidoPedido($_SESSION["idsucursal"]);
+			$query_Tipo = $objPed->ListarTipoPedidoPedido($_SESSION["idsucursal"], $_SESSION["tipo_usuario"]);
 			$data = Array();
             $i = 1;
      		while ($reg = $query_Tipo->fetch_object()) {

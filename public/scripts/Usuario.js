@@ -37,8 +37,8 @@ function init(){
 		if ($("#txtIdEmpleado").val() != "") {
 	        $.post("./ajax/UsuarioAjax.php?op=SaveOrUpdate", $(this).serialize(), function(r){
 	            swal("Mensaje del Sistema", r, "success");
-	            Limpiar();
 				ListadoUsuarios();
+				Limpiar();
 				OcultarForm();
 	        });
 	    } else {
@@ -66,14 +66,15 @@ function init(){
 	    $("#txtNombre").val("");
 	    $("#txtIdEmpleado").val("");
 	    $("#txtEmpleado").val("");
-	    $("#chkMnuAlmacen").attr('checked', false);
-	    $("#chkMnuCompras").attr('checked', false);
-	    $("#chkMnuVentas").attr('checked', false);
-	    $("#chkMnuMantenimiento").attr('checked', false);
-	    $("#chkMnuSeguridad").attr('checked', false);
-	    $("#chkConsultaCompras").attr('checked', false);
-	    $("#chkConsultaVentas").attr('checked', false);
-	    $("#chkMnuAdmin").attr('checked', false);
+	    $("#chkMnuAlmacen").attr('checked', '');
+	    $("#chkMnuCompras").attr('checked', '');
+	    $("#chkMnuVentas").attr('checked', '');
+	    $("#chkMnuMantenimiento").attr('checked', '');
+	    $("#chkMnuSeguridad").attr('checked', '');
+	    $("#chkConsultaCompras").attr('checked', '');
+	    $("#chkConsultaVentas").attr('checked', '');
+	    $("#chkMnuAdmin").attr('checked', '');
+	    $("#chkMnuPerfil").attr('checked', '');
 	}
 
 	function VerForm(){
@@ -86,7 +87,7 @@ function init(){
         $("#VerForm").hide();
         $("#btnNuevo").show();
         $("#VerListado").show();
-        //Limpiar();
+        Limpiar();
     }
 
 
@@ -112,10 +113,10 @@ function ListadoUsuarios(){
        		"aServerSide": true,
        		dom: 'Bfrtip',
 	        buttons: [
-	            'copyHtml5',
-	            'excelHtml5',
-	            'csvHtml5',
-	            'pdfHtml5'
+	            //'copyHtml5',
+	            'excelHtml5'
+	            //'csvHtml5',
+	            //'pdfHtml5'
 	        ],
         	"aoColumns":[
         	     	{   "mDataProp": "0"},
@@ -142,7 +143,7 @@ function ListadoUsuarios(){
 };
 
 function cargarDataUsuario(idUsuario, idSucursal, idempleado, empleado, tipo_usuario, num_grupo, mnu_almacen, mnu_compras, mnu_ventas,
-	 mnu_mantenimiento, mnu_seguridad, mnu_consulta_compras, mnu_consulta_ventas, mnu_admin){
+	 mnu_mantenimiento, mnu_seguridad, mnu_consulta_compras, mnu_consulta_ventas, mnu_admin, mnu_perfil){
 		$("#VerForm").show();
 		$("#btnNuevo").hide();
 		$("#VerListado").hide();
@@ -194,4 +195,22 @@ function cargarDataUsuario(idUsuario, idSucursal, idempleado, empleado, tipo_usu
 	    } else {
 	    	$("#chkMnuAdmin").attr('checked', false);
 	    }
+	    if (mnu_perfil == 1) {
+	    	$("#chkMnuPerfil").attr('checked', true);
+	    } else {
+	    	$("#chkMnuPerfil").attr('checked', false);
+	    }
+}
+
+function verPerfil(id){
+	$.post("./ajax/UsuarioAjax.php?op=verPerfil", {id : id}, function(e){
+        /*swal("Mensaje del Sistema", e, "success");
+		ListadoUsuarios();
+		Limpiar();*/
+		if (e == 1)
+			$('.alert').show();
+		else
+			$('.alert').hide();
+		//alert(e);
+    });
 }

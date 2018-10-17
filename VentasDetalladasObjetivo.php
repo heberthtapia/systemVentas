@@ -2,16 +2,14 @@
 
 	session_start();
 
-
-	if(isset($_SESSION["idusuario"])){
-
+	if(isset($_SESSION["idusuario"]) && $_SESSION["mnu_consulta_ventas"] == 1){
 
 		if ($_SESSION["superadmin"] != "S") {
 			include "view/header.html";
-			include "view/Escritorio.html";
+			include "view/VentasDetalladasObjetivo.php";
 		} else {
 			include "view/headeradmin.html";
-			include "view/EscritorioAdmin.html";
+			include "view/VentasDetalladasObjetivo.php";
 		}
 
 		include "view/footer.html";
@@ -19,3 +17,4 @@
 		header("Location:index.html");
 	}
 
+?>

@@ -2,7 +2,7 @@ $(document).on("ready", init);
 
 function init(){
 
-	var tabla = $('#tblArticulos').dataTable({
+	var tabla = $('#tblObjetivo').dataTable({
         dom: 'Bfrtip',
         buttons: [
             'copyHtml5',
@@ -12,7 +12,7 @@ function init(){
         ]
     });
 
-	ListadoArticulos();
+	ListadoObjetivos();
 	ComboCategoria();
 	ComboUM();
 	$("#VerForm").hide();
@@ -32,7 +32,7 @@ function init(){
 
 	                type: "POST",
 
-	               data: formData,
+	                data: formData,
 
 	                contentType: false,
 
@@ -43,7 +43,7 @@ function init(){
 	                {
 
 	                    swal("Mensaje del Sistema", datos, "success");
-						  ListadoArticulos();
+						  ListadoObjetivos();
 						  OcultarForm();
 						  $('#frmArticulos').trigger("reset");
 	                }
@@ -53,7 +53,7 @@ function init(){
 
 	function ComboCategoria(){
 			$.post("./ajax/ArticuloAjax.php?op=listCategoria", function(r){
-	            $("#cboCategoria").html(r);
+	            $("#cboCategoriaObj").html(r);
 	        });
 	}
 
@@ -80,16 +80,13 @@ function init(){
 			$("#VerListado").show();
 	}
 }
-function ListadoArticulos(){
-	var tabla = $('#tblArticulos').dataTable(
+function ListadoObjetivos(){
+	var tabla = $('#tblObjetivo').dataTable(
 		{   "aProcessing": true,
        		"aServerSide": true,
        		dom: 'Bfrtip',
 	        buttons: [
-	            'copyHtml5',
-	            'excelHtml5',
-	            'csvHtml5',
-	            'pdfHtml5'
+
 	        ],
         	"aoColumns":[
         	     	{   "mDataProp": "id"},
@@ -102,7 +99,7 @@ function ListadoArticulos(){
 
         	],"ajax":
 	        	{
-	        		url: './ajax/ArticuloAjax.php?op=list',
+	        		url: './ajax/ObjetivoAjax.php?op=list',
 					type : "get",
 					dataType : "json",
 
@@ -121,7 +118,7 @@ function eliminarArticulo(id){
 			$.post("./ajax/ArticuloAjax.php?op=delete", {id : id}, function(e){
 
 				swal("Mensaje del Sistema", e, "success");
-				ListadoArticulos();
+				ListadoObjetivos();
 
             });
 		}

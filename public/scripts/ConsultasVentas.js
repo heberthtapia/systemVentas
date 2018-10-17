@@ -88,6 +88,10 @@ function init(){
 	$("#cboCategoria").change(ListadoVentasDetalladasArticulo);
 	//$("#cboGrupoReport").change(ListadoVentasDetalladasArticulo);
 
+	$("#cboFechaHoyDetVentObj").change(ListadoVentasDetalladasArticuloObj);
+	$("#cboFechaHDetVentObj").change(ListadoVentasDetalladasArticuloObj);
+	$("#cboCategoriaObj").change(ListadoVentasDetalladasArticuloObj);
+
 	$("#cboFechaDesdeVentPend").change(ListadoVentasPendientes);
 	$("#cboFechaHastaVentPend").change(ListadoVentasPendientes);
 
@@ -221,6 +225,37 @@ function init(){
 							type : "get",
 							dataType : "json",
 							data:{fecha_desde: fecha_desde, fecha_hasta: fecha_hasta, categoria: categoria, idsucursal: idsucursal, grupo: grupo},
+							error: function(e){
+						   		console.log(e.responseText);
+							}
+			        	},
+			        "bDestroy": true
+
+		    	}).DataTable();
+
+		}
+	}
+
+	function ListadoVentasDetalladasArticuloObj(){
+
+		if($("#cboFechaHoyDetVent").val() != "" ){
+			var fecha_desde = $("#cboFechaHoyDetVentObj").val(), fecha_hasta = $("#cboFechaHDetVentObj").val(), categoria = $("#cboCategoriaObj").val(), idsucursal = $("#txtIdSucursal").val(), id = $("#idEmp").val();
+			var tabla = $('#tblVentasDetalladas').dataTable(
+				{   "aProcessing": true,
+		       		"aServerSide": true,
+	       			dom: 'Bfrtip',
+			        buttons: [
+			            //'copyHtml5',
+			            'excelHtml5',
+			            //'csvHtml5',
+			            'pdfHtml5'
+			        ],
+		        	"ajax":
+			        	{
+			        		url: './ajax/ConsultasVentasAjax.php?op=listVentasDetalladasArticuloObj',
+							type : "get",
+							dataType : "json",
+							data:{fecha_desde: fecha_desde, fecha_hasta: fecha_hasta, categoria: categoria, idsucursal: idsucursal, id: id},
 							error: function(e){
 						   		console.log(e.responseText);
 							}

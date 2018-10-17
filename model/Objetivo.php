@@ -1,7 +1,7 @@
 <?php
 	require "Conexion.php";
 
-	class articulo{
+	class objetivo{
 
 
 		public function __construct(){
@@ -33,9 +33,9 @@
 
 		public function Listar(){
 			global $conexion;
-			$sql = "select a.*, c.nombre as categoria, um.nombre as unidadMedida
+			$sql = "select a.*, c.nombre as categoria, um.nombre as unidadMedida, o.objetivo as objetivo
 	from articulo a inner join categoria c on a.idcategoria = c.idcategoria
-	inner join unidad_medida um on a.idunidad_medida = um.idunidad_medida where a.estado = 'A' order by idarticulo desc";
+	inner join unidad_medida um on a.idunidad_medida = um.idunidad_medida left join objetivo o on a.idarticulo = o.idarticulo where a.estado = 'A' order by idarticulo desc";
 			$query = $conexion->query($sql);
 			return $query;
 		}

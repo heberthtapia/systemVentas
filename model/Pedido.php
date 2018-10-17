@@ -32,13 +32,21 @@
 			return $sw;
 		}
 
-		public function Listar($idsucursal){
+		public function Listar($idsucursal, $tipousuario){
 			global $conexion;
-			$sql = "select p.*, c.nombre as Cliente, c.email
+			if ($tipousuario == "Administrador") {
+				$sql = "select p.*, c.nombre as Cliente, c.email
 			from pedido p inner join persona c on p.idcliente = c.idpersona where p.idsucursal = $idsucursal
-			and c.tipo_persona = 'Cliente' and p.tipo_pedido = 'Venta' order by idpedido desc limit 0,2999";
-			$query = $conexion->query($sql);
-			return $query;
+			and c.tipo_persona = 'Cliente' and p.tipo_pedido = 'Venta' order by idpedido desc limit 0,1450";
+				$query = $conexion->query($sql);
+				return $query;
+			}else{
+				$sql = "select p.*, c.nombre as Cliente, c.email
+			from pedido p inner join persona c on p.idcliente = c.idpersona where p.idsucursal = $idsucursal
+			and c.tipo_persona = 'Cliente' and p.tipo_pedido = 'Venta' and p.idusuario = ".$_SESSION['idusuario']." order by idpedido desc limit 0,1450";
+				$query = $conexion->query($sql);
+				return $query;
+			}
 		}
 
 		public function VerVenta($idpedido){
@@ -139,13 +147,20 @@
 			return $query;
 		}
 
-		public function ListarTipoPedidoPedido($idsucursal){
+		public function ListarTipoPedidoPedido($idsucursal, $tipousuario){
 			global $conexion;
-			$sql = "select p.*, c.nombre as Cliente, c.email from pedido p inner join persona c
+			if($tipousuario == 'Administrador'){
+				$sql = "select p.*, c.nombre as Cliente, c.email from pedido p inner join persona c
 			on p.idcliente = c.idpersona where p.estado = 'A' and p.idsucursal = $idsucursal and p.tipo_pedido <> 'Venta'
-			order by idpedido desc";
-			$query = $conexion->query($sql);
-			return $query;
+			order by idpedido desc limit 0,1400 ";
+				$query = $conexion->query($sql);
+				return $query;
+			}else{
+				$sql = "select p.*, c.nombre as Cliente, c.email from pedido p inner join persona c
+			on p.idcliente = c.idpersona where p.estado = 'A' and p.idsucursal = $idsucursal and p.tipo_pedido <> 'Venta' and p.idusuario = ".$_SESSION['idusuario']." order by idpedido desc limit 0,1400 ";
+				$query = $conexion->query($sql);
+				return $query;
+			}
 		}
 
 		public function GetTotal($idpedido){

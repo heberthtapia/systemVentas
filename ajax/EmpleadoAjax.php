@@ -53,6 +53,7 @@
 						}
 					}
 
+					$objEmpleado->updatePerfil($_SESSION["idusuario"]);
 
 				}
 			} else {
@@ -83,6 +84,8 @@
 							echo "La información del empleado no ha podido ser actualizada.";
 						}
 					}
+
+					$objEmpleado->updatePerfil($_SESSION["idusuario"]);
 				}
 			}
 

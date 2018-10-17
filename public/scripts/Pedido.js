@@ -23,10 +23,10 @@ function init() {
     $('#tblPedidos').dataTable({
         dom: 'Bfrtip',
         buttons: [
-            'copyHtml5',
-            'excelHtml5',
-            'csvHtml5',
-            'pdfHtml5'
+            //'copyHtml5',
+            'excelHtml5'
+            //'csvHtml5',
+            //'pdfHtml5'
         ]
     });
 
@@ -55,15 +55,22 @@ function init() {
     $("#btnGenerarVenta").click(GenerarVenta);
 
     $("#btnAgregarCliente").click(function(e){
-		e.preventDefault();
+		/*e.preventDefault();
 
 		var opt = $("input[type=radio]:checked");
 		$("#txtIdCliente").val(opt.val());
 		$("#txtCliente").val(opt.attr("data-nombre"));
-        email = opt.attr("data-email");
+        email = opt.attr("data-email");*/
 
 		$("#modalListadoCliente").modal("hide");
+        $("#nameCli").val("");
 	});
+
+    /**abrir modal*/
+    $('#modalListadoCliente').on('shown.bs.modal', function () {
+        $('#nameCli').focus();
+        $("#nameCli").val("");
+    })
 
 	$("#btnAgregarArtPed").click(function(e){
 		e.preventDefault();
@@ -306,10 +313,10 @@ function init() {
     function AbrirModalCliente(){
 		$("#modalListadoCliente").modal("show");
 
-		$.post("./ajax/PedidoAjax.php?op=listClientes", function(r){
+		/*$.post("./ajax/PedidoAjax.php?op=listClientes", function(r){
             $("#Cliente").html(r);
             $("#tblClientees").DataTable();
-        });
+        });*/
 	}
 
 	function AbrirModalDetPed(){
@@ -408,10 +415,10 @@ function ListadoPedidos(){
             "aServerSide": true,
             dom: 'Bfrtip',
                 buttons: [
-                    'copyHtml5',
-                    'excelHtml5',
-                    'csvHtml5',
-                    'pdfHtml5'
+                    //'copyHtml5',
+                    'excelHtml5'
+                    //'csvHtml5',
+                    //'pdfHtml5'
                 ],
             "aoColumns":[
                     {   "mDataProp": "0"},
