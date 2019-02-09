@@ -2,7 +2,7 @@ $(document).on("ready", init);// Inciamos el jquery
 
 function init(){
 
-	$('#tblCliente').dataTable({
+	/*$('#tblCliente').dataTable({
         dom: 'Bfrtip',
         buttons: [
             'copyHtml5',
@@ -10,9 +10,10 @@ function init(){
             'csvHtml5',
             'pdfHtml5'
         ]
-    });
+    });*/
 
-	ListadoCliente();// Ni bien carga la pagina que cargue el metodo
+	listaCliente();
+	//ListadoCliente();// Ni bien carga la pagina que cargue el metodo
 	ComboTipo_Documento();
 	$("#VerForm").hide();// Ocultamos el formulario
 	$("form#frmCliente").submit(SaveOrUpdate);// Evento submit de jquery que llamamos al metodo SaveOrUpdate para poder registrar o modificar datos
@@ -88,6 +89,24 @@ function init(){
 
 }
 
+function listaCliente(){
+	var r=0;
+	var table = $('#tblCliente').DataTable( {
+		"processing": true,
+		"serverSide": true,
+		"order": [[ 0, 'asc' ]],
+		dom: 'Bfrtip',
+		buttons: [
+	            'copyHtml5',
+	            'excelHtml5',
+	            'csvHtml5',
+	            'pdfHtml5'
+	        ],
+		"ajax": "./ajax/server_processing.php"
+	} );
+
+}
+
 function ListadoCliente(){
 		var tabla = $('#tblCliente').dataTable(
 		{   "aProcessing": true,
@@ -112,11 +131,7 @@ function ListadoCliente(){
 	        	{
 	        		url: './ajax/ClienteAjax.php?op=list',
 					type : "get",
-					dataType : "json",
-
-					error: function(e){
-				   		console.log(e.responseText);
-					}
+					dataType : "json"
 	        	},
 	        "bDestroy": true
 

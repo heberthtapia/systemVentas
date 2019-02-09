@@ -491,9 +491,195 @@ $con_letra=strtoupper($V->ValorEnLetras($reg_total->Total,""));
 
                     //echo $row_cnt = $query_ped->num_rows;
 
-                    $query_ped_izq = $objPedido->ImprimirDetallePedidoLimit($_GET["id"],11,$row_cnt);
+                    $query_ped_izq = $objPedido->ImprimirDetallePedidoLimit($_GET["id"],11,30);
 
-                    while( ($regi = $query_ped_izq->fetch_object()) && ($conti < $row_cnt)){
+                    while( ($regi = $query_ped_izq->fetch_object()) && ($conti < 30)){
+                      $conti++;
+                    ?>
+                    <tr <?php if($conti%2 == 0) echo("class='even'"); ?> >
+                        <td align="center" class="pri"><?=$regi->codigo;?></td>
+                        <td align="left">
+                            <div class="hyphenation2">
+                            <?=utf8_decode("$regi->articulo Serie:$regi->serie");?>
+                            </div>
+                        </td>
+                        <td align="center"><?=$regi->cantidad;?></td>
+                        <td align="center"><?=$regi->precio_venta;?></td>
+                        <td align="center"><?=$regi->descuento;?></td>
+                        <td align="right" class="last"><?=$regi->sub_total;?></td>
+                    </tr>
+                    <?PHP
+                        $total = $reg_total->Total;
+                    }
+                    for ($k=$conti; $k<22; $k++) {
+                        $conti++;
+                    ?>
+                    <tr>
+                        <td class="pri">&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="last"></td>
+                    </tr>
+                    <?php
+                    }
+                    ?>
+
+                </tbody>
+            </table>
+            <?php if ($row_cnt <= 30): ?>
+            <table class="total" align="center" style=" width: 100%; border-radius: 5px; border-top: 1px solid #abb2b9; border-right: 1px solid #abb2b9; border-bottom: 1px solid #abb2b9; border-left: 1px solid #abb2b9;" >
+                <tbody>
+                    <tr>
+                        <td style="width: 351px">Importe Total:</td>
+                        <td class="last" style="width: 60px">Bs.- <?=$total;?></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" class="last top">Son: <?=$con_letra;?></td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <?php endif ?>
+
+        </td>
+        <td valign="top" style="width: 50%; padding-left: 15px;">
+
+            <table class="report" style="width: 100%; border-radius: 5px; border-top: 1px solid #abb2b9; border-right: 1px solid #abb2b9; border-bottom: 1px solid #abb2b9; border-left: 1px solid #abb2b9;" align="center">
+                <thead>
+                    <tr>
+                        <th>CODIGO</th>
+                        <th align="center">DESCRIPCION</th>
+                        <th>CANT.</th>
+                        <th>P. UNIT.</th>
+                        <th align="center">DESC.</th>
+                        <th class="last">SUBTOTAL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?PHP
+                    //$conti = 0;
+                    //$query_ped = $objPedido->ImprimirDetallePedido($_GET["id"]);
+
+                    //echo $row_cnt = $query_ped->num_rows;
+
+                    $query_ped_der = $objPedido->ImprimirDetallePedidoLimit($_GET["id"],11,30);
+
+                    while( ($regd = $query_ped_der->fetch_object()) && ($contd < 30)){
+                      $contd++;
+                    ?>
+                    <tr <?php if($conti%2 == 0) echo("class='even'"); ?> >
+                        <td align="center" class="pri"><?=$regd->codigo;?></td>
+                        <td align="left">
+                            <div class="hyphenation2">
+                            <?=utf8_decode("$regd->articulo Serie:$regd->serie");?>
+                            </div>
+                        </td>
+                        <td align="center"><?=$regd->cantidad;?></td>
+                        <td align="center"><?=$regd->precio_venta;?></td>
+                        <td align="center"><?=$regd->descuento;?></td>
+                        <td align="right" class="last"><?=$regd->sub_total;?></td>
+                    </tr>
+                    <?PHP
+                        $total = $reg_total->Total;
+                    }
+                    for ($k=$contd; $k<22; $k++) {
+                        $contd++;
+                    ?>
+                    <tr>
+                        <td class="pri">&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="last"></td>
+                    </tr>
+                    <?php
+                    }
+                    ?>
+
+                </tbody>
+            </table>
+
+            <?php if ($row_cnt <= 30): ?>
+            <table class="total" align="center" style=" width: 100%; border-radius: 5px; border-top: 1px solid #abb2b9; border-right: 1px solid #abb2b9; border-bottom: 1px solid #abb2b9; border-left: 1px solid #abb2b9;" >
+                <tbody>
+                    <tr>
+                        <td style="width: 351px">Importe Total:</td>
+                        <td class="last" style="width: 60px">Bs.- <?=$total;?></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6" class="last top">Son: <?=$con_letra;?></td>
+
+                    </tr>
+                </tbody>
+            </table>
+            <?php endif ?>
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</page>
+<?php endif ?>
+
+<!-- TERCERA PAGINA -->
+<?php if ($row_cnt > 30): ?>
+<page orientation="paysage" backtop="10mm" backbottom="10mm" backleft="3mm" backright="3mm">
+    <page_header>
+        <table class="page_header" style="width: 100%;">
+            <tr>
+                <td style="width: 15%"><?=$reg_cli->razon_social;?></td>
+                <td style="width: 20%; text-align: center;"><strong>P<?=$reg_cli->serie_comprobante.'-'.$reg_cli->num_comprobante;?></strong></td>
+                <td style="width: 15%; text-align:right; padding-right: 10px;"><strong><?php echo $reg_cli->fecha; ?></strong></td>
+
+                <td style="width: 17%; padding-left: 10px;"><?=$reg_cli->razon_social;?></td>
+                <td style="width: 18%; text-align: center;"><strong><?=$reg_cli->serie_comprobante.'-'.$reg_cli->num_comprobante;?></strong></td>
+                <td style="width: 15%; text-align:right;"><strong><?php echo $reg_cli->fecha; ?></strong></td>
+            </tr>
+        </table>
+    </page_header>
+    <page_footer>
+        <table class="page_footer" style="width: 100%;">
+            <tr>
+                <td style="width: 25%">Dirección: <?=$reg_cli->direccion;?><br>Telefono: <?=$reg_cli->telefono_suc?></td>
+                <td style=" text-align:right; width: 25%; padding-right: 10px;">Email: <?=$reg_cli->email_suc?><br>Pag. [[page_cu]]/[[page_nb]]</td>
+
+                <td style="width: 25%; padding-left: 10px;">Dirección: <?=$reg_cli->direccion;?><br>Telefono: <?=$reg_cli->telefono_suc?></td>
+                <td style=" text-align:right; width: 25%">Email: <?=$reg_cli->email_suc?><br>Pag. [[page_cu]]/[[page_nb]]</td>
+            </tr>
+        </table>
+        <link rel="stylesheet" type="text/css" href="../public/css/pdf.css"/>
+    </page_footer>
+
+<table style="width: 100%; border-collapse: collapse;" align="center">
+    <tbody>
+    <tr>
+        <td valign="top" style="width: 50%; border-right: 1px solid dashed;">
+
+            <table class="report" style="width: 100%; border-radius: 5px; border-top: 1px solid #abb2b9; border-right: 1px solid #abb2b9; border-bottom: 1px solid #abb2b9; border-left: 1px solid #abb2b9;" align="center">
+                <thead>
+                    <tr>
+                        <th>CODIGO</th>
+                        <th align="center">DESCRIPCION</th>
+                        <th>CANT.</th>
+                        <th>P. UNIT.</th>
+                        <th align="center">DESC.</th>
+                        <th class="last">SUBTOTAL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?PHP
+                    //$conti = 0;
+                    //$query_ped = $objPedido->ImprimirDetallePedido($_GET["id"]);
+
+                    //echo $row_cnt = $query_ped->num_rows;
+
+                    $query_ped_izq = $objPedido->ImprimirDetallePedidoLimit($_GET["id"],30,40);
+
+                    while( ($regi = $query_ped_izq->fetch_object()) && ($conti < 40)){
                       $conti++;
                     ?>
                     <tr <?php if($conti%2 == 0) echo("class='even'"); ?> >
@@ -563,9 +749,9 @@ $con_letra=strtoupper($V->ValorEnLetras($reg_total->Total,""));
 
                     //echo $row_cnt = $query_ped->num_rows;
 
-                    $query_ped_der = $objPedido->ImprimirDetallePedidoLimit($_GET["id"],11,$row_cnt);
+                    $query_ped_der = $objPedido->ImprimirDetallePedidoLimit($_GET["id"],30,40);
 
-                    while( ($regd = $query_ped_der->fetch_object()) && ($contd < $row_cnt)){
+                    while( ($regd = $query_ped_der->fetch_object()) && ($contd < 40)){
                       $contd++;
                     ?>
                     <tr <?php if($conti%2 == 0) echo("class='even'"); ?> >

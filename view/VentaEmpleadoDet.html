@@ -4,7 +4,7 @@
                   <h3 class="box-title" >Ventas Detalladas - Empleado</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    
+
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                   </div>
                 </div>
@@ -14,9 +14,9 @@
                   	<div class="row">
 	                  	<div class="col-md-12">
 		                    <!--Contenido-->
-                            
+
 	<div class="col-sm-14">
-       
+
         <form role="form">
             <div class="row">
                 <?php
@@ -25,7 +25,7 @@
                         <div class="col-lg-4 left">
                             <label for="inputMarca">Sucursal:</label>
                             <div class="form-group has-success">
-                                
+
                                 <div class="input-group">
 
                                     <input id="txtSucursal" type="text" value="<?php echo $_SESSION["sucursal"] ?>" class="form-control" name="txtSucursal" required="" placeholder="Seleccione una Sucursal" autofocus="" disabled/>
@@ -34,7 +34,7 @@
                                                         Buscar
                                           </button>
                                     </span>
-                                </div>   
+                                </div>
                             </div>
                         </div>
                         <?php } ?>
@@ -68,6 +68,7 @@
                             <th>Serie</th>
                             <th>Numero</th>
                             <th>Impuesto</th>
+                            <th>Categoria</th>
                             <th>Articulo</th>
                             <th>Codigo</th>
                             <th>Serie Art.</th>
@@ -77,7 +78,7 @@
                             <th>Total</th>
                         </tr>
                     </thead>
-             
+
                     <tfoot>
                         <tr>
                             <th>Fecha</th>
@@ -88,6 +89,7 @@
                             <th>Serie</th>
                             <th>Numero</th>
                             <th>Impuesto</th>
+                            <th>Categoria</th>
                             <th>Articulo</th>
                             <th>Codigo</th>
                             <th>Serie Art.</th>
@@ -97,11 +99,11 @@
                             <th>Total</th>
                         </tr>
                     </tfoot>
-             
+
                 </table>
             </div>
     </div>
-		                    
+
 		                    <!--Fin-Contenido-->
                   		</div>
                   	</div><!-- /.row -->
@@ -129,7 +131,7 @@
                             <th>Logo</th>
                         </tr>
                     </thead>
-             
+
                     <tfoot>
                         <tr>
                             <th>Seleccione</th>
@@ -141,7 +143,7 @@
                             <th>Logo</th>
                         </tr>
                     </tfoot>
-             
+
                     <tbody id="Sucursales">
 
                     </tbody>
@@ -157,7 +159,7 @@
 </div>
 
 <script type="text/javascript">
-    
+
     $('#liConsultaVentas').addClass("treeview active");
     $('#liVentasEmpleadoDet').addClass("active");
 

@@ -59,7 +59,7 @@
 
 		public function ListarCliente(){
 			global $conexion;
-			$sql = "SELECT * FROM persona where tipo_persona='Cliente' order by idpersona desc";
+			$sql = "SELECT * FROM persona where tipo_persona='Cliente' order by idpersona desc ";
 			$query = $conexion->query($sql);
 			return $query;
 		}

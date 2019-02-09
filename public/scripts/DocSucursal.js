@@ -6,7 +6,7 @@ var bandera = 1;
 
 function init() {
 
-    elementos = new Array(); 
+    elementos = new Array();
 
     $('#tblDocSucursal').dataTable({
         dom: 'Bfrtip',
@@ -16,10 +16,10 @@ function init() {
             'csvHtml5',
             'pdfHtml5'
         ]
-    });    
+    });
 
     ComboTipoDoc();
-    ListadoDocSuc();
+    //ListadoDocSuc();
 
     $("#VerForm").hide();
 
@@ -53,7 +53,7 @@ function init() {
         var data = [];
 
         if (bandera == 1) {
-            data  = { 
+            data  = {
                 idDocSucursal : $("#txtIdDocSucursal").val(),
                 detalle : detalle
             };
@@ -66,7 +66,7 @@ function init() {
                 numero : $("#txtNumero").val()
             };
         }
-        
+
         $.post("./ajax/DocSucursalAjax.php?op=Save", data, function(r){
             swal("Mensaje del Sistema", r, "success");
             ListadoDocSuc();
@@ -75,7 +75,7 @@ function init() {
 
     }
 
-    function ListadoDocSuc(){ 
+    function ListadoDocSuc(){
         var tabla = $('#tblDocSucursal').dataTable();
         $.ajax({
             url: './ajax/DocSucursalAjax.php?op=list',
@@ -93,12 +93,12 @@ function init() {
                                     s[i][5],
                                     s[i][6],
                                     s[i][7]
-                                      ]);                                       
+                                      ]);
                         } // End For
-                                        
+
             },
             error: function(e){
-               console.log(e.responseText); 
+               console.log(e.responseText);
             }
         });
     };
@@ -107,7 +107,7 @@ function init() {
 
         $.get("./ajax/DocSucursalAjax.php?op=listTipoDoc", function(r) {
                 $("#cboTipoDocumento").html(r);
-            
+
         })
     }
 
@@ -135,7 +135,7 @@ function init() {
         var detalles = new Array(idsucursal, idtipo_doc, tipo_doc, serie, numero);
         elementos.push(detalles);
         ConsultarDetallesDocSuc();
-    }    
+    }
 
     function consultar() {
         return JSON.stringify(elementos);
@@ -144,10 +144,10 @@ function init() {
     this.eliminar = function(pos){
         //var pos = elementos[].indexOf( 'c' );
         console.log(pos);
-        
+
         pos > -1 && elementos.splice(parseInt(pos),1);
         console.log(elementos);
-        
+
         //this.elementos.splice(pos, 1);
         //console.log(this.elementos);
     };
@@ -171,7 +171,7 @@ function eliminarDetalleDocSuc(ele){
         ConsultarDetallesDocSuc();
     }
 
-    function ListadoDocSuc(){ 
+    function ListadoDocSuc(){
         var tabla = $('#tblDocSucursal').dataTable();
         $.ajax({
             url: './ajax/DocSucursalAjax.php?op=list',
@@ -189,12 +189,12 @@ function eliminarDetalleDocSuc(ele){
                                     s[i][5],
                                     s[i][6],
                                     s[i][7]
-                                      ]);                                       
+                                      ]);
                         } // End For
-                                        
+
             },
             error: function(e){
-               console.log(e.responseText); 
+               console.log(e.responseText);
             }
         });
     };
@@ -202,7 +202,7 @@ function eliminarDetalleDocSuc(ele){
 function ConsultarDetallesDocSuc() {
         $("table#tblDetalleDoc tbody").html("");
         var data = JSON.parse(objinit.consultar());
-        
+
         for (var pos in data) {
             $("table#tblDetalleDoc").append("<tr><td>"+data[pos][2]+"</td><td>"+data[pos][3]+"</td><td>"+data[pos][4]+"</td><td><button type='button' onclick='eliminarDetalleDocSuc(" + pos + ")' class='btn btn-danger'><i class='fa fa-remove' ></i> </button></td></tr>");
         }
@@ -229,13 +229,13 @@ function ConsultarDetallesDocSuc() {
         bootbox.confirm("¿Esta Seguro de Eliminar el registro?", function(result){
             if(result){
                 $.post("./ajax/DocSucursalAjax.php?op=delete", {idDocSucursal : idDocSucursal}, function(e){
-                    
+
                     swal("Mensaje del Sistema", e, "success");
                     ListadoDocSuc();
-                    
+
                 });
             }
-            
+
         })
     }
 
@@ -246,7 +246,7 @@ function ConsultarDetallesDocSuc() {
         var cantPed = document.frmDocSucursals.elements["txtCantidaPed[]"];
         var descPed = document.frmDocSucursals.elements["txtDescuentoPed[]"];
        // alert(pos);
-       
+
         elementos[pos][0] = idDetIng[pos].value;
         elementos[pos][2] = pvd[pos].value;
         elementos[pos][3] = cantPed[pos].value;

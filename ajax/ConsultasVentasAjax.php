@@ -616,7 +616,7 @@
                $fecha_hasta = $_REQUEST["fecha_hasta"];
                $idsucursal = $_REQUEST["idsucursal"];
                $data= Array();
-               $query_Tipo = $objCategoria->ListarVentasEmpleado($idsucursal, $_SESSION["idempleado"], $fecha_desde, $fecha_hasta);
+               $query_Tipo = $objCategoria->ListarVentasEmpleado($idsucursal, $_SESSION["idempleado"], $_SESSION["tipo_usuario"], $fecha_desde, $fecha_hasta);
 
                while ($reg = $query_Tipo->fetch_object()) {
 
@@ -649,7 +649,7 @@
                $fecha_hasta = $_REQUEST["fecha_hasta"];
                $idsucursal = $_REQUEST["idsucursal"];
                $data= Array();
-               $query_Tipo = $objCategoria->ListarVentasEmpleadoDet($idsucursal, $_SESSION["idempleado"], $fecha_desde, $fecha_hasta);
+               $query_Tipo = $objCategoria->ListarVentasEmpleadoDet($idsucursal, $_SESSION["idempleado"], $_SESSION["tipo_usuario"], $fecha_desde, $fecha_hasta);
 
                while ($reg = $query_Tipo->fetch_object()) {
 
@@ -662,13 +662,14 @@
                          "6"=>$reg->serie,
                          "7"=>$reg->numero,
                          "8"=>$reg->impuesto,
-                         "9"=>$reg->articulo,
-                         "10"=>$reg->codigo,
-                         "11"=>$reg->serie_art,
-                         "12"=>$reg->cantidad,
-                         "13"=>$reg->precio_venta,
-                         "14"=>$reg->descuento,
-                         "15"=>$reg->total
+                         "9"=>$reg->categoria,
+                         "10"=>$reg->articulo,
+                         "11"=>$reg->codigo,
+                         "12"=>$reg->serie_art,
+                         "13"=>$reg->cantidad,
+                         "14"=>$reg->precio_venta,
+                         "15"=>$reg->descuento,
+                         "16"=>$reg->total
                     );
                }
 

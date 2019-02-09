@@ -179,7 +179,7 @@
 			return $query;
 		}
 
-		public function ListarVentasEmpleado($idsucursal, $idempleado, $fecha_desde, $fecha_hasta){
+		public function ListarVentasEmpleado($idsucursal, $idempleado, $tipoempleado, $fecha_desde, $fecha_hasta){
 			global $conexion;
 			$sql = "select v.fecha,s.razon_social as sucursal,
 				concat(e.apellidos,' ',e.nombre) as empleado,
@@ -194,21 +194,24 @@
 				inner join usuario u on p.idusuario=u.idusuario
 				inner join empleado e on u.idempleado=e.idempleado
 				inner join persona pe on p.idcliente=pe.idpersona
-				where v.fecha>='$fecha_desde' and v.fecha<='$fecha_hasta'
-				and e.idempleado= $idempleado and s.idsucursal= $idsucursal and v.estado='A'
+				where v.fecha>='$fecha_desde' and v.fecha<='$fecha_hasta' ";
+			if($tipoempleado != 'Administrador'){
+				$sql.="and e.idempleado= $idempleado ";
+			}
+			$sql.="and s.idsucursal= $idsucursal and v.estado='A'
 				order by v.fecha desc;
 				";
 			$query = $conexion->query($sql);
 			return $query;
 		}
 
-		public function ListarVentasEmpleadoDet($idsucursal, $idempleado, $fecha_desde, $fecha_hasta){
+		public function ListarVentasEmpleadoDet($idsucursal, $idempleado, $tipoempleado, $fecha_desde, $fecha_hasta){
 			global $conexion;
 			$sql = "select v.fecha,s.razon_social as sucursal,
 				concat(e.apellidos,' ',e.nombre) as empleado,
 				pe.nombre as cliente,v.tipo_comprobante as comprobante,
 				v.serie_comprobante as serie,v.num_comprobante as numero,
-				v.impuesto,
+				v.impuesto, c.nombre as categoria,
 				a.nombre as articulo,di.codigo as codigo,di.serie as serie_art,
 				dp.cantidad,dp.precio_venta,dp.descuento,
 				(dp.cantidad*(dp.precio_venta-dp.descuento))as total
@@ -220,11 +223,13 @@
 				inner join usuario u on p.idusuario=u.idusuario
 				inner join empleado e on u.idempleado=e.idempleado
 				inner join persona pe on p.idcliente=pe.idpersona
+				inner join categoria c on a.idcategoria=c.idcategoria
 				where v.fecha>='$fecha_desde' and v.fecha<='$fecha_hasta'
-				and s.idsucursal= $idsucursal and v.estado='A'
-				and e.idempleado= $idempleado
-				order by v.fecha desc
-				";
+				and s.idsucursal= $idsucursal and v.estado='A' ";
+				if($tipoempleado != 'Administrador'){
+					$sql.= "and e.idempleado= $idempleado ";
+				}
+			$sql.= "order by c.nombre asc ";
 			$query = $conexion->query($sql);
 			return $query;
 		}
