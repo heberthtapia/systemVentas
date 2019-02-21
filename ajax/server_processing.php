@@ -76,6 +76,8 @@ require( 'ssp.class.php' );
 
 $whereCustom = "tipo_persona = 'Cliente'";
 
+echo $_REQUEST[$search[0]];
+
 echo json_encode(
 	SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns, $whereCustom )
 );

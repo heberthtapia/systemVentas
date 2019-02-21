@@ -243,7 +243,7 @@ class SSP {
 		$where = self::filter( $request, $columns, $bindings );
 
 		if($whereCustom)
- 			$where = ($where) ? ' WHERE '.$whereCustom : ' WHERE '.$whereCustom;
+ 			$where = ($where) ? $where : ' WHERE '.$whereCustom;
 
 		// Main query to actually get the data
 		$data = self::sql_exec( $db, $bindings,
