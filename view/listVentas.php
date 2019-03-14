@@ -19,6 +19,7 @@ $Query1 = $conexion->query($sql);
 <table id="tblVentasDetalladas" class="table table-striped table-bordered table-condensed table-hover" cellpadding="0" cellspacing="0" width="100%">
     <thead>
         <tr>
+            <th>CATEGORIA</th>
             <th>ITEM</th>
         <?php
             while ($reg = $Query1->fetch_object()) {
@@ -33,6 +34,7 @@ $Query1 = $conexion->query($sql);
 
     <tfoot>
         <tr>
+            <th>CATEGORIA</th>
             <th>ITEM</th>
         <?php
             while ($row = $Query->fetch_object()) {

@@ -100,7 +100,7 @@
                while ($reg = $query_Tipo->fetch_object()) {
 
                     $total = 0;
-                    $i     = 0;
+                    $i     = 1;
                     $emp   = Array();
 
                     $sql   = "SELECT e.idempleado, e.apellidos, e.nombre ";
@@ -206,15 +206,17 @@
                     }
 
                     $c = 0;
-                    $data[$j][$c] = $reg->nombre;
+                    $data[$j][$c] = $reg->categoria;
 
-                    for($i=1; $i <= $num; $i++){
+                    $data[$j][$c+1] = $reg->nombre;
+
+                    for($i=2; $i <= $num+1; $i++){
                          $data[$j][$i] = $emp[$c];
                          //$data[$j][$i].= ' / '.'obj';
                           $c++;
                     }
 
-                    $data[$j][$c+1] = $total;
+                    $data[$j][$c+2] = $total;
                     $montoTotal = $montoTotal + $total;
 
                     $j++;
@@ -222,26 +224,28 @@
                }
 
                $data[$k][0] = '<strong>z. TOTAL VENTAS</strong>';
+               $data[$k][1] = '';
 
-               for($i=1; $i <= $num; $i++){
+               for($i=2; $i <= $num+1; $i++){
                     $data[$k][$i] = '<strong>'.$totalEmp[$i].'</strong>';
                }
-               $data[$k][$num+1] = '<strong>'.$montoTotal.'</strong>';
+               $data[$k][$num+2] = '<strong>'.$montoTotal.'</strong>';
 
-               $data[$k][$num+2] = '<strong> </strong>';
+               $data[$k][$num+3] = '<strong> </strong>';
 
                /*****************************/
 
                $data[$k+1][0] = '<strong>z. TOTAL Bs.-</strong>';
+               $data[$k+1][1] = '';
 
-               for($i=1; $i <= $num; $i++){
+               for($i=2; $i <= $num+1; $i++){
                     $totalBs = $totalPre[$i]-$descuento[$i];
                     $data[$k+1][$i] = '<strong>'.$totalBs.'</strong>';
                     $totalVentas = $totalVentas + $totalPre[$i] - $descuento[$i];
                }
-               $data[$k+1][$num+1] = '<strong>'.$totalVentas.'</strong>';
+               $data[$k+1][$num+2] = '<strong>'.$totalVentas.'</strong>';
 
-               $data[$k+1][$num+2] = '<strong> </strong>';
+               $data[$k+1][$num+3] = '<strong> </strong>';
 
                //print_r($totalPre);
 

@@ -56,12 +56,13 @@
 			return $query;
 		}
 
-		public function ListarVentasDetalladasArticulo($idsucursal, $categoria, $fecha_desde){
+		public function ListarVentasDetalladasArticulo($idsucursal, $categoria, $fecha_desde, $fecha_hasta){
 			global $conexion;
 
-			$sql = "SELECT idarticulo, nombre FROM articulo ";
+			$sql = "SELECT a.idarticulo, a.nombre AS nombre, c.nombre AS categoria FROM articulo AS a, categoria AS c ";
+			$sql.= "WHERE a.idcategoria = c.idcategoria ";
 			if ($categoria != 0) {
-				$sql.= "WHERE idcategoria = $categoria";
+				$sql.= "AND c.idcategoria = $categoria";
 			}
 
 			$query = $conexion->query($sql);
