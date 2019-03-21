@@ -39,7 +39,7 @@ $columns = array(
 		'db' => 'idpersona',
 		'dt' => 5,
 		'formatter' => function( $d, $row ) {
-			return ('<button class="btn btn-warning" data-toggle="tooltip" title="Editar" onclick="cargaDataCliente('.$d.')"><i class="fa fa-pencil"></i> </button>&nbsp;'.
+			return ('<button class="btn btn-warning" data-toggle="tooltip" title="Editar" onclick="cargarDataCliente('.$d.')"><i class="fa fa-pencil"></i> </button>&nbsp;'.
 					'<button class="btn btn-danger" data-toggle="tooltip" title="Eliminar" onclick="eliminaCliente('.$d.')"><i class="fa fa-trash"></i> </button>');
 		} )
 	/*array(
