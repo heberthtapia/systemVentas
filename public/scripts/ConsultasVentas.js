@@ -83,12 +83,12 @@ function init(){
 	$("#cboFechaDesdeDetVent").change(ListadoVentasDetalladas);
 	$("#cboFechaHastaDetVent").change(ListadoVentasDetalladas);
 
-	$("#cboFechaHoyDetVent").change(ListadoVentasDetalladasArticulo);
+	//$("#cboFechaHoyDetVent").change(ListadoVentasDetalladasArticulo);
 	$("#cboFechaHDetVent").change(ListadoVentasDetalladasArticulo);
 	$("#cboCategoria").change(ListadoVentasDetalladasArticulo);
 	//$("#cboGrupoReport").change(ListadoVentasDetalladasArticulo);
 
-	$("#cboFechaHoyDetVentObj").change(ListadoVentasDetalladasArticuloObj);
+	//$("#cboFechaHoyDetVentObj").change(ListadoVentasDetalladasArticuloObj);
 	$("#cboFechaHDetVentObj").change(ListadoVentasDetalladasArticuloObj);
 	$("#cboCategoriaObj").change(ListadoVentasDetalladasArticuloObj);
 

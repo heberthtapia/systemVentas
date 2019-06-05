@@ -1,7 +1,10 @@
 <?php
+    define ('WP_MEMORY_LIMIT', '96M');
     session_start();
 
     require_once "model/Grafico.php";
+
+    set_time_limit(60);
 
     $objGlobal = new Grafico();
 
@@ -356,7 +359,7 @@
 
     <!-- ChartJS 1.0.1 -->
     <?php
-    $obj = new Grafico();
+    /*$obj = new Grafico();
     $query_ComprasMesSucursal = $obj->ComprasMesSucursal($_SESSION["idsucursal"]);
     $query_ComprasMesSucursal2 = $obj->ComprasMesSucursal($_SESSION["idsucursal"]);
 
@@ -367,7 +370,7 @@
     $query_VentasDiasSucursal2 = $obj->VentasDiasSucursal($_SESSION["idsucursal"]);
 
     $query_ProductosVendidosAno = $obj->ProductosVendidosAno($_SESSION["idsucursal"]);
-    $query_ProductosVendidosAno2 = $obj->ProductosVendidosAno($_SESSION["idsucursal"]);
+    $query_ProductosVendidosAno2 = $obj->ProductosVendidosAno($_SESSION["idsucursal"]);*/
     ?>
     <script src="public/js/Chart.js"></script>
 

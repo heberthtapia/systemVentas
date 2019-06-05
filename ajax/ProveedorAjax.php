@@ -8,7 +8,7 @@
 
 	switch ($_GET["op"]) {
 
-		case 'SaveOrUpdate':			
+		case 'SaveOrUpdate':
 
 			$tipo_persona = $_POST["cboTipo_Persona"];
 			$nombre = $_POST["txtNombre"];
@@ -24,16 +24,15 @@
 			$estado = $_POST["txtEstado"];
 
 			if(empty($_POST["txtIdPersona"])){
-				
-				if($objProveedor->Registrar($tipo_persona,$nombre,$tipo_documento,$num_documento,$direccion_departamento,$direccion_provincia,$direccion_distrito,$direccion_calle,$telefono,$email,$numero_cuenta,$estado)){
+
+				if($objProveedor->Registrar($tipo_persona,$nombre,$tipo_documento,$num_documento,$direccion_departamento,$direccion_provincia,'',$direccion_calle,$direccion_nom_calle,$direccion_num,$direccion_zona,$direccion_nom_zona,$cx,$cy,$telefono,$email,$numero_cuenta,"".$ruta,$estado)){
 					echo "Proveedor registrado correctamente";
 				}else{
 					echo "El Proveedor no ha podido ser registrado.";
 				}
 			}else{
-				
 				$idpersona = $_POST["txtIdPersona"];
-				if($objProveedor->Modificar($idpersona,$tipo_persona,$nombre,$tipo_documento,$num_documento,$direccion_departamento,$direccion_provincia,$direccion_distrito,$direccion_calle,$telefono,$email,$numero_cuenta,$estado)){
+				if($objProveedor->Modificar($idpersona,$tipo_persona,$nombre,$tipo_documento,$num_documento,$direccion_departamento,$direccion_provincia,'',$direccion_calle,$direccion_nom_calle,$direccion_num,$direccion_zona,$direccion_nom_zona,$cx,$cy,$telefono,$email,$numero_cuenta,"".$ruta,$estado)){
 					echo "La informacion del Proveedor ha sido actualizada";
 				}else{
 					echo "La informacion del Proveedor no ha podido ser actualizada.";
@@ -41,8 +40,8 @@
 			}
 			break;
 
-		case "delete":			
-			
+		case "delete":
+
 			$id = $_POST["id"];// Llamamos a la variable id del js que mandamos por $.post (Categoria.js (Linea 62))
 			$result = $objProveedor->Eliminar($id);
 			if ($result) {
@@ -51,7 +50,7 @@
 				echo "No fue Eliminado";
 			}
 			break;
-		
+
 		case "list":
 			$query_Tipo = $objProveedor->ListarProveedor();
             $data = Array();
@@ -74,7 +73,7 @@
         	"iTotalDisplayRecords" => count($data),
             "aaData"=>$data);
 			echo json_encode($results);
-            
+
 			break;
 
 		case "listTipo_DocumentoPersona":
@@ -91,4 +90,3 @@
 		    break;
 
 	}
-	

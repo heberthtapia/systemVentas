@@ -1,24 +1,34 @@
 <?php
+	session_start();
 	require "Conexion.php";
+	date_default_timezone_set("America/La_Paz" );
+
 
 	class Empleado{
-
 
 		public function __construct(){
 		}
 
 		public function Registrar($apellidos,$nombre,$tipo_documento,$num_documento,$direccion,$coorX,$coorY,$telefono,$email,$fecha_nacimiento,$foto, $login, $clave,$estado){
 			global $conexion;
-			$sql = "INSERT INTO empleado(apellidos,nombre,tipo_documento,num_documento,direccion,coorX,coorY,telefono,email,fecha_nacimiento,foto, login, clave,estado)
-						VALUES('$apellidos','$nombre','$tipo_documento','$num_documento','$direccion','$coorX','$coorY','$telefono','$email','$fecha_nacimiento','$foto', '$login', '$clave','$estado')";
+
+			$hoy = date("Y-m-d H:i:s");
+			$idEmp = $_SESSION['idempleado'];
+
+			$sql = "INSERT INTO empleado(apellidos,nombre,tipo_documento,num_documento,direccion,coorX,coorY,telefono,email,fecha_nacimiento,foto, login, clave,estado,id_update)
+						VALUES('$apellidos','$nombre','$tipo_documento','$num_documento','$direccion','$coorX','$coorY','$telefono','$email','$fecha_nacimiento','$foto', '$login', '$clave','$estado','$idEmp - $hoy')";
 			$query = $conexion->query($sql);
 			return $query;
 		}
 
 		public function Modificar($idempleado,$apellidos,$nombre, $tipo_documento,$num_documento,$direccion,$coorX,$coorY,$telefono,$email,$fecha_nacimiento,$foto, $login, $clave,$estado){
 			global $conexion;
+
+			$hoy = date("Y-m-d H:i:s");
+			$idEmp = $_SESSION['idempleado'];
+
 			$sql = "UPDATE empleado set apellidos = '$apellidos',nombre = '$nombre',tipo_documento='$tipo_documento',num_documento='$num_documento', direccion = '$direccion', coorX = '$coorX', coorY = '$coorY', telefono	='$telefono',email='$email',fecha_nacimiento='$fecha_nacimiento',foto='$foto',
-					login = '$login', clave = '$clave' ,estado='$estado'
+					login = '$login', clave = '$clave' ,estado='$estado', id_update = '$idEmp - $hoy'
 						WHERE idempleado = $idempleado";
 			$query = $conexion->query($sql);
 			return $query;

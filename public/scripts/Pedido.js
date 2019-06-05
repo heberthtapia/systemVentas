@@ -454,8 +454,18 @@ function ConsultarDetallesPed() {
         $("table#tblDetallePedido tbody").html("");
         var data = JSON.parse(objinit.consultar());
 
-        for (var pos in data) {
+        for (var i = data.length - 1; i >= 0; i--) {
+            for (var j = i - 1; j >= 0; j--) {
+                if(data[j][0] == data[i][0]){
+                    console.log(j);
+                    objinit.eliminar(j);
+                }
+            }
+        }
 
+        data = JSON.parse(objinit.consultar());
+
+        for (var pos in data) {
             $("table#tblDetallePedido").append("<tr><td>" + data[pos][1] + " <input class='form-control' type='hidden' name='txtIdDetIng' id='txtIdDetIng[]' value='" + data[pos][0] + "' /></td><td> " + data[pos][6] + "</td><td> " + data[pos][7] + "</td><td>" + data[pos][5]+ "</td><td><input class='form-control' type='text' readonly='' name='txtPrecioVentPed' id='txtPrecioVentPed[]' value='" + data[pos][2] + "' onchange='calcularTotalPed(" + pos + ")' /></td><td><input class='form-control' type='text' name='txtCantidaPed' id='txtCantidaPed[]'  value='" + data[pos][3] + "' onchange='calcularTotalPed(" + pos + ")' /></td><td><input class='form-control' type='text' name='txtDescuentoPed' id='txtDescuentoPed[]' value='" + data[pos][4] + "' onchange='calcularTotalPed(" + pos + ")' /></td><td><button type='button' onclick='eliminarDetallePed(" + pos + ")' class='btn btn-danger'><i class='fa fa-remove' ></i> </button></td></tr>");
         }
         calcularIgvPed();
@@ -671,11 +681,12 @@ function ConsultarDetallesPed() {
         var pvd = document.getElementsByName("txtPrecioVentPed");
         var cantPed = document.getElementsByName("txtCantidaPed");
         var descPed = document.getElementsByName("txtDescuentoPed");
-       // alert(pos);
-       //elementos[pos][2] = $("input[name=txtPrecioVentPed]:eq(" + pos + ")").val();
+        // alert(pos);
+        //elementos[pos][2] = $("input[name=txtPrecioVentPed]:eq(" + pos + ")").val();
 
         elementos[pos][0] = idDetIng[pos].value;
         elementos[pos][2] = pvd[pos].value;
+
         if (parseInt(cantPed[pos].value) <= elementos[pos][5]) {
             elementos[pos][3] = cantPed[pos].value;
             if (parseInt(cantPed[pos].value) <= 0) {

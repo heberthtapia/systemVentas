@@ -1,5 +1,4 @@
 <?php
-
 	session_start();
 
 	require_once "../model/Persona.php";
@@ -118,6 +117,39 @@
 		        }
 
 		    break;
+		case "listCliente":
+			$id = $_POST["id"];
+			$query_Tipo = $objCliente->ListaCliente($id);
+			$data = array();
+
+            $i = 1;
+     		while ($reg = $query_Tipo->fetch_object()) {
+
+				$data[idpersona]              = $reg->idpersona;
+				$data[tipo_persona]           = $reg->tipo_persona;
+				$data[nombre]                 = $reg->nombre;
+				$data[tipo_documento]         = $reg->tipo_documento;
+				$data[num_documento]          = $reg->num_documento;
+				$data[direccion_departamento] = $reg->direccion_departamento;
+				$data[direccion_provincia]    = $reg->direccion_provincia;
+				$data[direccion_distrito]     = $reg->direccion_distrito;
+				$data[direccion_calle]        = $reg->direccion_calle;
+				$data[direccion_nom_calle]    = $reg->direccion_nom_calle;
+				$data[direccion_num]          = $reg->direccion_num;
+				$data[direccion_zona]         = $reg->direccion_zona;
+				$data[direccion_nom_zona]     = $reg->direccion_nom_zona;
+				$data[cx]                     = $reg->coorX;
+				$data[cy]                     = $reg->coorY;
+				$data[telefono]               = $reg->telefono;
+				$data[email]                  = $reg->email;
+				$data[numero_cuenta]          = $reg->numero_cuenta;
+				$data[foto]                   = $reg->foto;
+				$data[estado]                 = $reg->estado;
+
+			}
+			echo json_encode($data);
+
+			break;
 
 	}
 

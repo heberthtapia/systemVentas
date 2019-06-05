@@ -1,4 +1,5 @@
 <?php
+	ini_set('max_execution_time', 300);
 	require "Conexion.php";
 
 	class Persona{
@@ -25,9 +26,21 @@
 
 		public function Eliminar($idpersona){
 			global $conexion;
-			$sql = "DELETE FROM persona WHERE idpersona = $idpersona";
+			$sql = "SET FOREIGN_KEY_CHECKS=0";
 			$query = $conexion->query($sql);
-			return $query;
+			if ($query) {
+				$sql = "DELETE FROM pedido WHERE idcliente = $idpersona";
+				$query = $conexion->query($sql);
+				if ($query) {
+					$sql = "DELETE FROM persona WHERE idpersona = $idpersona";
+					$query = $conexion->query($sql);
+
+					$sqlQuery = "SET FOREIGN_KEY_CHECKS=1";
+					$querySql = $conexion->query($sqlQuery);
+
+					return $query;
+				}
+			}
 		}
 		public function Listar(){
 			global $conexion;
@@ -64,6 +77,12 @@
 			return $query;
 		}
 
+		public function ListaCliente($id){
+			global $conexion;
+			$sql = "SELECT * FROM persona where tipo_persona='Cliente' and idpersona = $id order by idpersona desc ";
+			$query = $conexion->query($sql);
+			return $query;
+		}
 
 
 	}

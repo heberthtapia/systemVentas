@@ -109,6 +109,7 @@
                     if($grupo != 0){
                          $sql   .= "AND u.num_grupo = '".$grupo."' ";
                     }
+                    $sql   .= "AND e.estado != '".C."' ";
                     $sql   .= "ORDER BY e.idempleado";
 
                     $Query = $conexion->query($sql);
@@ -215,8 +216,8 @@
                          //$data[$j][$i].= ' / '.'obj';
                           $c++;
                     }
-
-                    $data[$j][$c+2] = $total;
+                    //print_r($emp);
+                    $data[$j][$c+2] = $total;  //totales de cada fila
                     $montoTotal = $montoTotal + $total;
 
                     $j++;

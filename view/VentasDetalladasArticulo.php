@@ -23,6 +23,8 @@ $(document).ready(function(){
     $("#cboGrupoReport").change(function(){
         grupo = $("#cboGrupoReport").val();
         despliega('listVentas.php', 'VerListado', grupo);
+        $("#cboFechaHoyDetVent").val('');
+        $("#cboFechaHDetVent").val('');
     });
 })
 </script>

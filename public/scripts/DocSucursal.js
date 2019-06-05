@@ -19,7 +19,7 @@ function init() {
     });
 
     ComboTipoDoc();
-    //ListadoDocSuc();
+    ListadoDocSuc();
 
     $("#VerForm").hide();
 

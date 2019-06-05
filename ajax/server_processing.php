@@ -65,7 +65,20 @@ $sql_details = array(
 	'db'   => 'solventas',
 	'host' => 'localhost'
 );
+/*$sql_details = array(
+	'user' => 'dymmasivos',
+	'pass' => '}n#OFI[LS#~e',
+	'db'   => 'dymmasivos',
+	'host' => 'localhost'
+);
+$sql_details = array(
+	'user' => 'demofarma',
+	'pass' => '-yWSSZx?0Myz',
+	'db'   => 'demofarma',
+	'host' => 'localhost'
+);
 
+*/
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  * If you just want to use the basic configuration for DataTables with PHP

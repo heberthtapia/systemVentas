@@ -43,7 +43,7 @@ function init(){
                 processData: false,
                 success: function(datos){
                     swal("Mensaje del Sistema", datos, "success");
-                    ListadoCliente();
+                    listaCliente();
                     OcultarForm();
                     Limpiar();
                 }
@@ -91,7 +91,8 @@ function init(){
 
 function listaCliente(){
 	var r=0;
-	var table = $('#tblCliente').DataTable( {
+	var tabla = $('#tblCliente').DataTable( {
+		"destroy": true,
 		"processing": true,
 		"serverSide": true,
 		"order": [[ 0, 'asc' ]],
@@ -104,7 +105,6 @@ function listaCliente(){
 	        ],
 		"ajax": "./ajax/server_processing.php"
 	} );
-
 }
 
 function ListadoCliente(){
@@ -138,12 +138,13 @@ function ListadoCliente(){
     	}).DataTable();
     };
 
-function eliminarCliente(id){// funcion que llamamos del archivo ajax/CategoriaAjax.php?op=delete linea 53
-	bootbox.confirm("¿Esta Seguro de eliminar el cliente seleccionado?", function(result){ // confirmamos con una pregunta si queremos eliminar
+function eliminaCliente(id){// funcion que llamamos del archivo ajax/CategoriaAjax.php?op=delete linea 53
+	bootbox.confirm("¿Esta Seguro de eliminar el cliente seleccionado?. Tenga en cuenta que los pedidos y ventas realizadas por este cliente se perderan.", function(result){ // confirmamos con una pregunta si queremos eliminar
 		if(result){// si el result es true
 			$.post("./ajax/ClienteAjax.php?op=delete", {id : id}, function(e){// llamamos la url de eliminar por post. y mandamos por parametro el id
 
-				ListadoCliente();
+				//$('#tblCliente').html('');
+				listaCliente();
 				swal("Mensaje del Sistema", e, "success");
 
             });
@@ -153,33 +154,46 @@ function eliminarCliente(id){// funcion que llamamos del archivo ajax/CategoriaA
 }
 
 function cargarDataCliente(id, tipo_persona,nombre,tipo_documento,num_documento,direccion_departamento,direccion_provincia,direccion_distrito,direccion_calle,direccion_nom_calle,direccion_num,direccion_zona,direccion_nom_zona,cx,cy,foto,telefono,email,numero_cuenta,estado){// funcion que llamamos del archivo ajax/CategoriaAjax.php linea 52
-		$("#VerForm").show();// mostramos el formulario
-		$("#btnNuevo").hide();// ocultamos el boton nuevo
-		$("#VerListado").hide();
 
-		$("#txtIdPersona").val(id);// recibimos la variable id a la caja de texto
-		$("#cboTipoPersona").val(tipo_persona);
-	    $("#txtNombre").val(nombre);// recibimos la variable nombre a la caja de texto txtNombre
-	    $("#cboTipo_Documento").val(tipo_documento);
- 		$("#txtNum_Documento").val(num_documento);
-	    $("#txtDireccion_Departamento").val(direccion_departamento);
-	    $("#txtDireccion_Provincia").val(direccion_provincia);
-	    $("#txtDireccion_Distrito").val(direccion_distrito);
-	    $("#txtDireccion_Calle").val(direccion_calle);
-	    $("#txtDireccion_Nom_Calle").val(direccion_nom_calle);
-	    $("#txtDireccion_Num").val(direccion_num);
-	    $("#txtDireccion_Zona").val(direccion_zona);
-	    $("#txtDireccion_Nom_Zona").val(direccion_nom_zona);
-	    $("#cx").val(cx);
-	    $("#cy").val(cy);
-	    $("#txtRutaImgCli").val(foto);
-	    $("#txtRutaImgCli").show();
-	    $("#txtTelefono").val(telefono);
- 		$("#txtEmail").val(email);
- 		$("#txtNumero_Cuenta").val(numero_cuenta);
- 		$("#cboEstado").val(estado);
+	$.ajax({
+        url: './ajax/ClienteAjax.php?op=listCliente',
+        type: 'post',
+        dataType: 'json',
+        cache: false,
+        data: 'id=' + id,
+        success: function(data) {
 
- 		initMap();
- 		listaMap(cx,cy);
- 	}
+        	$("#VerForm").show();// mostramos el formulario
+			$("#btnNuevo").hide();// ocultamos el boton nuevo
+			$("#VerListado").hide();
+
+			$("#txtIdPersona").val(data.idpersona);// recibimos la variable id a la caja de texto
+			$("#cboTipoPersona").val(data.tipo_persona);
+		    $("#txtNombre").val(data.nombre);// recibimos la variable nombre a la caja de texto txtNombre
+		    $("#cboTipo_Documento").val(data.tipo_documento);
+			$("#txtNum_Documento").val(data.num_documento);
+		    $("#txtDireccion_Departamento").val(data.direccion_departamento);
+		    $("#txtDireccion_Provincia").val(data.direccion_provincia);
+		    $("#txtDireccion_Distrito").val(data.direccion_distrito);
+		    $("#txtDireccion_Calle").val(data.direccion_calle);
+		    $("#txtDireccion_Nom_Calle").val(data.direccion_nom_calle);
+		    $("#txtDireccion_Num").val(data.direccion_num);
+		    $("#txtDireccion_Zona").val(data.direccion_zona);
+		    $("#txtDireccion_Nom_Zona").val(data.direccion_nom_zona);
+		    $("#cx").val(data.cx);
+		    $("#cy").val(data.cy);
+		    $("#txtRutaImgCli").val(data.foto);
+		    $("#txtRutaImgCli").show();
+		    $("#txtTelefono").val(data.telefono);
+			$("#txtEmail").val(data.email);
+			$("#txtNumero_Cuenta").val(data.numero_cuenta);
+			$("#cboEstado").val(data.estado);
+
+			initMap();
+			listaMap(data.cx,data.cy);
+
+        }
+    });
+
+}
 

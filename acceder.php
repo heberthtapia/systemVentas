@@ -72,11 +72,6 @@
                 </form>
               </div><!-- /.box -->
 
-
-
-
-
-
             </div><!--/.col (left) -->
             <!-- right column -->
             <div class="col-md-8">
@@ -113,7 +108,7 @@
                           </div><!--/.col (right) -->
           </div>   <!-- /.row -->
         </section><!-- /.content -->
-      </div><!-- /.content-wrapper -->
+
 
     <!-- jQuery 2.1.4 -->
     <script src="public/js/jquery.min.js"></script>

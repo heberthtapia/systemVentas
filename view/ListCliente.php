@@ -181,6 +181,7 @@
     }
 
     function listaCliente(status,zona,fecha,idempleado){
+
         //ANTES DE LISTAR MARCADORES
         //SE DEBEN QUITAR LOS ANTERIORES DEL MAPA
         deleteMarkers(markers);
@@ -251,7 +252,9 @@
                             return function() {
                                 infoWindow.setContent(contentString[j]);
                                 infoWindow.open(mapa, marca);
+                                $('.ui-tooltip').hide();
                             }
+
                         })(marca, j));
                         //AGREGAR EL MARCADOR A LA VARIABLE MARCADORES_BD
                         // marcadores_bd.push(marca);
